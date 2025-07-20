@@ -13,7 +13,8 @@
       <link>http://localhost:1313/posts/blogpost/</link>
       <pubDate>Thu, 01 Jan 1970 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/blogpost/</guid>
-      <description>&lt;p&gt;Hi!&lt;/p&gt;</description>
+      <description>&lt;p&gt;Hi! My name is Dev&lt;/p&gt;
+&lt;p&gt;$$ 4!&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
