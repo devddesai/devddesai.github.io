@@ -1,0 +1,25 @@
+baseURL: https://example.org/
+languageCode: en-us
+title: Dev's Blog
+theme: PaperMod
+
+params:
+  defaultTheme: light
+  homeInfoParams:
+    Title: Hi, I'm Dev
+    Content: >-
+      Welcome to my website.      
+  socialIcons:
+    - name: email
+      url: 'mailto:desaidev@utexas.com'
+    - name: github
+      url: 'https://github.com/devddesai'
+    - name: linkedin
+      url: 'https://linkedin.com/in/dev-v-desai/'
+
+assets:
+  favicon16x16: /assets/favicon-16x16.png
+  favicon32x32: /assets/favicon-32x32.png
+  apple_touch_icon: /assets/apple-touch-icon.png
+
+favicon: favicon.ico
