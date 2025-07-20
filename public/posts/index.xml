@@ -13,27 +13,11 @@
       <link>http://localhost:1313/posts/24-12-10-metrobike/</link>
       <pubDate>Tue, 10 Dec 2024 18:47:40 -0600</pubDate>
       <guid>http://localhost:1313/posts/24-12-10-metrobike/</guid>
-      <description>&lt;p&gt;This project was done as our final project for &lt;a href=&#34;https://www.wgilpin.com/&#34;&gt;William Gilpin&amp;rsquo;s&lt;/a&gt; Graduate &lt;a href=&#34;https://www.wgilpin.com/cphy/?utm_source=en_us_srepgw&#34;&gt;Computational Physics Course&lt;/a&gt;. Our complete GitHub repository, with instructions on how to replicate our results, can be found &lt;a href=&#34;https://github.com/devddesai/metrobike&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Original post can be found: &lt;a href=&#34;https://hasithv.github.io/posts/24-12-10-metrobike/&#34;&gt;here&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;This project was done as our final project for &lt;a href=&#34;https://www.wgilpin.com/&#34;&gt;William Gilpin&amp;rsquo;s&lt;/a&gt; Graduate &lt;a href=&#34;https://www.wgilpin.com/cphy/?utm_source=en_us_srepgw&#34;&gt;Computational Physics Course&lt;/a&gt;. Our complete GitHub repository, with instructions on how to replicate our results, can be found &lt;a href=&#34;https://github.com/devddesai/metrobike&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;The goal of this project is to simulate the behavior of a bike-sharing system in a network of stations and destinations, and then optimize the positions of the stations. We approach the simulation of the bike-sharing system with Agent Based Modeling (ABM).&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>My first blog post</title>
-      <link>http://localhost:1313/posts/blogpost/</link>
-      <pubDate>Thu, 01 Jan 1970 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/blogpost/</guid>
-      <description>&lt;p&gt;hi&lt;/p&gt;
-&lt;p&gt;$math$&lt;/p&gt;
-&lt;p&gt;$$math$$&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;Hi&lt;/li&gt;
-&lt;li&gt;No&lt;/li&gt;
-&lt;/ol&gt;&lt;/blockquote&gt;
-&lt;p&gt;&lt;figure class=&#34;align-center &#34;&gt;
-    &lt;img loading=&#34;lazy&#34; src=&#34;./images/diamond.png#center&#34;
-         alt=&#34;Map of four destinations arranged in a diamond shape. The aspect ratio of this graph is misleading, Destination 2 and Destination 1 are about twice as far away from each other than Destination 4 and Destination 3&#34; width=&#34;300px&#34;/&gt; &lt;figcaption&gt;
-            &lt;p&gt;Map of four destinations arranged in a diamond shape. The aspect ratio of this graph is misleading, &lt;code&gt;Destination 2&lt;/code&gt; and &lt;code&gt;Destination 1&lt;/code&gt; are about twice as far away from each other than &lt;code&gt;Destination 4&lt;/code&gt; and &lt;code&gt;Destination 3&lt;/code&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

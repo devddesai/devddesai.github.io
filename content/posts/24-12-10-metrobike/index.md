@@ -55,7 +55,7 @@ Our implementation of PSO has the following hyperparameters:
 The PSO algorithm works by initializing a swarm of particles with random positions and velocities. At each iteration, the particles update their positions and velocities based on their best position so far and the best position of the swarm. The best position of the swarm is the position that minimizes the fitness function. The particles then update their positions based on the following formula:
 $$v_{i+1} = wv_i + c_1r_1(p_{\text{best}, i} - x_i) + c_2r_2(g_\text{best} - x_i)$$
 $$x_{i+1} = x_i + v_{i+1}$$
-where $v_i$ is the velocity of particle $i$, $x_i$ is the position of particle $i$, $p_{\text{best}, i}$ is the best position of particle $i$ so far, $gbest$ is the best position of the swarm, $r_1$ and $r_2$ are random numbers between 0 and 1, and $w$, $c_1$, and $c_2$ are the inertia, cognitive, and social parameters, respectively.
+where $v_i$ is the velocity of particle $i$, $x_i$ is the position of particle $i$, $p_{\text{best}, i}$ is the best position of particle $i$ so far, $g_best$ is the best position of the swarm, $r_1$ and $r_2$ are random numbers between 0 and 1, and $w$, $c_1$, and $c_2$ are the inertia, cognitive, and social parameters, respectively.
 
 The PSO algorithm will do this for `n_iterations` iterations, and at the end, it will return the best position of the swarm found so far.
 
