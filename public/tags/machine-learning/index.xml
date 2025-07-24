@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Machine Learning on Dev&#39;s Blog</title>
+    <link>http://localhost:1313/tags/machine-learning/</link>
+    <description>Recent content in Machine Learning on Dev&#39;s Blog</description>
+    <generator>Hugo -- 0.148.1</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 22 Jul 2025 18:47:40 -0600</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>An Overview of Autoeoncoders</title>
+      <link>http://localhost:1313/posts/vae/</link>
+      <pubDate>Tue, 22 Jul 2025 18:47:40 -0600</pubDate>
+      <guid>http://localhost:1313/posts/vae/</guid>
+      <description>&lt;p&gt;Hey guys! For my 2-D Ising Model project, I was reading up on &lt;em&gt;Denoising Diffusion Probabilistic Models&lt;/em&gt; (DDPMs), which are generative models used in machine learning – especially for generating images. To better understand how DDPMs work, I decided to explore some of the foundational models they build upon, which led me to autoencoders.&lt;/p&gt;
+&lt;p&gt;In this post, I’ll give a brief overview of autoencoders and introduce two important variants: the &lt;strong&gt;variational autoencoder (VAE)&lt;/strong&gt; and the &lt;strong&gt;sparse autoencoder (SAE)&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

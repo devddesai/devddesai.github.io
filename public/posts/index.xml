@@ -6,8 +6,29 @@
     <description>Recent content in Posts on Dev&#39;s Blog</description>
     <generator>Hugo -- 0.148.1</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 Dec 2024 18:47:40 -0600</lastBuildDate>
+    <lastBuildDate>Tue, 22 Jul 2025 18:47:40 -0600</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>An Overview of Autoencoders</title>
+      <link>http://localhost:1313/posts/vae/</link>
+      <pubDate>Tue, 22 Jul 2025 18:47:40 -0600</pubDate>
+      <guid>http://localhost:1313/posts/vae/</guid>
+      <description>&lt;p&gt;Hey guys! For my 2-D Ising Model project, I was reading up on &lt;em&gt;Denoising Diffusion Probabilistic Models&lt;/em&gt; (DDPMs), which are generative models used in machine learning – especially for generating images. To better understand how DDPMs work, I decided to explore some of the foundational models they build upon, which led me to autoencoders.&lt;/p&gt;
+&lt;p&gt;In this post, I’ll give a brief overview of autoencoders and introduce two important variants: the &lt;strong&gt;variational autoencoder (VAE)&lt;/strong&gt; and the &lt;strong&gt;sparse autoencoder (SAE)&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>An Introduction to High Energy Physics</title>
+      <link>http://localhost:1313/posts/particle_physics/</link>
+      <pubDate>Sun, 20 Jul 2025 18:47:40 -0600</pubDate>
+      <guid>http://localhost:1313/posts/particle_physics/</guid>
+      <description>&lt;p&gt;Hey guys! This past semester, I dove deep into a research project in Professor Deepa Thomas&amp;rsquo;s lab at UT Austin,
+where her group specializes in &lt;em&gt;Quark Gluon Plasma&lt;/em&gt; (QGP). This post aims to give readers a overview of particle
+physics theory. After, be sure to give my &lt;a href=&#34;http://localhost:1313/posts/24-12-10-metrobike/&#34;&gt;Pythia studies&lt;/a&gt;
+a read to see how
+we can use particle collision data to probe at these theories!&lt;/p&gt;
+&lt;h1 id=&#34;the-standard-model&#34;&gt;The Standard Model&lt;/h1&gt;
+&lt;p&gt;In physics, all known interactions between matter and energy can be attributed to the four fundamental forces of nature.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Metrobike Optimization Around UT Austin</title>
       <link>http://localhost:1313/posts/24-12-10-metrobike/</link>
