@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
-<title>Particle Physics | Dev&#39;s Blog</title>
+<title>Particle Physics | Dev the dev</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="Dev Desai">
@@ -34,8 +34,21 @@
 <script>
   MathJax = {
     tex: {
-      displayMath: [['\\[', '\\]'], ['$$', '$$']],  
-      inlineMath: [['\\(', '\\)'], ['$','$']]                  
+      packages: ['base', 'ams', 'noerrors', 'noundefined'],
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],
+      inlineMath: [['\\(', '\\)'], ['$','$']],
+      processEscapes: true,
+      processEnvironments: true,
+      macros: {
+        
+      },
+      tags: 'ams'
+    },
+    loader: {
+      load: ['[tex]/ams', '[tex]/noerrors', '[tex]/noundefined']
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
     }
   };
 </script>
@@ -53,7 +66,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Dev&#39;s Blog (Alt + H)">Dev&#39;s Blog</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Dev the dev (Alt + H)">Dev the dev</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -100,6 +113,19 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Kinematic Correlations of Charmed Hadrons
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In my Junior year at UT Austin,
+</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-07-24 18:47:40 -0600 -0600'>July 24, 2025</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Dev Desai</footer>
+  <a class="entry-link" aria-label="post link to Kinematic Correlations of Charmed Hadrons" href="http://localhost:1313/posts/pythia/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">An Introduction to High Energy Physics
     </h2>
   </header>
@@ -114,7 +140,7 @@ The Standard Model In physics, all known interactions between matter and energy 
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="http://localhost:1313/">Dev&#39;s Blog</a></span> · 
+        <span>&copy; 2025 <a href="http://localhost:1313/">Dev the dev</a></span> · 
 
     <span>
         Powered by

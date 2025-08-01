@@ -1,6 +1,6 @@
 baseURL: https://example.org/
 languageCode: en-us
-title: Dev's Blog
+title: Dev the dev
 theme: PaperMod
 
 params:
@@ -11,9 +11,12 @@ params:
   math: true
   author: ["Dev Desai"]
   homeInfoParams:
-    Title: Hi, I'm Dev
+    Title: Hi there!
     Content: >-
-      Welcome to my website.      
+      I'm a senior at The Univeristy of Texas at Austin majoring in 
+      Physics & Math with minors in Business, Computer Science, and Computational Science & Engineering. I am interested in computational physics,
+      scientific machine learning, and quantitative finance. Here's just a little blog about some interesting things I've worked on and read at my time
+      here. **I am currently in the process of migrating all my projects to this site, so many of the posts are still incomplete.**
   socialIcons:
     - name: email
       url: 'mailto:desaidev@utexas.com'
@@ -39,3 +42,22 @@ menu:
     name: Blog
     url: /posts/
     weight: 20
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
+        delimiters:
+          block:
+            - - \[
+              - \]
+            - - $$
+              - $$
+          inline:
+            - - \(
+              - \)
+            - - $
+              - $
+        enable: true

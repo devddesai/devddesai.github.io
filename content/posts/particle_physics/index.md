@@ -9,7 +9,7 @@ showtoc: true
 ---
 Hey guys! This past semester, I dove deep into a research project in Professor Deepa Thomas's lab at UT Austin, 
 where her group specializes in *Quark Gluon Plasma* (QGP). This post aims to give readers a overview of particle 
-physics theory. After, be sure to give my [Pythia studies]({{< ref "posts/24-12-10-metrobike/index.md" >}})
+physics theory. After, be sure to give my [Pythia studies]({{< ref "posts/pythia/index.md" >}})
  a read to see how 
 we can use particle collision data to probe at these theories!
 
@@ -37,7 +37,7 @@ In physics, all known interactions between matter and energy can be attributed t
 {{< figure src="./images/standardmodel1.png" width="400px" align="center" caption="The standard model of particle physics.">}}
 
 
-asymptotic freedom, color confinement -> only see hadrons
+<!-- asymptotic freedom, color confinement -> only see hadrons
 
 hadrons, decay routes, final state particles
 
@@ -56,7 +56,7 @@ signatures being jet quenching, flow, strangeness enhancement
 next post:
 summary
 
-go into code. lets visualize how kinematic correlations occur. 
+go into code. lets visualize how kinematic correlations occur.  -->
 
 
 list of things to talk about 

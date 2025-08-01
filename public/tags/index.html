@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
-<title>Tags | Dev&#39;s Blog</title>
+<title>Tags | Dev the dev</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="Dev Desai">
@@ -34,8 +34,21 @@
 <script>
   MathJax = {
     tex: {
-      displayMath: [['\\[', '\\]'], ['$$', '$$']],  
-      inlineMath: [['\\(', '\\)'], ['$','$']]                  
+      packages: ['base', 'ams', 'noerrors', 'noundefined'],
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],
+      inlineMath: [['\\(', '\\)'], ['$','$']],
+      processEscapes: true,
+      processEnvironments: true,
+      macros: {
+        
+      },
+      tags: 'ams'
+    },
+    loader: {
+      load: ['[tex]/ams', '[tex]/noerrors', '[tex]/noundefined']
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
     }
   };
 </script>
@@ -53,7 +66,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Dev&#39;s Blog (Alt + H)">Dev&#39;s Blog</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Dev the dev (Alt + H)">Dev the dev</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -101,19 +114,28 @@
         <a href="http://localhost:1313/tags/agent-based-modeling/">agent based modeling <sup><strong><sup>1</sup></strong></sup> </a>
     </li>
     <li>
+        <a href="http://localhost:1313/tags/deep-learning/">deep learning <sup><strong><sup>1</sup></strong></sup> </a>
+    </li>
+    <li>
+        <a href="http://localhost:1313/tags/machine-learning/">machine learning <sup><strong><sup>1</sup></strong></sup> </a>
+    </li>
+    <li>
         <a href="http://localhost:1313/tags/optimization/">optimization <sup><strong><sup>1</sup></strong></sup> </a>
     </li>
     <li>
-        <a href="http://localhost:1313/tags/particle-physics/">particle physics <sup><strong><sup>1</sup></strong></sup> </a>
+        <a href="http://localhost:1313/tags/particle-physics/">particle physics <sup><strong><sup>2</sup></strong></sup> </a>
     </li>
     <li>
-        <a href="http://localhost:1313/tags/python/">python <sup><strong><sup>2</sup></strong></sup> </a>
+        <a href="http://localhost:1313/tags/pythia/">pythia <sup><strong><sup>1</sup></strong></sup> </a>
+    </li>
+    <li>
+        <a href="http://localhost:1313/tags/python/">python <sup><strong><sup>4</sup></strong></sup> </a>
     </li>
 </ul>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="http://localhost:1313/">Dev&#39;s Blog</a></span> · 
+        <span>&copy; 2025 <a href="http://localhost:1313/">Dev the dev</a></span> · 
 
     <span>
         Powered by

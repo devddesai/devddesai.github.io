@@ -2,8 +2,21 @@
 <script>
   MathJax = {
     tex: {
-      displayMath: [['\\[', '\\]'], ['$$', '$$']],  // block
-      inlineMath: [['\\(', '\\)'], ['$','$']]
+      packages: ['base', 'ams', 'noerrors', 'noundefined'],
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],
+      inlineMath: [['\\(', '\\)'], ['$','$']],
+      processEscapes: true,
+      processEnvironments: true,
+      macros: {
+        // Add any custom macros here
+      },
+      tags: 'ams'
+    },
+    loader: {
+      load: ['[tex]/ams', '[tex]/noerrors', '[tex]/noundefined']
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
     }
   };
 </script>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
-<title>An Introduction to High Energy Physics | Dev&#39;s Blog</title>
+<title>An Introduction to High Energy Physics | Dev the dev</title>
 <meta name="keywords" content="particle physics, python">
 <meta name="description" content="Hey guys! This past semester, I dove deep into a research project in Professor Deepa Thomas&rsquo;s lab at UT Austin,
 where her group specializes in Quark Gluon Plasma (QGP). This post aims to give readers a overview of particle
@@ -39,8 +39,21 @@ In physics, all known interactions between matter and energy can be attributed t
 <script>
   MathJax = {
     tex: {
-      displayMath: [['\\[', '\\]'], ['$$', '$$']],  
-      inlineMath: [['\\(', '\\)'], ['$','$']]                  
+      packages: ['base', 'ams', 'noerrors', 'noundefined'],
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],
+      inlineMath: [['\\(', '\\)'], ['$','$']],
+      processEscapes: true,
+      processEnvironments: true,
+      macros: {
+        
+      },
+      tags: 'ams'
+    },
+    loader: {
+      load: ['[tex]/ams', '[tex]/noerrors', '[tex]/noundefined']
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
     }
   };
 </script>
@@ -58,7 +71,7 @@ In physics, all known interactions between matter and energy can be attributed t
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Dev&#39;s Blog (Alt + H)">Dev&#39;s Blog</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Dev the dev (Alt + H)">Dev the dev</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -124,7 +137,7 @@ In physics, all known interactions between matter and energy can be attributed t
 
   <div class="post-content"><p>Hey guys! This past semester, I dove deep into a research project in Professor Deepa Thomas&rsquo;s lab at UT Austin,
 where her group specializes in <em>Quark Gluon Plasma</em> (QGP). This post aims to give readers a overview of particle
-physics theory. After, be sure to give my <a href="http://localhost:1313/posts/24-12-10-metrobike/">Pythia studies</a>
+physics theory. After, be sure to give my <a href="http://localhost:1313/posts/pythia/">Pythia studies</a>
 a read to see how
 we can use particle collision data to probe at these theories!</p>
 <h1 id="the-standard-model">The Standard Model<a hidden class="anchor" aria-hidden="true" href="#the-standard-model">#</a></h1>
@@ -183,7 +196,7 @@ summary</p>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="http://localhost:1313/">Dev&#39;s Blog</a></span> · 
+        <span>&copy; 2025 <a href="http://localhost:1313/">Dev the dev</a></span> · 
 
     <span>
         Powered by
