@@ -1,32 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Categories on Dev the dev</title>
-    <link>http://localhost:1313/categories/</link>
-    <description>Recent content in Categories on Dev the dev</description>
-    <generator>Hugo -- 0.148.1</generator>
+    <title>Categories on to(dev🧊)</title>
+    <link>http://localhost:38931/categories/</link>
+    <description>Recent content in Categories on to(dev🧊)</description>
+    <generator>Hugo -- 0.123.7</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 24 Jul 2025 18:47:40 -0600</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Project</title>
-      <link>http://localhost:1313/categories/project/</link>
-      <pubDate>Thu, 24 Jul 2025 18:47:40 -0600</pubDate>
-      <guid>http://localhost:1313/categories/project/</guid>
-      <description></description>
-    </item>
+    <lastBuildDate>Fri, 03 Oct 2025 18:47:40 -0600</lastBuildDate>
+    <atom:link href="http://localhost:38931/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Notes</title>
-      <link>http://localhost:1313/categories/notes/</link>
-      <pubDate>Tue, 22 Jul 2025 18:47:40 -0600</pubDate>
-      <guid>http://localhost:1313/categories/notes/</guid>
+      <link>http://localhost:38931/categories/notes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:38931/categories/notes/</guid>
       <description></description>
     </item>
     <item>
       <title>Projects</title>
-      <link>http://localhost:1313/categories/projects/</link>
-      <pubDate>Sun, 20 Jul 2025 18:47:40 -0600</pubDate>
-      <guid>http://localhost:1313/categories/projects/</guid>
+      <link>http://localhost:38931/categories/projects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:38931/categories/projects/</guid>
       <description></description>
     </item>
   </channel>

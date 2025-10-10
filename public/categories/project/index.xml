@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Project on Dev the dev</title>
     <link>http://localhost:1313/categories/project/</link>
     <description>Recent content in Project on Dev the dev</description>
-    <generator>Hugo -- 0.148.1</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 24 Jul 2025 18:47:40 -0600</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/project/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <link>http://localhost:1313/posts/pythia/</link>
       <pubDate>Thu, 24 Jul 2025 18:47:40 -0600</pubDate>
       <guid>http://localhost:1313/posts/pythia/</guid>
-      <description>&lt;p&gt;In my Junior year at UT Austin,&lt;/p&gt;</description>
+      <description>In my junior year, I took an independent research course under Dr. Deepa Thomas whose work specializes in High Energy Physics and Quark Gluon Plasma. A common research method in this field is to use a Monte Carlo event generator, such as Pythia, to simulate particle collision data at extremely high energy. This post will cover my analysis of the kinematic correlations of charmed hadrons. If you haven&amp;rsquo;t checked out my crash course on particle physics, check it out here, as this post assumes a basic knowledge.</description>
     </item>
   </channel>
 </rss>
