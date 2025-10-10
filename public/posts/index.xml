@@ -2,32 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on to(dev🧊)</title>
-    <link>http://localhost:38931/posts/</link>
+    <link>http://localhost:40993/posts/</link>
     <description>Recent content in Posts on to(dev🧊)</description>
     <generator>Hugo -- 0.123.7</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 03 Oct 2025 18:47:40 -0600</lastBuildDate>
-    <atom:link href="http://localhost:38931/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:40993/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>QuantChallenge 2025</title>
-      <link>http://localhost:38931/posts/quantchallenge/</link>
+      <link>http://localhost:40993/posts/quantchallenge/</link>
       <pubDate>Fri, 03 Oct 2025 18:47:40 -0600</pubDate>
-      <guid>http://localhost:38931/posts/quantchallenge/</guid>
+      <guid>http://localhost:40993/posts/quantchallenge/</guid>
       <description>Simple Statistical Modeling Rolling window for average and volatility Monte Carlo use $\mu$ and $\sigma$ to simulate thousand of possible game outcomes probaility of winning into a fair value price adjust our fair value price with the tru emarket price. we assume we have some edge to the market. Real fair = 0.7 our fair + 0.3 market fair Market Making Provide liquidity to the market assuming the fair value and that people will want to trade at that fair value.</description>
     </item>
     <item>
       <title>An Overview of Autoencoders</title>
-      <link>http://localhost:38931/posts/vae/</link>
+      <link>http://localhost:40993/posts/vae/</link>
       <pubDate>Tue, 22 Jul 2025 18:47:40 -0600</pubDate>
-      <guid>http://localhost:38931/posts/vae/</guid>
+      <guid>http://localhost:40993/posts/vae/</guid>
       <description>For my 2-D Ising Model project, I was reading up on Denoising Diffusion Probabilistic Models (DDPMs), which are generative models used in machine learning – especially for generating images. To better understand how DDPMs work, I decided to explore some of the foundational models they build upon, which led me to autoencoders, and specifically, variational autoencoders.
 In this post, I’ll give a brief overview of autoencoders and introduce two variants: the variational autoencoder (VAE) and the sparse autoencoder (SAE).</description>
     </item>
     <item>
       <title>Metrobike Optimization Around UT Austin</title>
-      <link>http://localhost:38931/posts/24-12-10-metrobike/</link>
+      <link>http://localhost:40993/posts/24-12-10-metrobike/</link>
       <pubDate>Tue, 10 Dec 2024 18:47:40 -0600</pubDate>
-      <guid>http://localhost:38931/posts/24-12-10-metrobike/</guid>
+      <guid>http://localhost:40993/posts/24-12-10-metrobike/</guid>
       <description>Original post can be found: here
 This project was done as our final project for William Gilpin&amp;rsquo;s Graduate Computational Physics Course. Our complete GitHub repository, with instructions on how to replicate our results, can be found here.
 Introduction The goal of this project is to simulate the behavior of a bike-sharing system in a network of stations and destinations, and then optimize the positions of the stations. We approach the simulation of the bike-sharing system with Agent Based Modeling (ABM).</description>

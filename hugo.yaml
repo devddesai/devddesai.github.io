@@ -10,6 +10,11 @@ params:
   ShowCopyCodeButtons: true
   math: true
   author: ["Dev Desai"]
+  assets: 
+    favicon16x16: /assets/favicon-16x16.png
+    favicon32x32: /assets/favicon-32x32.png
+    apple_touch_icon: /assets/apple-touch-icon.png
+    favicon: /assets/favicon.ico
   homeInfoParams:
     Title: Hi there!
     Content: >-
@@ -24,13 +29,6 @@ params:
       url: 'https://github.com/devddesai'
     - name: linkedin
       url: 'https://linkedin.com/in/dev-v-desai/'
-
-assets:
-  favicon16x16: /assets/favicon-16x16.png
-  favicon32x32: /assets/favicon-32x32.png
-  apple_touch_icon: /assets/apple-touch-icon.png
-
-favicon: /assets/favicon.ico
 
 menu:
   main:

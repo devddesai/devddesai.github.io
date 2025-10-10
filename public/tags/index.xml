@@ -2,52 +2,52 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on to(dev🧊)</title>
-    <link>http://localhost:38931/tags/</link>
+    <link>http://localhost:40993/tags/</link>
     <description>Recent content in Tags on to(dev🧊)</description>
     <generator>Hugo -- 0.123.7</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 03 Oct 2025 18:47:40 -0600</lastBuildDate>
-    <atom:link href="http://localhost:38931/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:40993/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Machine Learning</title>
-      <link>http://localhost:38931/tags/machine-learning/</link>
+      <link>http://localhost:40993/tags/machine-learning/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38931/tags/machine-learning/</guid>
+      <guid>http://localhost:40993/tags/machine-learning/</guid>
       <description></description>
     </item>
     <item>
       <title>Python</title>
-      <link>http://localhost:38931/tags/python/</link>
+      <link>http://localhost:40993/tags/python/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38931/tags/python/</guid>
+      <guid>http://localhost:40993/tags/python/</guid>
       <description></description>
     </item>
     <item>
       <title>Quantitative Finance</title>
-      <link>http://localhost:38931/tags/quantitative-finance/</link>
+      <link>http://localhost:40993/tags/quantitative-finance/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38931/tags/quantitative-finance/</guid>
+      <guid>http://localhost:40993/tags/quantitative-finance/</guid>
       <description></description>
     </item>
     <item>
       <title>Deep Learning</title>
-      <link>http://localhost:38931/tags/deep-learning/</link>
+      <link>http://localhost:40993/tags/deep-learning/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38931/tags/deep-learning/</guid>
+      <guid>http://localhost:40993/tags/deep-learning/</guid>
       <description></description>
     </item>
     <item>
       <title>Agent Based Modeling</title>
-      <link>http://localhost:38931/tags/agent-based-modeling/</link>
+      <link>http://localhost:40993/tags/agent-based-modeling/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38931/tags/agent-based-modeling/</guid>
+      <guid>http://localhost:40993/tags/agent-based-modeling/</guid>
       <description></description>
     </item>
     <item>
       <title>Optimization</title>
-      <link>http://localhost:38931/tags/optimization/</link>
+      <link>http://localhost:40993/tags/optimization/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38931/tags/optimization/</guid>
+      <guid>http://localhost:40993/tags/optimization/</guid>
       <description></description>
     </item>
   </channel>
