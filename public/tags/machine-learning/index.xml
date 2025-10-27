@@ -2,26 +2,56 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Machine Learning on to(dev🧊)</title>
-    <link>http://localhost:40993/tags/machine-learning/</link>
+    <link>http://localhost:1313/tags/machine-learning/</link>
     <description>Recent content in Machine Learning on to(dev🧊)</description>
-    <generator>Hugo -- 0.123.7</generator>
+    <generator>Hugo -- 0.148.1</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 03 Oct 2025 18:47:40 -0600</lastBuildDate>
-    <atom:link href="http://localhost:40993/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>QuantChallenge 2025</title>
-      <link>http://localhost:40993/posts/quantchallenge/</link>
+      <link>http://localhost:1313/posts/quantchallenge/</link>
       <pubDate>Fri, 03 Oct 2025 18:47:40 -0600</pubDate>
-      <guid>http://localhost:40993/posts/quantchallenge/</guid>
-      <description>Simple Statistical Modeling Rolling window for average and volatility Monte Carlo use $\mu$ and $\sigma$ to simulate thousand of possible game outcomes probaility of winning into a fair value price adjust our fair value price with the tru emarket price. we assume we have some edge to the market. Real fair = 0.7 our fair + 0.3 market fair Market Making Provide liquidity to the market assuming the fair value and that people will want to trade at that fair value.</description>
+      <guid>http://localhost:1313/posts/quantchallenge/</guid>
+      <description>&lt;h2 id=&#34;simple-statistical-modeling&#34;&gt;Simple Statistical Modeling&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Rolling window for average and volatility&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;monte-carlo&#34;&gt;Monte Carlo&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;use $\mu$ and $\sigma$ to simulate thousand of possible game outcomes&lt;/li&gt;
+&lt;li&gt;probaility of winning into a fair value price&lt;/li&gt;
+&lt;li&gt;adjust our fair value price with the tru emarket price. we assume we have some edge to the market.&lt;/li&gt;
+&lt;li&gt;Real fair = 0.7 our fair + 0.3 market fair&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;market-making&#34;&gt;Market Making&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Provide liquidity to the market assuming the fair value and that people will want to trade at that fair value.&lt;/li&gt;
+&lt;li&gt;lets say fair value is 70&lt;/li&gt;
+&lt;li&gt;post buy orders slightly below, so 69&lt;/li&gt;
+&lt;li&gt;post sell orders slightly above, so 71&lt;/li&gt;
+&lt;li&gt;bid ask spread of 2&lt;/li&gt;
+&lt;li&gt;QA of some questions that i initially had
+&lt;ul&gt;
+&lt;li&gt;Q: Why not buy or sell far from the fair value?&lt;/li&gt;
+&lt;li&gt;A: Because extreme prices are usually stale or informed, increase risk, and can trap you with bad inventory. people won&amp;rsquo;t usually buy so dont put liquidity into stale stocks when instead it can be used to turn more profit&lt;/li&gt;
+&lt;li&gt;Q: Why not buy something that’s super cheap?&lt;/li&gt;
+&lt;li&gt;A: “Cheap” prices often mean you’re late to new bad info, or the quote is gone before you reach it; chasing them adds risk.&lt;/li&gt;
+&lt;li&gt;Q: What is the purpose of market making?&lt;/li&gt;
+&lt;li&gt;A: To provide liquidity— always ready to buy/sell so others can trade instantly — and earn the small spread for doing so. for a buyer and seller to happen to have the same exact price ask at a moment is rare, which is why market makers are there&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;skew-safety-net&#34;&gt;Skew Safety Net&lt;/h2&gt;
+&lt;p&gt;Terminology:&lt;/p&gt;</description>
     </item>
     <item>
       <title>An Overview of Autoencoders</title>
-      <link>http://localhost:40993/posts/vae/</link>
+      <link>http://localhost:1313/posts/vae/</link>
       <pubDate>Tue, 22 Jul 2025 18:47:40 -0600</pubDate>
-      <guid>http://localhost:40993/posts/vae/</guid>
-      <description>For my 2-D Ising Model project, I was reading up on Denoising Diffusion Probabilistic Models (DDPMs), which are generative models used in machine learning – especially for generating images. To better understand how DDPMs work, I decided to explore some of the foundational models they build upon, which led me to autoencoders, and specifically, variational autoencoders.
-In this post, I’ll give a brief overview of autoencoders and introduce two variants: the variational autoencoder (VAE) and the sparse autoencoder (SAE).</description>
+      <guid>http://localhost:1313/posts/vae/</guid>
+      <description>&lt;p&gt;For my 2-D Ising Model project, I was reading up on &lt;em&gt;Denoising Diffusion Probabilistic Models&lt;/em&gt; (DDPMs), which are generative models used in machine learning – especially for generating images. To better understand how DDPMs work, I decided to explore some of the foundational models they build upon, which led me to autoencoders, and specifically, variational autoencoders.&lt;/p&gt;
+&lt;p&gt;In this post, I’ll give a brief overview of autoencoders and introduce two variants: the &lt;strong&gt;variational autoencoder (VAE)&lt;/strong&gt; and the &lt;strong&gt;sparse autoencoder (SAE)&lt;/strong&gt;.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

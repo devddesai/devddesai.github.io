@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=40993&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
 <title>Metrobike Optimization Around UT Austin | to(dev🧊)</title>
 <meta name="keywords" content="optimization, agent based modeling, python">
-<meta name="description" content="Original post can be found: here
+<meta name="description" content="
+Original post can be found: here
 This project was done as our final project for William Gilpin&rsquo;s Graduate Computational Physics Course. Our complete GitHub repository, with instructions on how to replicate our results, can be found here.
-Introduction The goal of this project is to simulate the behavior of a bike-sharing system in a network of stations and destinations, and then optimize the positions of the stations. We approach the simulation of the bike-sharing system with Agent Based Modeling (ABM).">
+Introduction
+The goal of this project is to simulate the behavior of a bike-sharing system in a network of stations and destinations, and then optimize the positions of the stations. We approach the simulation of the bike-sharing system with Agent Based Modeling (ABM).">
 <meta name="author" content="Hasith Vattikuti, Dev Desai, Eric Liang, Viren Govin">
-<link rel="canonical" href="http://localhost:40993/posts/24-12-10-metrobike/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.a090830a421002426baafbd314e38f149d77b4c48a12ee9312700d770b27fb26.css" integrity="sha256-oJCDCkIQAkJrqvvTFOOPFJ13tMSKEu6TEnANdwsn&#43;yY=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:40993/assets/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:40993/assets/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:40993/assets/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:40993/assets/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:40993/safari-pinned-tab.svg">
+<link rel="canonical" href="http://localhost:1313/posts/24-12-10-metrobike/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.8fe10233a706bc87f2e08b3cf97b8bd4c0a80f10675a143675d59212121037c0.css" integrity="sha256-j&#43;ECM6cGvIfy4Is8&#43;XuL1MCoDxBnWhQ2ddWSEhIQN8A=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/assets/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/assets/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/assets/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:40993/posts/24-12-10-metrobike/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/24-12-10-metrobike/">
 <noscript>
     <style>
         #theme-toggle,
@@ -67,7 +69,7 @@ Introduction The goal of this project is to simulate the behavior of a bike-shar
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:40993/" accesskey="h" title="to(dev🧊) (Alt + H)">to(dev🧊)</a>
+            <a href="http://localhost:1313/" accesskey="h" title="to(dev🧊) (Alt + H)">to(dev🧊)</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -93,12 +95,12 @@ Introduction The goal of this project is to simulate the behavior of a bike-shar
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:40993/" title="Home">
+                <a href="http://localhost:1313/" title="Home">
                     <span>Home</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:40993/posts/" title="Blog">
+                <a href="http://localhost:1313/posts/" title="Blog">
                     <span>Blog</span>
                 </a>
             </li>
@@ -113,7 +115,7 @@ Introduction The goal of this project is to simulate the behavior of a bike-shar
     <h1 class="post-title entry-hint-parent">
       Metrobike Optimization Around UT Austin
     </h1>
-    <div class="post-meta"><span title='2024-12-10 18:47:40 -0600 CST'>December 10, 2024</span>&nbsp;·&nbsp;<span>12 min</span>&nbsp;·&nbsp;<span>Hasith Vattikuti, Dev Desai, Eric Liang, Viren Govin</span>
+    <div class="post-meta"><span title='2024-12-10 18:47:40 -0600 CST'>December 10, 2024</span>&nbsp;·&nbsp;12 min&nbsp;·&nbsp;Hasith Vattikuti, Dev Desai, Eric Liang, Viren Govin
 
 </div>
   </header> <div class="toc">
@@ -166,8 +168,7 @@ Introduction The goal of this project is to simulate the behavior of a bike-shar
 </div>
 
   <div class="post-content"><blockquote>
-<p><em>Original post can be found: <a href="https://hasithv.github.io/posts/24-12-10-metrobike/">here</a></em></p>
-</blockquote>
+<p><em>Original post can be found: <a href="https://hasithv.github.io/posts/24-12-10-metrobike/">here</a></em></p></blockquote>
 <p>This project was done as our final project for <a href="https://www.wgilpin.com/">William Gilpin&rsquo;s</a> Graduate <a href="https://www.wgilpin.com/cphy/?utm_source=en_us_srepgw">Computational Physics Course</a>. Our complete GitHub repository, with instructions on how to replicate our results, can be found <a href="https://github.com/devddesai/metrobike">here</a>.</p>
 <h1 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h1>
 <p>The goal of this project is to simulate the behavior of a bike-sharing system in a network of stations and destinations, and then optimize the positions of the stations. We approach the simulation of the bike-sharing system with Agent Based Modeling (ABM).</p>
@@ -185,7 +186,7 @@ Introduction The goal of this project is to simulate the behavior of a bike-shar
 <p>In this graph, the blue nodes represent destinations and the red nodes represent stations. Every node is connected to every other node by an edge, whose weight represents the time it takes to travel between them on a bike (to get the time between two nodes by walking, multiply the edge weight by 3 since walking is about 3 times slower than biking). The fact that the graph is fully connected means that, in principle, an agent can travel between any two nodes by walking.</p>
 <h3 id="agent-decision-making">Agent Decision Making<a hidden class="anchor" aria-hidden="true" href="#agent-decision-making">#</a></h3>
 <p>If an agent wants to bike, they must find a station with an available bike and another station where they can return the bike (ideally, the agent would want to find a station close to their destination to drop off the bike). Based on the fact that stations can be full or empty, the agent must decide whether to walk or bike to their destination. The full logic of the agent&rsquo;s pathfinding is quite tedious to explain, but trust that the agent will approximate your decision making to the first order. Interested readers can refer to the <code>pathfinding.py</code> file and the <code>step</code> method in the <code>Commuter</code> class in <code>commuter.py</code>.</p>
-<h2 id="heading"><a hidden class="anchor" aria-hidden="true" href="#heading">#</a></h2>
+<h2></h2>
 <p>At each timestep, the agents will:</p>
 <blockquote>
 <ol>
@@ -193,15 +194,13 @@ Introduction The goal of this project is to simulate the behavior of a bike-shar
 <li>The stations update their bike counts based on the agents&rsquo; decisions</li>
 <li>Agents who arrived at their destination pick a new destination and start moving towards it</li>
 <li>The way agents choose a particular destination is based on a probability distribution that we can set.</li>
-</ol>
-</blockquote>
+</ol></blockquote>
 <p>Using the previous graph as an example, we can set the probability distribution to be uniform for every destination, or we can set it so that agents favor certain destinations over others. This is done with the <code>weights</code> attribute in the <code>MyModel</code> class in <code>model.py</code>.</p>
 <h2 id="optimization">Optimization<a hidden class="anchor" aria-hidden="true" href="#optimization">#</a></h2>
 <p>The goal of the optimization is to find the best positions for the stations in the network. We can use two algorithms to do this: particle swarm optimization (PSO) and a genetic algorithm (GA). The optimization algorithms are implemented in the <code>optimize.py</code> file.</p>
 <p>Essentially, we treat the position of all $n$ stations we want to optimize as a single vector $x \in \mathbb{R}^{2n}$, where each station has an $(x, y)$ coordinate. So, the optimization problem is to find the best $x$ that minimizes a fitness function. The fitness function we use is the negative of the average trips completed per agent, which we denote as $L$:
 </p>
-$$L = -\frac{T}{N}$$
-<p>
+$$L = -\frac{T}{N}$$<p>
 where $T$ is the total number of trips completed by all agents and $N$ is the number of agents in the model. The reason we use the negative of the average trips completed is because the optimization algorithms are designed to minimize the fitness function, and we want to maximize the number of trips completed.</p>
 <h3 id="pso">PSO<a hidden class="anchor" aria-hidden="true" href="#pso">#</a></h3>
 <p>Our implementation of PSO has the following hyperparameters:</p>
@@ -214,9 +213,9 @@ where $T$ is the total number of trips completed by all agents and $N$ is the nu
 </ul>
 <p>The PSO algorithm works by initializing a swarm of particles with random positions and velocities. At each iteration, the particles update their positions and velocities based on their best position so far and the best position of the swarm. The best position of the swarm is the position that minimizes the fitness function. The particles then update their positions based on the following formula:
 </p>
-$$v_{i+1} = wv_i + c_1r_1(p_{\text{best}, i} - x_i) + c_2r_2(g_\text{best} - x_i)$$
-$$x_{i+1} = x_i + v_{i+1}$$
-<p>
+$$v_{i+1} = wv_i + c_1r_1(p_{\text{best}, i} - x_i) + c_2r_2(g_\text{best} - x_i)$$<p>
+</p>
+$$x_{i+1} = x_i + v_{i+1}$$<p>
 where $v_i$ is the velocity of particle $i$, $x_i$ is the position of particle $i$, $p_{\text{best}, i}$ is the best position of particle $i$ so far, $g_{\text{best}}$ is the best position of the swarm, $r_1$ and $r_2$ are random numbers between 0 and 1, and $w$, $c_1$, and $c_2$ are the inertia, cognitive, and social parameters, respectively.</p>
 <p>The PSO algorithm will do this for <code>n_iterations</code> iterations, and at the end, it will return the best position of the swarm found so far.</p>
 <h3 id="genetic-algorithm">Genetic Algorithm<a hidden class="anchor" aria-hidden="true" href="#genetic-algorithm">#</a></h3>
@@ -238,8 +237,7 @@ $$c_i = \left[\begin{cases}
     \alpha B & \text{with probability } p \\
     0 & \text{with probability } 1 - p
 \end{cases}
-$$
-<p>
+$$<p>
 where $B$ is the length of the maxiumum dimension of the search space, $p$ is the mutation rate, and $\alpha$ is the strength of the mutation.</p>
 <h1 id="results">Results<a hidden class="anchor" aria-hidden="true" href="#results">#</a></h1>
 <p>Everything needed to reproduce the results can be found in the <code>metrobike.ipynb</code> notebook. The notebook will guide you through the process of running the simulations and visualizing the results.</p>
@@ -349,8 +347,7 @@ where $B$ is the length of the maxiumum dimension of the search space, $p$ is th
 <li>Rise - 0.021</li>
 <li>Axis West - 0.077</li>
 <li>Rec - 0.056</li>
-</ol>
-</blockquote>
+</ol></blockquote>
 <p>Then, we were able to use our optimization algorithms to find the optimal positions of the stations. We optimized for 6 stations around campus and west campus, and the results can be seen in the following images:</p>
 <p><figure class="align-center ">
     <img loading="lazy" src="./images/genetic10x6.png#center"
@@ -385,16 +382,16 @@ where $B$ is the length of the maxiumum dimension of the search space, $p$ is th
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:40993/tags/optimization/">Optimization</a></li>
-      <li><a href="http://localhost:40993/tags/agent-based-modeling/">Agent Based Modeling</a></li>
-      <li><a href="http://localhost:40993/tags/python/">Python</a></li>
+      <li><a href="http://localhost:1313/tags/optimization/">Optimization</a></li>
+      <li><a href="http://localhost:1313/tags/agent-based-modeling/">Agent Based Modeling</a></li>
+      <li><a href="http://localhost:1313/tags/python/">Python</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="http://localhost:40993/">to(dev🧊)</a></span> · 
+        <span>&copy; 2025 <a href="http://localhost:1313/">to(dev🧊)</a></span> · 
 
     <span>
         Powered by
