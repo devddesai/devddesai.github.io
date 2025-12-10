@@ -8,7 +8,6 @@ params:
   math: true
   ShowReadingTime: true
   ShowCopyCodeButtons: true
-  math: true
   author: ["Dev Desai"]
   assets: 
     favicon16x16: /assets/favicon-16x16.png

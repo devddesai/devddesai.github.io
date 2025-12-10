@@ -4,7 +4,7 @@
     <title>Deep Learning on to(dev🧊)</title>
     <link>http://localhost:1313/tags/deep-learning/</link>
     <description>Recent content in Deep Learning on to(dev🧊)</description>
-    <generator>Hugo -- 0.148.1</generator>
+    <generator>Hugo -- 0.123.7</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 22 Jul 2025 18:47:40 -0600</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
@@ -13,8 +13,16 @@
       <link>http://localhost:1313/posts/vae/</link>
       <pubDate>Tue, 22 Jul 2025 18:47:40 -0600</pubDate>
       <guid>http://localhost:1313/posts/vae/</guid>
-      <description>&lt;p&gt;For my 2-D Ising Model project, I was reading up on &lt;em&gt;Denoising Diffusion Probabilistic Models&lt;/em&gt; (DDPMs), which are generative models used in machine learning – especially for generating images. To better understand how DDPMs work, I decided to explore some of the foundational models they build upon, which led me to autoencoders, and specifically, variational autoencoders.&lt;/p&gt;
-&lt;p&gt;In this post, I’ll give a brief overview of autoencoders and introduce two variants: the &lt;strong&gt;variational autoencoder (VAE)&lt;/strong&gt; and the &lt;strong&gt;sparse autoencoder (SAE)&lt;/strong&gt;.&lt;/p&gt;</description>
+      <description>For my 2-D Ising Model project, I was reading up on Denoising Diffusion Probabilistic Models (DDPMs), which are generative models used in machine learning – especially for generating images. To better understand how DDPMs work, I decided to explore some of the foundational models they build upon, which led me to autoencoders, and specifically, variational autoencoders.
+In this post, I’ll give a brief overview of autoencoders and introduce two variants: the variational autoencoder (VAE) and the sparse autoencoder (SAE).</description>
+    </item>
+    <item>
+      <title>Annotated S4</title>
+      <link>http://localhost:1313/posts/s4/</link>
+      <pubDate>Tue, 22 Jul 2025 18:47:40 -0600</pubDate>
+      <guid>http://localhost:1313/posts/s4/</guid>
+      <description>Part 1: State Space Models We want a model which takes in an input $u(t)$ and maps it onto $x(t)$, the latent space. $x(t)$ stores the information from the sequence, and $u(t)$ is the current signal. It does this by saying that $x(t)$ changes wrt to $x(t)$ and $u(t)$, giving us the equation $x&#39;(t) = \textbf{A}x(t) + \textbf{B}u(t).$
+SSMs are based on control/signal processing theory, where linear models approximate reality well.</description>
     </item>
   </channel>
 </rss>
