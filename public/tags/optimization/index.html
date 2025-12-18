@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="Dev Desai">
 <link rel="canonical" href="http://localhost:1313/tags/optimization/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.8fe10233a706bc87f2e08b3cf97b8bd4c0a80f10675a143675d59212121037c0.css" integrity="sha256-j&#43;ECM6cGvIfy4Is8&#43;XuL1MCoDxBnWhQ2ddWSEhIQN8A=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.c80733235d756866b1b578ef2f5081d627827ae8c8069253fc1f2be9b8e1a060.css" integrity="sha256-yAczI111aGaxtXjvL1CB1ieCeujIBpJT/B8r6bjhoGA=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/assets/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/assets/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/assets/favicon-32x32.png">
@@ -140,7 +140,143 @@ Introduction The goal of this project is to simulate the behavior of a bike-shar
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+
+<script>
+  let shapes = [];
+  let palette = [
+    '#da532c1a', 
+    '#da532c1a', 
+    '#497cc921', 
+    '#497cc921'
+  ];
+  let numShapes = 20; 
+
+  function setup() {
+    let canvas = createCanvas(windowWidth, windowHeight);
+    canvas.position(0, 0);
+    canvas.style('z-index', '-1');
+    canvas.style('position', 'fixed');
+    canvas.style('pointer-events', 'none');
+    
+    for (let i = 0; i < numShapes; i++) {
+      shapes.push(new FloatingShape());
+    }
+  }
+
+  function draw() {
+    
+    let isDark = document.body.classList.contains('dark');
+    
+    
+    if (isDark) {
+      background(10, 10, 10); 
+    } else {
+      background(255); 
+    }
+    
+    
+    
+    if (isDark) {
+      stroke('#b66c580d'); 
+    } else {
+      stroke('#b66c580d'); 
+    }
+    
+    strokeWeight(1);
+    for (let x = 0; x < width; x += 50) line(x, 0, x, height);
+    for (let y = 0; y < height; y += 50) line(0, y, width, y);
+
+    for (let shape of shapes) {
+      shape.move();
+      shape.display();
+    }
+  }
+
+  class FloatingShape {
+    constructor() {
+      this.x = random(width);
+      this.y = random(height);
+      
+      
+      if (random() < 0.35) {
+        this.type = 3; 
+      } else {
+        this.type = floor(random(0, 3)); 
+      }
+
+      
+      let speedScale = (this.type === 3) ? 0.1 : 0.4; 
+      this.vx = random(-speedScale, speedScale);
+      this.vy = random(-speedScale, speedScale);
+
+      this.angle = random(TWO_PI);
+      this.rotSpeed = random(-0.01, 0.01);
+      this.color = color(random(palette));
+      
+      let sizeBase = random(35, 40);
+      let multiplier = random() > 0.8 ? 2.5 : 1; 
+      this.size = sizeBase * multiplier;
+
+      this.wiggleSeeds = [];
+      for(let i=0; i<5; i++) this.wiggleSeeds.push(random(1000));
+    }
+
+    move() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.angle += this.rotSpeed;
+
+      
+      if (this.x > width + this.size) this.x = -this.size;
+      if (this.x < -this.size) this.x = width + this.size;
+      if (this.y > height + this.size) this.y = -this.size;
+      if (this.y < -this.size) this.y = height + this.size;
+    }
+
+    display() {
+      push();
+      translate(this.x, this.y);
+      rotate(this.angle);
+      noFill();
+      stroke(this.color);
+      strokeWeight(1.2);
+
+      if (this.type === 0) {
+        ellipse(0, 0, this.size);
+      } 
+      else if (this.type === 1) {
+        line(-this.size/2, 0, this.size/2, 0);
+      } 
+      else if (this.type === 2) {
+        rectMode(CENTER);
+        rect(0, 0, this.size, this.size);
+      } 
+      else if (this.type === 3) {
+        
+        let points = [];
+        for (let i = 0; i < 5; i++) {
+          let a = TWO_PI / 5 * i;
+          
+          let wiggle = map(noise(this.wiggleSeeds[i] + frameCount * 0.015), 0, 1, -10, 10);
+          let r = (this.size / 2) + wiggle;
+          points.push({ x: cos(a) * r, y: sin(a) * r });
+        }
+
+        beginShape();
+        for (let p of points) vertex(p.x, p.y);
+        endShape(CLOSE);
+
+        fill(this.color);
+        for (let p of points) ellipse(p.x, p.y, 4, 4);
+        noFill();
+      }
+      pop();
+    }
+  }
+
+  function windowResized() { resizeCanvas(windowWidth, windowHeight); }
+</script>
 
 <script>
     let menu = document.getElementById('menu')

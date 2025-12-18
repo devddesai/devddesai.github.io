@@ -7,9 +7,11 @@ categories = ["projects"]
 tags = ["optimization", "agent based modeling", "python"]
 showtoc = true
 +++
-> *Original post can be found: [here](https://hasithv.github.io/posts/24-12-10-metrobike/)*
+
 
 This project was done as our final project for [William Gilpin's](https://www.wgilpin.com/) Graduate [Computational Physics Course](https://www.wgilpin.com/cphy/?utm_source=en_us_srepgw). Our complete GitHub repository, with instructions on how to replicate our results, can be found [here](https://github.com/devddesai/metrobike).
+
+*Original post can be found: [here](https://hasithv.github.io/posts/24-12-10-metrobike/)*
 
 # Introduction
 The goal of this project is to simulate the behavior of a bike-sharing system in a network of stations and destinations, and then optimize the positions of the stations. We approach the simulation of the bike-sharing system with Agent Based Modeling (ABM).

@@ -54,13 +54,23 @@
 &lt;p&gt;In this post, I’ll give a brief overview of autoencoders and introduce two variants: the &lt;strong&gt;variational autoencoder (VAE)&lt;/strong&gt; and the &lt;strong&gt;sparse autoencoder (SAE)&lt;/strong&gt;.&lt;/p&gt;</description>
     </item>
     <item>
+      <title>Annotated S4</title>
+      <link>http://localhost:1313/posts/s4/</link>
+      <pubDate>Tue, 22 Jul 2025 18:47:40 -0600</pubDate>
+      <guid>http://localhost:1313/posts/s4/</guid>
+      <description>&lt;h2 id=&#34;part-1-state-space-models&#34;&gt;Part 1: State Space Models&lt;/h2&gt;
+&lt;p&gt;We want a model which takes in an input $u(t)$ and maps it onto $x(t)$, the latent space. $x(t)$ stores the information from the sequence, and $u(t)$ is the current signal. It does this by saying that $x(t)$ changes wrt to $x(t)$ and $u(t)$, giving us the equation $x&#39;(t) = \textbf{A}x(t) + \textbf{B}u(t).$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;SSMs are based on control/signal processing theory, where linear models approximate reality well. This and also the fact that linear equations are much easier to solve than non linear equations, which often don&amp;rsquo;t have closed form solutions, is why we assume a linear form.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Metrobike Optimization Around UT Austin</title>
       <link>http://localhost:1313/posts/24-12-10-metrobike/</link>
       <pubDate>Tue, 10 Dec 2024 18:47:40 -0600</pubDate>
       <guid>http://localhost:1313/posts/24-12-10-metrobike/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Original post can be found: &lt;a href=&#34;https://hasithv.github.io/posts/24-12-10-metrobike/&#34;&gt;here&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;This project was done as our final project for &lt;a href=&#34;https://www.wgilpin.com/&#34;&gt;William Gilpin&amp;rsquo;s&lt;/a&gt; Graduate &lt;a href=&#34;https://www.wgilpin.com/cphy/?utm_source=en_us_srepgw&#34;&gt;Computational Physics Course&lt;/a&gt;. Our complete GitHub repository, with instructions on how to replicate our results, can be found &lt;a href=&#34;https://github.com/devddesai/metrobike&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+      <description>&lt;p&gt;This project was done as our final project for &lt;a href=&#34;https://www.wgilpin.com/&#34;&gt;William Gilpin&amp;rsquo;s&lt;/a&gt; Graduate &lt;a href=&#34;https://www.wgilpin.com/cphy/?utm_source=en_us_srepgw&#34;&gt;Computational Physics Course&lt;/a&gt;. Our complete GitHub repository, with instructions on how to replicate our results, can be found &lt;a href=&#34;https://github.com/devddesai/metrobike&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Original post can be found: &lt;a href=&#34;https://hasithv.github.io/posts/24-12-10-metrobike/&#34;&gt;here&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;The goal of this project is to simulate the behavior of a bike-sharing system in a network of stations and destinations, and then optimize the positions of the stations. We approach the simulation of the bike-sharing system with Agent Based Modeling (ABM).&lt;/p&gt;</description>
     </item>
