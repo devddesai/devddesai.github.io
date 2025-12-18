@@ -5,7 +5,6 @@ theme: PaperMod
 
 params:
   defaultTheme: light
-  math: true
   ShowReadingTime: true
   ShowCopyCodeButtons: true
   math: true
