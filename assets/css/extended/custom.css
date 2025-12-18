@@ -1,0 +1,277 @@
+/*
+This is just a placeholder blank stylesheet so as to support adding custom styles budled with theme's default styles
+
+Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-css-with-themes-assets for more info
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+
+.post-entry {
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    box-shadow: none;
+    background: rgba(218, 83, 44, 0.1);
+    border-left: 4px solid rgb(218, 83, 44);
+}
+
+.dark .post-entry {
+    background: rgba(218, 83, 44, 0.2); /* Alpha 0.2 for dark mode */
+}
+
+/* Target the title inside .post-entry */
+.post-entry h1, 
+.post-entry h2, 
+.post-entry .post-title {
+    font-family: 'IBM Plex Mono', monospace; 
+    font-weight: 600; 
+    font-size: 1.2em; 
+    border-left: 2px solid rgb(218, 83, 44);  
+    padding-left: 10px;
+    margin-bottom: 15px;
+}
+
+/* Target non-title text inside .post-entry */
+
+.post-entry p, 
+.post-entry span, 
+.post-entry li {
+    color: rgb(10,10,10) !important; 
+    font-weight: 300;
+}
+
+.dark .post-entry p, 
+.dark .post-entry span,
+.dark .post-entry li {
+    color: rgb(220,220,220) !important; 
+}
+
+.post-entry .entry-footer {
+    color: rgb(10,10,10);
+    font-weight: 300;
+}
+.dark .post-entry .entry-footer {
+    color: rgb(220,220,220);
+}
+
+.post-entry .entry-footer span {
+    display: inline-flex;
+    align-items: center;
+}
+
+:root {
+    --main-width: 870px;      /* wider index pages */
+    --content-width: 840px;   /* wider single posts */
+       /* optional extra breathing room */
+}
+
+.post-entry {
+    padding: 30px 40px;
+}
+
+.post-entry + .post-entry {
+    margin-top: 28px;
+}
+
+.entry-header h1 {
+    font-family: 'IBM Plex Mono', monospace; /* Change the font */
+    font-size: 5em; /* Adjust the size */
+    font-weight: 600; /* Make it bold */
+    color: rgb(10,10,10); /* Change the color */
+}
+.dark .entry-header h1 {
+    color: rgb(220,220,220); /* Lighter color for dark mode */
+}
+
+/* Customize the bio/description text */
+.entry-content {
+    color: rgb(10,10,10) !important; 
+    font-weight: 300;
+}
+.dark .entry-content {
+    color: rgb(220,220,220) !important; 
+}
+
+
+/* 
+
+### This is all the experiment for the profile picture stuff
+
+.profile-right {
+    float: right;
+    width: 300px;       
+    height: 300px;
+    margin-left: 80px;  
+    margin-bottom: 90px;
+    border-radius: 0px; 
+    object-fit: cover;
+    border: 1px solid var(--border); 
+}
+
+.home-info .entry-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.home-info .entry-content p {
+    flex: 1;
+    margin: 0;
+}
+
+.home-info .entry-content .profile-right {
+    flex: 0 500px 500px;
+    order: 2;
+    margin: 0 0 0 200px;
+}
+
+.home-info__title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 5em;
+    font-weight: 700;
+    color: rgb(218, 83, 44);
+    margin-bottom: 12px;
+} */
+
+.logo a {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 600;
+}
+
+.page-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+}
+
+/* Change font for the navigation menu buttons */
+#menu a {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 100;     
+    letter-spacing: 1.4px; 
+    color: rgb(30,30,30);
+    text-transform: uppercase;
+}
+.dark #menu a {
+    color: rgb(220,220,220);
+}
+
+#menu .active {
+    font-weight: 100;
+    color: #da532c;
+    text-transform: uppercase;
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: rgb(10, 10, 10);
+}
+
+.dark .post-content h1,
+.dark .post-content h2,
+.dark .post-content h3,
+.dark .post-content h4,
+.dark .post-content h5,
+.dark .post-content h6 {
+  color: rgb(220, 220, 220);
+}
+
+
+.post-content h1 {
+  border-left: 4px solid rgb(218, 83, 44);
+  padding-left: 12px;
+  margin-top: 1.6em;
+}
+
+/* .post-content a:hover {
+  color: rgb(218, 83, 44);
+  text-decoration-color: rgb(218, 83, 44);
+} */
+
+.post-content a {
+  color: inherit;            /* default text color */
+  text-decoration: none;     /* we'll draw an underline ourselves */
+  background-image: linear-gradient(rgb(218, 83, 44), rgb(218, 83, 44));
+  background-size: 0% 2px;   /* hidden until hover */
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 220ms ease, color 180ms ease;
+}
+
+.post-content a:hover {
+  color: rgb(218, 83, 44);   /* optional: comment this out if you want ONLY the underline */
+  background-size: 100% 0.5px; /* the "slide" */
+}
+
+/* Blockquotes */
+.post-content blockquote {
+  border-left: 4px solid rgb(218, 83, 44);
+  background: rgba(218, 83, 44, 0.08);
+  padding: 0.75em 1em; 
+}
+.post-content blockquote > :first-child {
+  margin-top: 0;
+}
+.post-content blockquote > :last-child {
+  margin-bottom: 0;
+}
+.post-content blockquote ul,
+.post-content blockquote ol {
+  margin: 0.35em 0;     /* smaller than default */
+  padding-left: 1.1em; /* slightly less indent inside quote */
+}
+
+.post-content blockquote li {
+  margin: 0.3em 0.2em;      /* tighter list item spacing inside quote */
+}
+
+.dark .post-content blockquote {
+  background: rgba(218, 83, 44, 0.16);
+}
+
+/* Code blocks */
+.post-content pre {
+  border-radius: 10px;
+  border: 1px solid rgba(218, 83, 44, 0.18);
+}
+
+.post-content div.highlight {
+  border-radius: 10px;
+  border: 1px solid rgba(218, 83, 44, 0.18);
+  overflow: hidden;
+}
+
+/* Horizontal rule */
+.post-content hr {
+  border: 0;
+  height: 1px;
+  background: rgba(10, 10, 10, 0.25);
+  margin: 2em 0;
+}
+
+.post-single .post-title {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 600;
+}
+
+.toc,
+.widget-toc,
+#toc {
+  border: none;
+  border-left: 4px solid rgb(218, 83, 44);
+  border-radius: 0;
+  padding-left: 5px;        
+  background-color: rgba(218, 83, 44, 0.1); /* light background */
+}
+
+.dark .toc,
+.dark .widget-toc,
+.dark #toc {
+  background-color: rgba(218, 83, 44, 0.2); /* slightly darker for dark mode */
+}

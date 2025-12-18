@@ -13,9 +13,8 @@
       <link>http://localhost:1313/posts/24-12-10-metrobike/</link>
       <pubDate>Tue, 10 Dec 2024 18:47:40 -0600</pubDate>
       <guid>http://localhost:1313/posts/24-12-10-metrobike/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Original post can be found: &lt;a href=&#34;https://hasithv.github.io/posts/24-12-10-metrobike/&#34;&gt;here&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;This project was done as our final project for &lt;a href=&#34;https://www.wgilpin.com/&#34;&gt;William Gilpin&amp;rsquo;s&lt;/a&gt; Graduate &lt;a href=&#34;https://www.wgilpin.com/cphy/?utm_source=en_us_srepgw&#34;&gt;Computational Physics Course&lt;/a&gt;. Our complete GitHub repository, with instructions on how to replicate our results, can be found &lt;a href=&#34;https://github.com/devddesai/metrobike&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+      <description>&lt;p&gt;This project was done as our final project for &lt;a href=&#34;https://www.wgilpin.com/&#34;&gt;William Gilpin&amp;rsquo;s&lt;/a&gt; Graduate &lt;a href=&#34;https://www.wgilpin.com/cphy/?utm_source=en_us_srepgw&#34;&gt;Computational Physics Course&lt;/a&gt;. Our complete GitHub repository, with instructions on how to replicate our results, can be found &lt;a href=&#34;https://github.com/devddesai/metrobike&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Original post can be found: &lt;a href=&#34;https://hasithv.github.io/posts/24-12-10-metrobike/&#34;&gt;here&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;The goal of this project is to simulate the behavior of a bike-sharing system in a network of stations and destinations, and then optimize the positions of the stations. We approach the simulation of the bike-sharing system with Agent Based Modeling (ABM).&lt;/p&gt;</description>
     </item>
