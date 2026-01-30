@@ -14,7 +14,7 @@
       <link>http://localhost:1313/posts/flowfm/</link>
       <pubDate>Tue, 20 Jan 2026 18:47:40 -0600</pubDate>
       <guid>http://localhost:1313/posts/flowfm/</guid>
-      <description>&lt;p&gt;Hey guys! Recently, I&amp;rsquo;ve been interested in novel generative techniques. We&amp;rsquo;ve seen the advent of diffusion over the past few years, from DDPM to diffusion transformers. Diffusion transformers are the gold standard for modern-day image generation, and there has been a lot of research on using diffusion for language modeling, sparked by the famous LLaDa model. Newer advancements include hybrid LLMs built on &amp;ldquo;Block Diffusion&amp;rdquo; to take advantage of diffusion&amp;rsquo;s parallel token generation whilst utilizing autoregression&amp;rsquo;s flexible-length generation and KV Caching.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Recently, I&amp;rsquo;ve been interested in novel generative techniques. We&amp;rsquo;ve seen the advent of diffusion over the past few years. Diffusion transformers are the gold standard for modern-day image generation, and there has been a lot of research on using diffusion for language modeling, sparked by the famous LLaDa model. Newer advancements include hybrid LLMs built on &amp;ldquo;Block Diffusion&amp;rdquo; to take advantage of diffusion&amp;rsquo;s parallel token generation whilst utilizing autoregression&amp;rsquo;s flexible-length generation and KV Caching.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

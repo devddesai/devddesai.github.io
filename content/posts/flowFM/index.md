@@ -12,9 +12,9 @@ Recently, I've been interested in novel generative techniques. We've seen the ad
 
 Diffusion's core concept revolves around moving from one probability distribution to another by learning a noisy, diffusive path. Flow Matching was a framework which stated that instead of learning the noisy path and steps to take to move from a distribution to another, you can just learn the velocity field. This can be generalized using the ***Stochastic Interpolants*** framework [[1]](https://arxiv.org/abs/2303.08797), which aims to unify diffusion and flow matching.
 
-___ 
 
-### Diffusion and its Limitations
+---
+## Diffusion and its Limitations
 
 To understand the motivation behind stochastic interpolants, let's take a quick walk through the diffusion process. 
 
@@ -84,13 +84,14 @@ We can then just solve the corresponding ODE or SDE to generate samples from the
 
 $$\dot{x}(t) = b(t, x(t)), \quad dX_t = (b(t, X_t) + \epsilon(t) \nabla \log \rho(t, X_t)) dt + \sqrt{2\epsilon(t)} dW_t$$
 
+---
 
-### Commentary
+## Commentary
 Stochastic interpolants provide a powerful and flexible framework for generative modeling by unifying diffusion and flow matching. I believe exploring this flexibility can lead to more efficient and effective generative models. We have seen its potential in image generation, but I am interested in seeing its application in language modeling or other domains! We have seen diffusion LLMs perform well, but perhaps stochastic interpolants can provide a more efficient approach, and I aim to explore this in future work.
 
 ---
 
-### References
+## References
 [1] https://arxiv.org/abs/2303.08797
 
 [2] https://www.imsi.institute/videos/generative-modeling-with-stochastic-interpolants/
