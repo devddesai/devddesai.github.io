@@ -2,7 +2,7 @@
 title: 'Annotated S4'
 date: 2025-07-22T18:47:40-06:00
 author: ["Dev Desai"]
-draft: false
+draft: true
 categories: ["notes"]
 tags: ["machine learning", "python", "deep learning"]
 showtoc: true

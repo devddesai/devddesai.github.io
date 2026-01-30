@@ -98,8 +98,13 @@
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/posts/" title="Blog">
-                    <span>Blog</span>
+                <a href="http://localhost:1313/categories/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/notes/" title="Notes">
+                    <span>Notes</span>
                 </a>
             </li>
         </ul>
@@ -148,6 +153,19 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Generalizable Diffuion via Stochastic Interpolants
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Hey guys! Recently, I’ve been interested in novel generative techniques. We’ve seen the advent of diffusion over the past few years, from DDPM to diffusion transformers. Diffusion transformers are the gold standard for modern-day image generation, and there has been a lot of research on using diffusion for language modeling, sparked by the famous LLaDa model. Newer advancements include hybrid LLMs built on “Block Diffusion” to take advantage of diffusion’s parallel token generation whilst utilizing autoregression’s flexible-length generation and KV Caching.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-20 18:47:40 -0600 CST'>January 20, 2026</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Dev Desai</footer>
+  <a class="entry-link" aria-label="post link to Generalizable Diffuion via Stochastic Interpolants" href="http://localhost:1313/posts/flowfm/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">QuantChallenge 2025
     </h2>
   </header>
@@ -175,20 +193,6 @@ In this post, I’ll give a brief overview of autoencoders and introduce two var
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">Annotated S4
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Part 1: State Space Models We want a model which takes in an input $u(t)$ and maps it onto $x(t)$, the latent space. $x(t)$ stores the information from the sequence, and $u(t)$ is the current signal. It does this by saying that $x(t)$ changes wrt to $x(t)$ and $u(t)$, giving us the equation $x&#39;(t) = \textbf{A}x(t) &#43; \textbf{B}u(t).$
-SSMs are based on control/signal processing theory, where linear models approximate reality well. This and also the fact that linear equations are much easier to solve than non linear equations, which often don’t have closed form solutions, is why we assume a linear form.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2025-07-22 18:47:40 -0600 -0600'>July 22, 2025</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Dev Desai</footer>
-  <a class="entry-link" aria-label="post link to Annotated S4" href="http://localhost:1313/posts/s4/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">Metrobike Optimization Around UT Austin
     </h2>
   </header>
@@ -204,7 +208,7 @@ Introduction The goal of this project is to simulate the behavior of a bike-shar
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="http://localhost:1313/">to(dev🧊)</a></span> · 
+        <span>© 2026 <a href="https://devddesai.github.io/">Dev Desai</a>, Inspired by <a href="https://malbergo.me/">Michael Albergo</a>.</span> · 
 
     <span>
         Powered by

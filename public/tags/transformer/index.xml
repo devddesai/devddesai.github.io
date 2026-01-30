@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Transformer on to(dev🧊)</title>
+    <link>http://localhost:1313/tags/transformer/</link>
+    <description>Recent content in Transformer on to(dev🧊)</description>
+    <generator>Hugo -- 0.148.1</generator>
+    <language>en-us</language>
+    <copyright>2026 Dev Desai, Inspired by Michael Albergo.</copyright>
+    <lastBuildDate>Tue, 20 Jan 2026 18:47:40 -0600</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/transformer/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hacking NanoGPT into a Flow Matching LLM </title>
+      <link>http://localhost:1313/posts/flowfm/</link>
+      <pubDate>Tue, 20 Jan 2026 18:47:40 -0600</pubDate>
+      <guid>http://localhost:1313/posts/flowfm/</guid>
+      <description>&lt;p&gt;Hey guys! Recently, I&amp;rsquo;ve been interested in novel generative techniques. We&amp;rsquo;ve seen the advent of diffusion over the past few years, from DDPM to diffusion transformers. Diffusion transformers are the gold standard for modern-day image generation, and there has been a lot of research on using diffusion for language modeling, sparked by the famous LLaDa model. Newer advancements include hybrid LLMs built on &amp;ldquo;Block Diffusion&amp;rdquo; to take advantage of diffusion&amp;rsquo;s parallel token generation whilst utilizing autoregression&amp;rsquo;s flexible-length generation and KV Caching.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

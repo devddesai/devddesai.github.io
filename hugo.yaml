@@ -2,6 +2,7 @@ baseURL: https://example.org/
 languageCode: en-us
 title: to(dev🧊)
 theme: PaperMod
+copyright: "© 2026 [Dev Desai](https://devddesai.github.io/), Inspired by [Michael Albergo](https://malbergo.me/)."
 
 params:
   defaultTheme: light
@@ -35,10 +36,14 @@ menu:
     name: Home
     url: /
     weight: 10
-  - identifier: posts
-    name: Blog
-    url: /posts/
+  - identifier: projects
+    name: Projects
+    url: /categories/projects/
     weight: 20
+  - identifier: notes
+    name: Notes
+    url: /categories/notes/
+    weight: 30
 
 markup:
   goldmark:

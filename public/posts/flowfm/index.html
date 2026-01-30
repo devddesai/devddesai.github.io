@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Generalizable Diffuion via Stochastic Interpolants | to(dev🧊)</title>
+<meta name="keywords" content="AI, diffusion, generative models, stochastics">
+<meta name="description" content="Hey guys! Recently, I&rsquo;ve been interested in novel generative techniques. We&rsquo;ve seen the advent of diffusion over the past few years, from DDPM to diffusion transformers. Diffusion transformers are the gold standard for modern-day image generation, and there has been a lot of research on using diffusion for language modeling, sparked by the famous LLaDa model. Newer advancements include hybrid LLMs built on &ldquo;Block Diffusion&rdquo; to take advantage of diffusion&rsquo;s parallel token generation whilst utilizing autoregression&rsquo;s flexible-length generation and KV Caching.">
+<meta name="author" content="Dev Desai">
+<link rel="canonical" href="http://localhost:1313/posts/flowfm/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a7210df72ec3c8f389d599134f5bbb98c718af9c9fd6027de81bac8fef74719e.css" integrity="sha256-pyEN9y7DyPOJ1ZkTT1u7mMcYr5yf1gJ96Busj&#43;90cZ4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/assets/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/assets/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/assets/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/flowfm/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+    
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      packages: ['base', 'ams', 'noerrors', 'noundefined'],
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],
+      inlineMath: [['\\(', '\\)'], ['$','$']],
+      processEscapes: true,
+      processEnvironments: true,
+      macros: {
+        
+      },
+      tags: 'ams'
+    },
+    loader: {
+      load: ['[tex]/ams', '[tex]/noerrors', '[tex]/noundefined']
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+    
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="to(dev🧊) (Alt + H)">to(dev🧊)</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/notes/" title="Notes">
+                    <span>Notes</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Generalizable Diffuion via Stochastic Interpolants
+    </h1>
+    <div class="post-meta"><span title='2026-01-20 18:47:40 -0600 CST'>January 20, 2026</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Dev Desai
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul><ul>
+                <li>
+                    <a href="#diffusion-and-its-limitations" aria-label="Diffusion and its Limitations">Diffusion and its Limitations</a></li></ul>
+                    
+                <li>
+                    <a href="#stochastic-interpolants" aria-label="Stochastic Interpolants">Stochastic Interpolants</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>Hey guys! Recently, I&rsquo;ve been interested in novel generative techniques. We&rsquo;ve seen the advent of diffusion over the past few years, from DDPM to diffusion transformers. Diffusion transformers are the gold standard for modern-day image generation, and there has been a lot of research on using diffusion for language modeling, sparked by the famous LLaDa model. Newer advancements include hybrid LLMs built on &ldquo;Block Diffusion&rdquo; to take advantage of diffusion&rsquo;s parallel token generation whilst utilizing autoregression&rsquo;s flexible-length generation and KV Caching.</p>
+<p>Diffusion&rsquo;s core concept revolves around moving from one probability distribution to another by learning a noisy, diffusive path. Flow Matching was a framework which stated that instead of learning the noisy path and steps to take to move from a distribution to another, you can just learn the velocity field. This can be generalized using the <em><strong>Stochastic Interpolants</strong></em> framework [1], which aims to unify diffusion and flow matching.</p>
+<hr>
+<h3 id="diffusion-and-its-limitations">Diffusion and its Limitations<a hidden class="anchor" aria-hidden="true" href="#diffusion-and-its-limitations">#</a></h3>
+<p>To understand the motivation behind stochastic interpolants, let&rsquo;s take a quick walk through the diffusion process.</p>
+<p>Let&rsquo;s say we have a target probability distribution, $\rho_{1}$ that represents the space that contains all the possible images/text we want to generate. There is no way we would know that entire distribution, otherwise we could just randomly sample from it to &ldquo;generate.&rdquo;</p>
+<p>To try to approximate this distribution, diffusion aims to learn how to nudge Gaussian noise over many steps, eventually leading it to the target distribution. We start with a sample from $\rho_{1}$ and we slowly add Gaussian noise to it until it becomes pure Gaussian noise. The model then learns how to &ldquo;undo&rdquo; that in a denoising process. Eventually, we can just sample from $\rho_{0} \sim \mathcal{N}(0,1)$, and allow the trained model to iteratively remove Gaussian noise, eventually leaving us with a sample from $\rho_{1}$.</p>
+<p>Some fragility of diffusion can be seen through these:</p>
+<blockquote>
+<ol>
+<li>The base density, $\rho_0$, must be the standard normal. According to specific use cases, you might want to condition on a different base density. An example is if you wanted to take images of purple flowers and generate images of their yellow counterparts.</li>
+<li>The noising and denoising process happens as $t$ approaches infinity.</li>
+<li>The sampling process is seen as the time reversal of some forward noising process.</li>
+</ol></blockquote>
+<p>While diffusion has proved its worth, there is a more robust stochastic process we can define to capture diffusion&rsquo;s strengths while also accounting for its weaknesses.</p>
+<hr>
+<h2 id="stochastic-interpolants">Stochastic Interpolants<a hidden class="anchor" aria-hidden="true" href="#stochastic-interpolants">#</a></h2>
+<p>A stochastic interpolant is a stochastic process defined by</p>
+$$ x_t = \alpha(t) x_0 + \beta (t) x_1 + \gamma(t)z$$<p>where $x_0$ is a sample from some base density $\rho_0$ (doesn&rsquo;t have to be Gaussian), $x_1$ is a sample from the target density, and $\rho_1$, $z \sim \mathcal{N}(0,1)$. The time-dependent coefficients satisfy the following boundary conditions:</p>
+$$\alpha(0) = 1, \alpha(1) = 0$$<p>
+</p>
+$$\beta(0) = 0, \beta(1) = 1$$<p>
+</p>
+$$\gamma(0) = 0, \gamma(1) = 0$$<p>This framework allows us to define a whole family of generative models, including diffusion and flow matching, by choosing different $\alpha$, $\beta$, and $\gamma$ functions. For example, setting $\gamma(t) = 0$ gives us flow matching, while specific choices of these functions can recover diffusion processes.</p>
+<p>Some key properties of stochastic interpolants include:</p>
+<blockquote>
+<ol>
+<li>Exact connection: $x_t$ interpolates between $x_0$ and $x_1$ as $t$ goes from 0 to 1.</li>
+<li>Ease of sampling: The sampling process can be designed to be more efficient than traditional diffusion methods.</li>
+<li>Flexibility in base distribution: The base distribution $\rho_0$ can be chosen to suit the specific application.</li>
+</ol></blockquote>
+<p>Through the following image, we can see how this framework can be powerful in unifying different generative modeling techniques through its flexible approach.</p>
+<figure class="align-center ">
+    <img loading="lazy" src="./images/flowers.png#center"
+         alt="An illustration of how using different interpolant schedules can affect the latent state at different time steps. [1]" width="800px"/> <figcaption>
+            <p>An illustration of how using different interpolant schedules can affect the latent state at different time steps. [1]</p>
+        </figcaption>
+</figure>
+
+<p>We can see how choosing different $\alpha$, $\beta$, and $\gamma$ functions can lead to different latent states at various time steps. This flexibility allows for tailoring the generative process to specific needs, potentially improving efficiency and quality. Some key observations from the image above:</p>
+<ul>
+<li>
+<p>The base density is flexbile. Here, $\rho_0$ is white flowers, $\rho_1$ is purple flowers, and $x_t$ interpolates between the two!</p>
+</li>
+<li>
+<p>Despite different noise schedules, the final sample at $t=1$ is always from the target distribution $\rho_1$. Even the first process which has zero noise at all still manages to reach the target distribution. What is even more fascinating to me is that in the first&rsquo;s intermediate states, the image is still discernable as a flower. This suggests that the model is learning a more than just the base and target distributions, and how to move between them, but a meaningful latent space.</p>
+</li>
+<li>
+<p>We can see that different noise schedules lead to different intermediate states. This suggests that we can optimize the noise schedule for different tasks, such as faster sampling or better quality.</p>
+</li>
+<li>
+<p>The stochastic interpolant framework allows for a continuous transition between diffusion and flow matching, providing a unified view of generative modeling. The first process is pure flow matching, while the last is more akin to diffusion, as it is learning to denoise Gaussian noise.</p>
+</li>
+</ul>
+<figure class="align-center ">
+    <img loading="lazy" src="./images/measure.png#center"
+         alt="The intermediate distributions between two and three mode gaussian mixture based distribution. [1]" width="800px"/> <figcaption>
+            <p>The intermediate distributions between two and three mode gaussian mixture based distribution. [1]</p>
+        </figcaption>
+</figure>
+
+<p>This figure shows how different interpolant schedules affect the intermediate distributions when transitioning between two and three mode Gaussian mixture-based distributions. How can we characterize these intermediate distributions?</p>
+<p>The time-dependent density $\rho(t, x)$ of the interpolant $x_t$ satisfies the transport equation</p>
+$$\partial_t \rho(t, x) + \nabla \cdot (b(t, x) \rho(t, x)) = 0, \quad b(t, x) = \mathbb{E} [\dot{x}_t | x_t = x].$$<p>Here, $b(t, x)$ is the drift field, representing the expected change in $x_t$ given its current state. The time-dependent density $\rho(t, x)$ also satisfies the family of Fokker-Planck equations
+</p>
+$$\partial_t \rho(t, x) + \nabla \cdot ([b(t, x) + \epsilon(t) \nabla \log \rho(t, x)] \rho(t, x)) = \epsilon(t) \Delta \rho(t, x),$$<p>Links: [1] <a href="https://arxiv.org/abs/2303.08797">https://arxiv.org/abs/2303.08797</a></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/ai/">AI</a></li>
+      <li><a href="http://localhost:1313/tags/diffusion/">Diffusion</a></li>
+      <li><a href="http://localhost:1313/tags/generative-models/">Generative Models</a></li>
+      <li><a href="http://localhost:1313/tags/stochastics/">Stochastics</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© 2026 <a href="https://devddesai.github.io/">Dev Desai</a>, Inspired by <a href="https://malbergo.me/">Michael Albergo</a>.</span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a><script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+
+<script>
+  let shapes = [];
+  let palette = [
+    '#da532c1a', 
+    '#da532c1a', 
+    '#497cc921', 
+    '#497cc921'
+  ];
+  let numShapes = 20; 
+
+  function setup() {
+    let canvas = createCanvas(windowWidth, windowHeight);
+    canvas.position(0, 0);
+    canvas.style('z-index', '-1');
+    canvas.style('position', 'fixed');
+    canvas.style('pointer-events', 'none');
+    
+    for (let i = 0; i < numShapes; i++) {
+      shapes.push(new FloatingShape());
+    }
+  }
+
+  function draw() {
+    
+    let isDark = document.body.classList.contains('dark');
+    
+    
+    if (isDark) {
+      background(10, 10, 10); 
+    } else {
+      background(255); 
+    }
+    
+    
+    
+    if (isDark) {
+      stroke('#b66c580d'); 
+    } else {
+      stroke('#b66c580d'); 
+    }
+    
+    strokeWeight(1);
+    for (let x = 0; x < width; x += 50) line(x, 0, x, height);
+    for (let y = 0; y < height; y += 50) line(0, y, width, y);
+
+    for (let shape of shapes) {
+      shape.move();
+      shape.display();
+    }
+  }
+
+  class FloatingShape {
+    constructor() {
+      this.x = random(width);
+      this.y = random(height);
+      
+      
+      if (random() < 0.35) {
+        this.type = 3; 
+      } else {
+        this.type = floor(random(0, 3)); 
+      }
+
+      
+      let speedScale = (this.type === 3) ? 0.1 : 0.4; 
+      this.vx = random(-speedScale, speedScale);
+      this.vy = random(-speedScale, speedScale);
+
+      this.angle = random(TWO_PI);
+      this.rotSpeed = random(-0.01, 0.01);
+      this.color = color(random(palette));
+      
+      let sizeBase = random(35, 40);
+      let multiplier = random() > 0.8 ? 2.5 : 1; 
+      this.size = sizeBase * multiplier;
+
+      this.wiggleSeeds = [];
+      for(let i=0; i<5; i++) this.wiggleSeeds.push(random(1000));
+    }
+
+    move() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.angle += this.rotSpeed;
+
+      
+      if (this.x > width + this.size) this.x = -this.size;
+      if (this.x < -this.size) this.x = width + this.size;
+      if (this.y > height + this.size) this.y = -this.size;
+      if (this.y < -this.size) this.y = height + this.size;
+    }
+
+    display() {
+      push();
+      translate(this.x, this.y);
+      rotate(this.angle);
+      noFill();
+      stroke(this.color);
+      strokeWeight(1.2);
+
+      if (this.type === 0) {
+        ellipse(0, 0, this.size);
+      } 
+      else if (this.type === 1) {
+        line(-this.size/2, 0, this.size/2, 0);
+      } 
+      else if (this.type === 2) {
+        rectMode(CENTER);
+        rect(0, 0, this.size, this.size);
+      } 
+      else if (this.type === 3) {
+        
+        let points = [];
+        for (let i = 0; i < 5; i++) {
+          let a = TWO_PI / 5 * i;
+          
+          let wiggle = map(noise(this.wiggleSeeds[i] + frameCount * 0.015), 0, 1, -10, 10);
+          let r = (this.size / 2) + wiggle;
+          points.push({ x: cos(a) * r, y: sin(a) * r });
+        }
+
+        beginShape();
+        for (let p of points) vertex(p.x, p.y);
+        endShape(CLOSE);
+
+        fill(this.color);
+        for (let p of points) ellipse(p.x, p.y, 4, 4);
+        noFill();
+      }
+      pop();
+    }
+  }
+
+  function windowResized() { resizeCanvas(windowWidth, windowHeight); }
+</script>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

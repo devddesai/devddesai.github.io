@@ -6,8 +6,16 @@
     <description>Recent content in Posts on to(dev🧊)</description>
     <generator>Hugo -- 0.148.1</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 03 Oct 2025 18:47:40 -0600</lastBuildDate>
+    <copyright>2026 Dev Desai, Inspired by Michael Albergo.</copyright>
+    <lastBuildDate>Tue, 20 Jan 2026 18:47:40 -0600</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Generalizable Diffuion via Stochastic Interpolants</title>
+      <link>http://localhost:1313/posts/flowfm/</link>
+      <pubDate>Tue, 20 Jan 2026 18:47:40 -0600</pubDate>
+      <guid>http://localhost:1313/posts/flowfm/</guid>
+      <description>&lt;p&gt;Hey guys! Recently, I&amp;rsquo;ve been interested in novel generative techniques. We&amp;rsquo;ve seen the advent of diffusion over the past few years, from DDPM to diffusion transformers. Diffusion transformers are the gold standard for modern-day image generation, and there has been a lot of research on using diffusion for language modeling, sparked by the famous LLaDa model. Newer advancements include hybrid LLMs built on &amp;ldquo;Block Diffusion&amp;rdquo; to take advantage of diffusion&amp;rsquo;s parallel token generation whilst utilizing autoregression&amp;rsquo;s flexible-length generation and KV Caching.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>QuantChallenge 2025</title>
       <link>http://localhost:1313/posts/quantchallenge/</link>
@@ -52,17 +60,6 @@
       <guid>http://localhost:1313/posts/vae/</guid>
       <description>&lt;p&gt;For my 2-D Ising Model project, I was reading up on &lt;em&gt;Denoising Diffusion Probabilistic Models&lt;/em&gt; (DDPMs), which are generative models used in machine learning – especially for generating images. To better understand how DDPMs work, I decided to explore some of the foundational models they build upon, which led me to autoencoders, and specifically, variational autoencoders.&lt;/p&gt;
 &lt;p&gt;In this post, I’ll give a brief overview of autoencoders and introduce two variants: the &lt;strong&gt;variational autoencoder (VAE)&lt;/strong&gt; and the &lt;strong&gt;sparse autoencoder (SAE)&lt;/strong&gt;.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Annotated S4</title>
-      <link>http://localhost:1313/posts/s4/</link>
-      <pubDate>Tue, 22 Jul 2025 18:47:40 -0600</pubDate>
-      <guid>http://localhost:1313/posts/s4/</guid>
-      <description>&lt;h2 id=&#34;part-1-state-space-models&#34;&gt;Part 1: State Space Models&lt;/h2&gt;
-&lt;p&gt;We want a model which takes in an input $u(t)$ and maps it onto $x(t)$, the latent space. $x(t)$ stores the information from the sequence, and $u(t)$ is the current signal. It does this by saying that $x(t)$ changes wrt to $x(t)$ and $u(t)$, giving us the equation $x&#39;(t) = \textbf{A}x(t) + \textbf{B}u(t).$&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;SSMs are based on control/signal processing theory, where linear models approximate reality well. This and also the fact that linear equations are much easier to solve than non linear equations, which often don&amp;rsquo;t have closed form solutions, is why we assume a linear form.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Metrobike Optimization Around UT Austin</title>

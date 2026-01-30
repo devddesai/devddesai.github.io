@@ -1,19 +1,50 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Project on Dev the dev</title>
+    <title>Project on to(dev🧊)</title>
     <link>http://localhost:1313/categories/project/</link>
-    <description>Recent content in Project on Dev the dev</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Project on to(dev🧊)</description>
+    <generator>Hugo -- 0.148.1</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 24 Jul 2025 18:47:40 -0600</lastBuildDate>
+    <copyright>2026 Dev Desai, Inspired by Michael Albergo.</copyright>
+    <lastBuildDate>Fri, 03 Oct 2025 18:47:40 -0600</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/project/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Kinematic Correlations of Charmed Hadrons</title>
-      <link>http://localhost:1313/posts/pythia/</link>
-      <pubDate>Thu, 24 Jul 2025 18:47:40 -0600</pubDate>
-      <guid>http://localhost:1313/posts/pythia/</guid>
-      <description>In my junior year, I took an independent research course under Dr. Deepa Thomas whose work specializes in High Energy Physics and Quark Gluon Plasma. A common research method in this field is to use a Monte Carlo event generator, such as Pythia, to simulate particle collision data at extremely high energy. This post will cover my analysis of the kinematic correlations of charmed hadrons. If you haven&amp;rsquo;t checked out my crash course on particle physics, check it out here, as this post assumes a basic knowledge.</description>
+      <title>QuantChallenge 2025</title>
+      <link>http://localhost:1313/posts/quantchallenge/</link>
+      <pubDate>Fri, 03 Oct 2025 18:47:40 -0600</pubDate>
+      <guid>http://localhost:1313/posts/quantchallenge/</guid>
+      <description>&lt;h2 id=&#34;simple-statistical-modeling&#34;&gt;Simple Statistical Modeling&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Rolling window for average and volatility&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;monte-carlo&#34;&gt;Monte Carlo&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;use $\mu$ and $\sigma$ to simulate thousand of possible game outcomes&lt;/li&gt;
+&lt;li&gt;probaility of winning into a fair value price&lt;/li&gt;
+&lt;li&gt;adjust our fair value price with the tru emarket price. we assume we have some edge to the market.&lt;/li&gt;
+&lt;li&gt;Real fair = 0.7 our fair + 0.3 market fair&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;market-making&#34;&gt;Market Making&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Provide liquidity to the market assuming the fair value and that people will want to trade at that fair value.&lt;/li&gt;
+&lt;li&gt;lets say fair value is 70&lt;/li&gt;
+&lt;li&gt;post buy orders slightly below, so 69&lt;/li&gt;
+&lt;li&gt;post sell orders slightly above, so 71&lt;/li&gt;
+&lt;li&gt;bid ask spread of 2&lt;/li&gt;
+&lt;li&gt;QA of some questions that i initially had
+&lt;ul&gt;
+&lt;li&gt;Q: Why not buy or sell far from the fair value?&lt;/li&gt;
+&lt;li&gt;A: Because extreme prices are usually stale or informed, increase risk, and can trap you with bad inventory. people won&amp;rsquo;t usually buy so dont put liquidity into stale stocks when instead it can be used to turn more profit&lt;/li&gt;
+&lt;li&gt;Q: Why not buy something that’s super cheap?&lt;/li&gt;
+&lt;li&gt;A: “Cheap” prices often mean you’re late to new bad info, or the quote is gone before you reach it; chasing them adds risk.&lt;/li&gt;
+&lt;li&gt;Q: What is the purpose of market making?&lt;/li&gt;
+&lt;li&gt;A: To provide liquidity— always ready to buy/sell so others can trade instantly — and earn the small spread for doing so. for a buyer and seller to happen to have the same exact price ask at a moment is rare, which is why market makers are there&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;skew-safety-net&#34;&gt;Skew Safety Net&lt;/h2&gt;
+&lt;p&gt;Terminology:&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

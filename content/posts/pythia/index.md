@@ -3,7 +3,7 @@ title: 'Kinematic Correlations of Charmed Hadrons'
 date: 2025-07-24T18:47:40-06:00
 author: ["Dev Desai"]
 draft: true
-categories: ["project"]
+categories: ["projects"]
 tags: ["pythia", "python", "particle physics"]
 showtoc: true
 math: true
