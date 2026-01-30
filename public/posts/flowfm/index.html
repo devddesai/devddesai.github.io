@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Generalizable Diffuion via Stochastic Interpolants | to(dev🧊)</title>
 <meta name="keywords" content="AI, diffusion, generative models, stochastics">
-<meta name="description" content="Hey guys! Recently, I&rsquo;ve been interested in novel generative techniques. We&rsquo;ve seen the advent of diffusion over the past few years, from DDPM to diffusion transformers. Diffusion transformers are the gold standard for modern-day image generation, and there has been a lot of research on using diffusion for language modeling, sparked by the famous LLaDa model. Newer advancements include hybrid LLMs built on &ldquo;Block Diffusion&rdquo; to take advantage of diffusion&rsquo;s parallel token generation whilst utilizing autoregression&rsquo;s flexible-length generation and KV Caching.">
+<meta name="description" content="Recently, I&rsquo;ve been interested in novel generative techniques. We&rsquo;ve seen the advent of diffusion over the past few years. Diffusion transformers are the gold standard for modern-day image generation, and there has been a lot of research on using diffusion for language modeling, sparked by the famous LLaDa model. Newer advancements include hybrid LLMs built on &ldquo;Block Diffusion&rdquo; to take advantage of diffusion&rsquo;s parallel token generation whilst utilizing autoregression&rsquo;s flexible-length generation and KV Caching.">
 <meta name="author" content="Dev Desai">
 <link rel="canonical" href="http://localhost:1313/posts/flowfm/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.a7210df72ec3c8f389d599134f5bbb98c718af9c9fd6027de81bac8fef74719e.css" integrity="sha256-pyEN9y7DyPOJ1ZkTT1u7mMcYr5yf1gJ96Busj&#43;90cZ4=" rel="preload stylesheet" as="style">
@@ -116,7 +116,7 @@
     <h1 class="post-title entry-hint-parent">
       Generalizable Diffuion via Stochastic Interpolants
     </h1>
-    <div class="post-meta"><span title='2026-01-20 18:47:40 -0600 CST'>January 20, 2026</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Dev Desai
+    <div class="post-meta"><span title='2026-01-20 18:47:40 -0600 CST'>January 20, 2026</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Dev Desai
 
 </div>
   </header> <div class="toc">
@@ -130,15 +130,22 @@
                     <a href="#diffusion-and-its-limitations" aria-label="Diffusion and its Limitations">Diffusion and its Limitations</a></li></ul>
                     
                 <li>
-                    <a href="#stochastic-interpolants" aria-label="Stochastic Interpolants">Stochastic Interpolants</a>
+                    <a href="#stochastic-interpolants" aria-label="Stochastic Interpolants">Stochastic Interpolants</a><ul>
+                        
+                <li>
+                    <a href="#commentary" aria-label="Commentary">Commentary</a></li>
+                <li>
+                    <a href="#references" aria-label="References">References</a>
                 </li>
+            </ul>
+            </li>
             </ul>
         </div>
     </details>
 </div>
 
-  <div class="post-content"><p>Hey guys! Recently, I&rsquo;ve been interested in novel generative techniques. We&rsquo;ve seen the advent of diffusion over the past few years, from DDPM to diffusion transformers. Diffusion transformers are the gold standard for modern-day image generation, and there has been a lot of research on using diffusion for language modeling, sparked by the famous LLaDa model. Newer advancements include hybrid LLMs built on &ldquo;Block Diffusion&rdquo; to take advantage of diffusion&rsquo;s parallel token generation whilst utilizing autoregression&rsquo;s flexible-length generation and KV Caching.</p>
-<p>Diffusion&rsquo;s core concept revolves around moving from one probability distribution to another by learning a noisy, diffusive path. Flow Matching was a framework which stated that instead of learning the noisy path and steps to take to move from a distribution to another, you can just learn the velocity field. This can be generalized using the <em><strong>Stochastic Interpolants</strong></em> framework [1], which aims to unify diffusion and flow matching.</p>
+  <div class="post-content"><p>Recently, I&rsquo;ve been interested in novel generative techniques. We&rsquo;ve seen the advent of diffusion over the past few years. Diffusion transformers are the gold standard for modern-day image generation, and there has been a lot of research on using diffusion for language modeling, sparked by the famous LLaDa model. Newer advancements include hybrid LLMs built on &ldquo;Block Diffusion&rdquo; to take advantage of diffusion&rsquo;s parallel token generation whilst utilizing autoregression&rsquo;s flexible-length generation and KV Caching.</p>
+<p>Diffusion&rsquo;s core concept revolves around moving from one probability distribution to another by learning a noisy, diffusive path. Flow Matching was a framework which stated that instead of learning the noisy path and steps to take to move from a distribution to another, you can just learn the velocity field. This can be generalized using the <em><strong>Stochastic Interpolants</strong></em> framework <a href="https://arxiv.org/abs/2303.08797">[1]</a>, which aims to unify diffusion and flow matching.</p>
 <hr>
 <h3 id="diffusion-and-its-limitations">Diffusion and its Limitations<a hidden class="anchor" aria-hidden="true" href="#diffusion-and-its-limitations">#</a></h3>
 <p>To understand the motivation behind stochastic interpolants, let&rsquo;s take a quick walk through the diffusion process.</p>
@@ -171,8 +178,8 @@ $$\gamma(0) = 0, \gamma(1) = 0$$<p>This framework allows us to define a whole fa
 <p>Through the following image, we can see how this framework can be powerful in unifying different generative modeling techniques through its flexible approach.</p>
 <figure class="align-center ">
     <img loading="lazy" src="./images/flowers.png#center"
-         alt="An illustration of how using different interpolant schedules can affect the latent state at different time steps. [1]" width="800px"/> <figcaption>
-            <p>An illustration of how using different interpolant schedules can affect the latent state at different time steps. [1]</p>
+         alt="An illustration of how using different interpolant schedules can affect the latent state at different time steps. 1" width="800px"/> <figcaption>
+            <p>An illustration of how using different interpolant schedules can affect the latent state at different time steps. <a href="https://arxiv.org/abs/2303.08797">1</a></p>
         </figcaption>
 </figure>
 
@@ -200,9 +207,16 @@ $$\gamma(0) = 0, \gamma(1) = 0$$<p>This framework allows us to define a whole fa
 
 <p>This figure shows how different interpolant schedules affect the intermediate distributions when transitioning between two and three mode Gaussian mixture-based distributions. How can we characterize these intermediate distributions?</p>
 <p>The time-dependent density $\rho(t, x)$ of the interpolant $x_t$ satisfies the transport equation</p>
-$$\partial_t \rho(t, x) + \nabla \cdot (b(t, x) \rho(t, x)) = 0, \quad b(t, x) = \mathbb{E} [\dot{x}_t | x_t = x].$$<p>Here, $b(t, x)$ is the drift field, representing the expected change in $x_t$ given its current state. The time-dependent density $\rho(t, x)$ also satisfies the family of Fokker-Planck equations
+$$\partial_t \rho(t, x) + \nabla \cdot (b(t, x) \rho(t, x)) = 0, \quad b(t, x) = \mathbb{E} [\dot{x}_t | x_t = x].$$<p>Here, $b(t, x)$ is the drift field, representing the expected change in $x_t$ given its current state. The time-dependent density $\rho(t, x)$ also satisfies the family of Fokker-Planck equations. This ensures that the density correctly evolves over time.
 </p>
-$$\partial_t \rho(t, x) + \nabla \cdot ([b(t, x) + \epsilon(t) \nabla \log \rho(t, x)] \rho(t, x)) = \epsilon(t) \Delta \rho(t, x),$$<p>Links: [1] <a href="https://arxiv.org/abs/2303.08797">https://arxiv.org/abs/2303.08797</a></p>
+$$\partial_t \rho(t, x) + \nabla \cdot ([b(t, x) + \epsilon(t) \nabla \log \rho(t, x)] \rho(t, x)) = \epsilon(t) \Delta \rho(t, x),$$<p>Great, but how do we practically use this to generate samples for our use? First, we train our model to minimize the square error of the drift ($\hat{b}$) and score ($\hat{s} \Leftrightarrow \nabla \log \rho$) functions.</p>
+$$\mathcal{L}_b(\hat{b}) = \int_{0}^{1} \mathbb{E} \left[ \|\hat{b}(t, x_t) - \dot{x}_t\|^2 \right] dt, \quad \mathcal{L}_s(\hat{s}) = \int_{0}^{1} \mathbb{E} \left[ \|\hat{s}(t, x_t) + \frac{1}{\gamma(t)} z\|^2 \right] dt$$<p>We can then just solve the corresponding ODE or SDE to generate samples from the target distribution!</p>
+$$\dot{x}(t) = b(t, x(t)), \quad dX_t = (b(t, X_t) + \epsilon(t) \nabla \log \rho(t, X_t)) dt + \sqrt{2\epsilon(t)} dW_t$$<h3 id="commentary">Commentary<a hidden class="anchor" aria-hidden="true" href="#commentary">#</a></h3>
+<p>Stochastic interpolants provide a powerful and flexible framework for generative modeling by unifying diffusion and flow matching. I believe exploring this flexibility can lead to more efficient and effective generative models. We have seen its potential in image generation, but I am interested in seeing its application in language modeling or other domains! We have seen diffusion LLMs perform well, but perhaps stochastic interpolants can provide a more efficient approach, and I aim to explore this in future work.</p>
+<hr>
+<h3 id="references">References<a hidden class="anchor" aria-hidden="true" href="#references">#</a></h3>
+<p>[1] <a href="https://arxiv.org/abs/2303.08797">https://arxiv.org/abs/2303.08797</a></p>
+<p>[2] <a href="https://www.imsi.institute/videos/generative-modeling-with-stochastic-interpolants/">https://www.imsi.institute/videos/generative-modeling-with-stochastic-interpolants/</a></p>
 
 
   </div>

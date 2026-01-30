@@ -8,9 +8,9 @@ tags: ["AI", "diffusion", "generative models", "stochastics"]
 showtoc: true
 ---
 
-Hey guys! Recently, I've been interested in novel generative techniques. We've seen the advent of diffusion over the past few years, from DDPM to diffusion transformers. Diffusion transformers are the gold standard for modern-day image generation, and there has been a lot of research on using diffusion for language modeling, sparked by the famous LLaDa model. Newer advancements include hybrid LLMs built on "Block Diffusion" to take advantage of diffusion's parallel token generation whilst utilizing autoregression's flexible-length generation and KV Caching.
+Recently, I've been interested in novel generative techniques. We've seen the advent of diffusion over the past few years. Diffusion transformers are the gold standard for modern-day image generation, and there has been a lot of research on using diffusion for language modeling, sparked by the famous LLaDa model. Newer advancements include hybrid LLMs built on "Block Diffusion" to take advantage of diffusion's parallel token generation whilst utilizing autoregression's flexible-length generation and KV Caching.
 
-Diffusion's core concept revolves around moving from one probability distribution to another by learning a noisy, diffusive path. Flow Matching was a framework which stated that instead of learning the noisy path and steps to take to move from a distribution to another, you can just learn the velocity field. This can be generalized using the ***Stochastic Interpolants*** framework [1], which aims to unify diffusion and flow matching.
+Diffusion's core concept revolves around moving from one probability distribution to another by learning a noisy, diffusive path. Flow Matching was a framework which stated that instead of learning the noisy path and steps to take to move from a distribution to another, you can just learn the velocity field. This can be generalized using the ***Stochastic Interpolants*** framework [[1]](https://arxiv.org/abs/2303.08797), which aims to unify diffusion and flow matching.
 
 ___ 
 
@@ -53,7 +53,7 @@ Some key properties of stochastic interpolants include:
 
 Through the following image, we can see how this framework can be powerful in unifying different generative modeling techniques through its flexible approach.
 
-{{< figure src="./images/flowers.png" width="800px" align="center" caption="An illustration of how using different interpolant schedules can affect the latent state at different time steps. [1]">}}
+{{< figure src="./images/flowers.png" width="800px" align="center" caption="An illustration of how using different interpolant schedules can affect the latent state at different time steps. [1](https://arxiv.org/abs/2303.08797)">}}
 
 We can see how choosing different $\alpha$, $\beta$, and $\gamma$ functions can lead to different latent states at various time steps. This flexibility allows for tailoring the generative process to specific needs, potentially improving efficiency and quality. Some key observations from the image above: 
 
@@ -73,8 +73,24 @@ The time-dependent density $\rho(t, x)$ of the interpolant $x_t$ satisfies the t
 
 $$\partial_t \rho(t, x) + \nabla \cdot (b(t, x) \rho(t, x)) = 0, \quad b(t, x) = \mathbb{E} [\dot{x}_t | x_t = x].$$
 
-Here, $b(t, x)$ is the drift field, representing the expected change in $x_t$ given its current state. The time-dependent density $\rho(t, x)$ also satisfies the family of Fokker-Planck equations
+Here, $b(t, x)$ is the drift field, representing the expected change in $x_t$ given its current state. The time-dependent density $\rho(t, x)$ also satisfies the family of Fokker-Planck equations. This ensures that the density correctly evolves over time.
 $$\partial_t \rho(t, x) + \nabla \cdot ([b(t, x) + \epsilon(t) \nabla \log \rho(t, x)] \rho(t, x)) = \epsilon(t) \Delta \rho(t, x),$$
 
+Great, but how do we practically use this to generate samples for our use? First, we train our model to minimize the square error of the drift ($\hat{b}$) and score ($\hat{s} \Leftrightarrow \nabla \log \rho$) functions.
 
-Links: [1] https://arxiv.org/abs/2303.08797
+$$\mathcal{L}_b(\hat{b}) = \int_{0}^{1} \mathbb{E} \left[ \|\hat{b}(t, x_t) - \dot{x}_t\|^2 \right] dt, \quad \mathcal{L}_s(\hat{s}) = \int_{0}^{1} \mathbb{E} \left[ \|\hat{s}(t, x_t) + \frac{1}{\gamma(t)} z\|^2 \right] dt$$ 
+
+We can then just solve the corresponding ODE or SDE to generate samples from the target distribution!
+
+$$\dot{x}(t) = b(t, x(t)), \quad dX_t = (b(t, X_t) + \epsilon(t) \nabla \log \rho(t, X_t)) dt + \sqrt{2\epsilon(t)} dW_t$$
+
+
+### Commentary
+Stochastic interpolants provide a powerful and flexible framework for generative modeling by unifying diffusion and flow matching. I believe exploring this flexibility can lead to more efficient and effective generative models. We have seen its potential in image generation, but I am interested in seeing its application in language modeling or other domains! We have seen diffusion LLMs perform well, but perhaps stochastic interpolants can provide a more efficient approach, and I aim to explore this in future work.
+
+---
+
+### References
+[1] https://arxiv.org/abs/2303.08797
+
+[2] https://www.imsi.institute/videos/generative-modeling-with-stochastic-interpolants/
