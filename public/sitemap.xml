@@ -8,6 +8,9 @@
     <loc>http://localhost:1313/categories/</loc>
     <lastmod>2026-01-20T18:47:40-06:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/posts/darkenergy/</loc>
+    <lastmod>2026-01-20T18:47:40-06:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/tags/diffusion/</loc>
     <lastmod>2026-01-20T18:47:40-06:00</lastmod>
   </url><url>
@@ -47,6 +50,15 @@
     <loc>http://localhost:1313/tags/quantitative-finance/</loc>
     <lastmod>2025-10-03T18:47:40-06:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/posts/pythia/</loc>
+    <lastmod>2025-07-24T18:47:40-06:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/particle-physics/</loc>
+    <lastmod>2025-07-24T18:47:40-06:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/pythia/</loc>
+    <lastmod>2025-07-24T18:47:40-06:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/posts/vae/</loc>
     <lastmod>2025-07-22T18:47:40-06:00</lastmod>
   </url><url>
@@ -56,10 +68,13 @@
     <loc>http://localhost:1313/tags/generative-ai/</loc>
     <lastmod>2025-07-22T18:47:40-06:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/posts/particle_physics/</loc>
+    <lastmod>2025-07-20T18:47:40-06:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/tags/agent-based-modeling/</loc>
     <lastmod>2024-12-10T18:47:40-06:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/24-12-10-metrobike/</loc>
+    <loc>http://localhost:1313/posts/metrobike/</loc>
     <lastmod>2024-12-10T18:47:40-06:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/optimization/</loc>

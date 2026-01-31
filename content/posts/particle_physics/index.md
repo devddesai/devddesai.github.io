@@ -2,14 +2,14 @@
 title: 'An Introduction to High Energy Physics'
 date: 2025-07-20T18:47:40-06:00
 author: ["Dev Desai"]
-draft: true
+draft: false
 categories: ["notes"]
 tags: ["particle physics", "python"]
 showtoc: true
 ---
 Hey guys! This past semester, I dove deep into a research project in Professor Deepa Thomas's lab at UT Austin, 
 where her group specializes in *Quark Gluon Plasma* (QGP). This post aims to give readers a overview of particle 
-physics theory. After, be sure to give my [Pythia studies]({{< ref "posts/pythia/index.md" >}})
+physics theory. After, be sure to give my __insert link__ 
  a read to see how 
 we can use particle collision data to probe at these theories!
 
