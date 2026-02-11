@@ -119,7 +119,7 @@ The goal of this project is to simulate the behavior of a bike-sharing system in
     <h1 class="post-title entry-hint-parent">
       Metrobike Optimization Around UT Austin
     </h1>
-    <div class="post-meta"><span title='2024-12-10 18:47:40 -0600 CST'>December 10, 2024</span>&nbsp;·&nbsp;12 min&nbsp;·&nbsp;Hasith Vattikuti, Dev Desai, Eric Liang, Viren Govin
+    <div class="post-meta"><span title='2024-12-10 18:47:40 -0600 -0600'>December 10, 2024</span>&nbsp;·&nbsp;12 min&nbsp;·&nbsp;Hasith Vattikuti, Dev Desai, Eric Liang, Viren Govin
 
 </div>
   </header> <div class="toc">
@@ -270,20 +270,7 @@ where $B$ is the length of the maxiumum dimension of the search space, $p$ is th
 </figure>
 
 <p>Thus, with only two stations to place, the optimal solution is to place one station near destination 2 and the other near destination 1. Both the PSO and the genetic algorithm are quite sensitive to this problem, it seems as if they only converge to the optimal solution about half the time. For the PSO, we show a failed case, and for the GA we show a successful case where the optimal solution was found:</p>
-<p><figure class="align-center ">
-    <img loading="lazy" src="./images/pso_4_2_uniform.png#center"
-         alt="Optimized map of four destinations and two stations using the PSO algorithm. Every destination is assumed to be equally popular." width="400px"/> <figcaption>
-            <p>Optimized map of four destinations and two stations using the PSO algorithm. Every destination is assumed to be equally popular.</p>
-        </figcaption>
-</figure>
-
-<figure class="align-center ">
-    <img loading="lazy" src="./images/ga_4_2_uniform.png#center"
-         alt="Optimized map of four destinations and two stations using the GA algorithm. Every destination is assumed to be equally popular" width="400px"/> <figcaption>
-            <p>Optimized map of four destinations and two stations using the GA algorithm. Every destination is assumed to be equally popular</p>
-        </figcaption>
-</figure>
-</p>
+<p>2</p>
 <p>Additionally, we can also consider the case where the weights are not uniform. For example, we can set the weights to be $(0.7, 0.1, 0.1, 0.1)$. In this case, the optimal solution is to place one station near destination 2 and the other near destination 1, since destination 1 will be the most popular. In this case, both PSO and GA are able to find the optimal solution:</p>
 <p><figure class="align-center ">
     <img loading="lazy" src="./images/pso_4_2_1weight.png#center"

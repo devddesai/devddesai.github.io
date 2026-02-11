@@ -6,8 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
 <title>Kinematic Correlations of Charmed Hadrons | to(dev🧊)</title>
-<meta name="keywords" content="pythia, python, particle physics">
-<meta name="description" content="In my junior year, I took an independent research course under Dr. Deepa Thomas whose work specializes in High Energy Physics and Quark Gluon Plasma. A common research method in this field is to use a Monte Carlo event generator, such as Pythia, to simulate particle collision data at extremely high energy. This post will cover my analysis of the kinematic correlations of charmed hadrons. If you haven&rsquo;t checked out my crash course on particle physics, check it out here, as this post assumes a basic knowledge.">
+<meta name="keywords" content="particle physics">
+<meta name="description" content="A full repository of this project can be found here: INSERT REPO LINK!!
+In my junior year, I took an independent research course under Dr. Deepa Thomas whose work specializes in High Energy Physics and Quark Gluon Plasma. A common research method in this field is to use a Monte Carlo event generator, such as Pythia, to simulate particle collision data at extremely high energy. This post will cover my analysis of the kinematic correlations of charmed hadrons.">
 <meta name="author" content="Dev Desai">
 <link rel="canonical" href="http://localhost:1313/posts/pythia/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.a7210df72ec3c8f389d599134f5bbb98c718af9c9fd6027de81bac8fef74719e.css" integrity="sha256-pyEN9y7DyPOJ1ZkTT1u7mMcYr5yf1gJ96Busj&#43;90cZ4=" rel="preload stylesheet" as="style">
@@ -116,7 +117,7 @@
     <h1 class="post-title entry-hint-parent">
       Kinematic Correlations of Charmed Hadrons
     </h1>
-    <div class="post-meta"><span title='2025-07-24 18:47:40 -0600 -0600'>July 24, 2025</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Dev Desai
+    <div class="post-meta"><span title='2025-07-24 00:00:00 +0000 UTC'>July 24, 2025</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;Dev Desai
 
 </div>
   </header> <div class="toc">
@@ -125,27 +126,218 @@
             <span class="details">Table of Contents</span>
         </summary>
 
-        <div class="inner"><ul>
+        <div class="inner"><ul><ul><ul>
                 <li>
-                    <a href="#motivation" aria-label="Motivation">Motivation</a>
+                    <a href="#motivation" aria-label="Motivation">Motivation</a></li></ul>
+                    </ul>
+                    
+                <li>
+                    <a href="#setup" aria-label="Setup">Setup</a><ul>
+                        <ul>
+                        
+                <li>
+                    <a href="#data-structure" aria-label="Data Structure">Data Structure</a></li>
+                <li>
+                    <a href="#phase-space-cuts---maximize-charm-quark-yield" aria-label="Phase Space Cuts - Maximize Charm Quark Yield">Phase Space Cuts - Maximize Charm Quark Yield</a></li></ul>
+                    </ul>
                 </li>
+                <li>
+                    <a href="#charm-multiplicity-analysis" aria-label="Charm Multiplicity Analysis">Charm Multiplicity Analysis</a></li>
+                <li>
+                    <a href="#kinematic-correlations" aria-label="Kinematic Correlations">Kinematic Correlations</a><ul>
+                        
+                <li>
+                    <a href="#two-final-state-charm-hadrons-correlations" aria-label="Two Final-State Charm Hadrons Correlations">Two Final-State Charm Hadrons Correlations</a><ul>
+                        
+                <li>
+                    <a href="#transverse-momentum-pt" aria-label="Transverse Momentum (pT)">Transverse Momentum (pT)</a></li>
+                <li>
+                    <a href="#rapidity-y-and-pseudorapidity-" aria-label="Rapidity (y) and Pseudorapidity ($\eta$)">Rapidity (y) and Pseudorapidity ($\eta$)</a></li>
+                <li>
+                    <a href="#phi-" aria-label="Phi ($\phi$)">Phi ($\phi$)</a></li>
+                <li>
+                    <a href="#delta-phi-" aria-label="Delta-Phi ($\Delta \phi$)">Delta-Phi ($\Delta \phi$)</a></li></ul>
+                </li>
+                <li>
+                    <a href="#kinematic-correlations-with-all-particles" aria-label="Kinematic Correlations With All Particles">Kinematic Correlations With All Particles</a>
+                </li>
+            </ul>
+            </li>
             </ul>
         </div>
     </details>
 </div>
 
-  <div class="post-content"><p>In my junior year, I took an independent research course under Dr. Deepa Thomas whose work specializes in High Energy Physics and Quark Gluon Plasma. A common research method in this field is to use a Monte Carlo event generator, such as <code>Pythia</code>, to simulate particle collision data at extremely high energy. This post will cover my analysis of the kinematic correlations of charmed hadrons. If you haven&rsquo;t checked out my crash course on particle physics, check it out <a href="http://localhost:1313/posts/particle_physics/">here</a>, as this post assumes a basic knowledge.</p>
+  <div class="post-content"><p><em>A full repository of this project can be found here: INSERT REPO LINK!!</em></p>
+<p>In my junior year, I took an independent research course under Dr. Deepa Thomas whose work specializes in High Energy Physics and Quark Gluon Plasma. A common research method in this field is to use a Monte Carlo event generator, such as <code>Pythia</code>, to simulate particle collision data at extremely high energy. This post will cover my analysis of the kinematic correlations of charmed hadrons.</p>
+<!-- If you haven't checked out my crash course on particle physics, check it out [here](http://localhost:1313/posts/particle_physics/), as this post assumes a basic knowledge. -->
 <hr>
 <h3 id="motivation">Motivation<a hidden class="anchor" aria-hidden="true" href="#motivation">#</a></h3>
-<p>Charm quarks are only created during high energy collisions, and are almost exclusively formed during the inital hard scattering, helping us understand QCD dynamics. But, charm quarks are difficult to observe directly due to <strong>color confinement?</strong>, so we want to study charmed hadron, or hadrons which contain at least one charm quark, in hopes to understand more about the production mechanisms behind charm quarks.</p>
+<p>Charm quarks are only created during high energy collisions, and are almost exclusively formed during the inital hard scattering, helping us understand <strong>QCD/QGP</strong>?? dynamics. But, charm quarks are difficult to observe directly due to <strong>color confinement</strong>??, and they hadronize rapidly. Hence, I will focus my analysis on charm hadrons, or hadrons which contain at least one charm quark, in hopes to understand more about their underlying production mechanisms.</p>
+<h1 id="setup">Setup<a hidden class="anchor" aria-hidden="true" href="#setup">#</a></h1>
+<p>In this study, I utilized <code>pythia</code> to simulate particle collisions. Some key notes about <code>pythia</code>:</p>
+<ul>
+<li>Models the full evolution of an event:
+<ol>
+<li>Hard scattering: primary parton interaction (e.g., charm quark
+production).</li>
+<li>Parton showering: emission of gluons and quarks (initial/final
+state radiation).</li>
+<li>Hadronization: transition of partons into observable hadrons. • Decay: of unstable hadrons into final-state particles.</li>
+</ol>
+</li>
+<li>Highly configurable: allows tuning of energy, cuts (like pTHatMin), and filtering for specific processes or particles.</li>
+</ul>
+<p>We will focus on the final state particles when doing our final analysis, as in the real world, we do not have access to the full lifetime of the particles, but rather, just what hits the detector. But, we can use each simulated particle&rsquo;s lifetime to understand what we see in the final state.</p>
+<h3 id="data-structure">Data Structure<a hidden class="anchor" aria-hidden="true" href="#data-structure">#</a></h3>
+<p>In order to do a robust study on charmed hadrons, we need a large dataset of these particles, which can quickly grow in filesize. In newer versions of pythia, there is not a simple method to write the full details of a simulation into a file. <code>hepMC</code> is a universal data structure which has many formats such as binary and ASCII, but there are quite a few dependency issues with more efficient formats such as binary, and using ASCII or txt formats can bloat a file.</p>
+<p>We can use <code>ROOT</code>, CERN&rsquo;s particle physics framework - not only will I utilize this for my analysis later on, but it also contains a <code>TParticle</code> class, optimized to store the lifetime of a particle, and a <code>Tree</code> class which is optimized for storing <code>ROOT</code> objects. By creating a custom data structure using these classes, we are able to reduce filesize by ~20%, which is useful as our dataset later on is ~ 1-10 GB. This also allows for easy reproducability with low dependency issues.</p>
+<p>When I created this ROOT data strcuture, I wanted to test that it was indeed storing the same information as the hepMC methods. I found 2 discrepancies: my structure had a very large number of PDG 90 counts. (PDG number is a unique identifier for different types of particles, but there is no such thing as PDG 90). This led me to believe that PDG 90 is some internal pythia object that can safely be ignored. Furthermore, in the hepMC class, I found an abnormally high number of PDG 21 (gluons), which wasn&rsquo;t present in the ROOT structure. I believe that these two discrepancies are correlated, as gluons are sort of an intermediate particle that aren&rsquo;t physically detected. This also highlighted an important note: pythia is not accurate to the intermediate quark/gluon level.</p>
+<p>The solution to this is to simply filter out these unphysical PDG 90 artifacts and gluons, as they won&rsquo;t be needed in the analysis anyways. After this filtering, both data structures were consistent!</p>
+<h3 id="phase-space-cuts---maximize-charm-quark-yield">Phase Space Cuts - Maximize Charm Quark Yield<a hidden class="anchor" aria-hidden="true" href="#phase-space-cuts---maximize-charm-quark-yield">#</a></h3>
+<p>Again, we need a dataset of particle collisions rich with charmed quarks. Yet, there only ~3.3% of proton-proton collisions contain charm quarks; this is because they are heavy flavor particles which require a high energy collision. This only occurs if the protons collide more head on with each other and have a certain energy/momentum transfer. The histogram below shows this phenomena:</p>
+<figure class="align-center ">
+    <img loading="lazy" src="./images/pt0.png#center"
+         alt="A histogram visualizing the number of charm hadrons in an event/collision." width="600px"/> <figcaption>
+            <p>A histogram visualizing the number of charm hadrons in an event/collision.</p>
+        </figcaption>
+</figure>
+
+<p>In order to get a charm quark rich dataset, one could just simulate collisions and throw them out if they don&rsquo;t contain a charm quark. This wastes 97% of compute though - instead, pythia has a parameter called <code>pThatMin</code>, which essentially cuts the simulation if the initial transverse momentum transfer is not high enough. If we choose a cutoff too high, this also leads to unnecessarily slow simulations, so let&rsquo;s find a good balance.</p>
+<p>I ran small scale simulations with different phase space cuts to optimize charm quark yield and compute time. Here are the findings:</p>
+<figure class="align-center ">
+    <img loading="lazy" src="./images/charmperevent.png#center"
+         alt="A histogram visualizing the number of charm hadrons in an event given different phase space cutoffs." width="600px"/> <figcaption>
+            <p>A histogram visualizing the number of charm hadrons in an event given different phase space cutoffs.</p>
+        </figcaption>
+</figure>
+
+<p>A clear relationship is seen - as we increase the cutoff, there is a higher yield of charm quarks. But again, choosing a value too high may be overkill.</p>
+<figure class="align-center ">
+    <img loading="lazy" src="./images/ptsummary.png#center"
+         alt="A histogram visualizing the average number of charm hadrons in an event given different phase space cutoffs." width="600px"/> <figcaption>
+            <p>A histogram visualizing the average number of charm hadrons in an event given different phase space cutoffs.</p>
+        </figcaption>
+</figure>
+
+<p>Here, we can see that around 10 GeV/c, the charm quark yield starts to plateau, so I will use this for all future work. Lastly, we can also look at a similar analysis with D0 mesons, as these are the most popular charm quarks - we see consistent results with this.</p>
+<figure class="align-center ">
+    <img loading="lazy" src="./images/ptD.png#center"
+         alt="A histogram visualizing the average number of D mesons in an event given different phase space cutoffs. Results are consistent with all charm quarks" width="600px"/> <figcaption>
+            <p>A histogram visualizing the average number of D mesons in an event given different phase space cutoffs. Results are consistent with all charm quarks</p>
+        </figcaption>
+</figure>
+
+<p>Next, I simulated 10,000 events for this analysis, although ~1 million events would be ideal. I simply didn&rsquo;t have the compute or storage at the time for such a high-scale analysis.</p>
+<h1 id="charm-multiplicity-analysis">Charm Multiplicity Analysis<a hidden class="anchor" aria-hidden="true" href="#charm-multiplicity-analysis">#</a></h1>
+<p>The first thing I did was to analyze the multiplicity of charm quarks per event. I plotted a histogram of this, as below.</p>
+<figure class="align-center ">
+    <img loading="lazy" src="./images/mult1.png#center"
+         alt="A histogram visualizing the average number of charm quarks produced in each event" width="600px"/> <figcaption>
+            <p>A histogram visualizing the average number of charm quarks produced in each event</p>
+        </figcaption>
+</figure>
+
+<p>We see something odd here: according to literature, charm quarks, and thereby hadrons, are most commonly produced in pairs. But, we see that there are more events with 3 charm hadrons than 2! To understand this, let&rsquo;s refresh on the charm quark production processes:</p>
+<blockquote>
+<p><strong>Pair Production:</strong> $gg → cc \text{ or } qq → cc$</p>
+<ul>
+<li>Produces a pair charm quarks → 2 charm hadrons (leading to
+even count)</li>
+<li>Is the most common production mechanism</li>
+</ul></blockquote>
+<blockquote>
+<p><strong>Flavor Excitation:</strong> $gc → gc \text{ or } qc → qc$</p>
+<ul>
+<li>Produces 1 charm quark → 1 charm hadron (leading to odd
+count)</li>
+<li>Rarely happens</li>
+</ul></blockquote>
+<blockquote>
+<p><strong>Gluon Splitting:</strong> $g → cc$</p>
+<ul>
+<li>Produces a pair charm quarks → 2 charm hadrons (leading to even count)</li>
+</ul></blockquote>
+<p>According to these three production mechanisms, the data should be comprised of mostly even numbered charm quark events. The issue lies with a specific decay process of the D* meson. D* mesons are a higher energy state of the D meson. These usually decay into more stable particles before it hits the detector. Hence, if we count all charmed hadrons, we might be double counting a charm quark as it is present in both a D* meson and its decayed meson. The solution to this is to filter out all non-final state particles, as these won&rsquo;t decay into other particles.</p>
+<figure class="align-center ">
+    <img loading="lazy" src="./images/Dstardecay.png#center"
+         alt="A histogram visualizing the average number of final-state charm quarks produced in each event" width="600px"/> <figcaption>
+            <p>A histogram visualizing the average number of final-state charm quarks produced in each event</p>
+        </figcaption>
+</figure>
+
+<p>We can now clearly see that events with an odd count of charmed hadrons are much less likely than their even counterparts. Let&rsquo;s integrate this and normalize it to convert it into a PDF.</p>
+<figure class="align-center ">
+    <img loading="lazy" src="./images/charmPDF.png#center"
+         alt="A log-scale PDF of final-state charm hadron multiplicity." width="600px"/> <figcaption>
+            <p>A log-scale PDF of final-state charm hadron multiplicity.</p>
+        </figcaption>
+</figure>
+
+<p>Here, I had a bin size of 2, so that instead of seeing the seasonal even-odd pattern, we can see that there is a decaying exponential relation between the number of hadrons and their probability. One might also ask, why not count the total number of quark quarks instead of looking at the hadrons? Well first, it is good to base our analysis on the hadrons, as we can then compare that analysis to real accelerator data. Secondly, it leads to massive double counting similar to with the D* phenomena. We would be counting the same charm quark in every step of its lifetime. Just to visualize this, I counted the number of charm quarks into a histogram:</p>
+<figure class="align-center ">
+    <img loading="lazy" src="./images/quarkmult.png#center"
+         alt="A histogram of charm multiplicity." width="600px"/> <figcaption>
+            <p>A histogram of charm multiplicity.</p>
+        </figcaption>
+</figure>
+
+<h1 id="kinematic-correlations">Kinematic Correlations<a hidden class="anchor" aria-hidden="true" href="#kinematic-correlations">#</a></h1>
+<p>In order to extract meaningful relationships in the data, I decided to only use events which had exactly 2 final state charm hadrons, as these should be correlated according to the three charm quark production processes as mentioned above. This section will have a lot of graphs, so please bear with me!</p>
+<h2 id="two-final-state-charm-hadrons-correlations">Two Final-State Charm Hadrons Correlations<a hidden class="anchor" aria-hidden="true" href="#two-final-state-charm-hadrons-correlations">#</a></h2>
+<h3 id="transverse-momentum-pt">Transverse Momentum (pT)<a hidden class="anchor" aria-hidden="true" href="#transverse-momentum-pt">#</a></h3>
+<figure class="align-center ">
+    <img loading="lazy" src="./images/transverse.png#center" width="600px"/> 
+</figure>
+
+<p>Through this figure (log-scale), we can see that most charm hadrons have a pT around 2-3 GeV/c. This makes sense, as that means on average, the two charm quarks contain around 50% of all the minimum transverse moementum (due to our phase space cutoff at 10 GeV/c). We can also see that there is a sharp cutoff as we get to higher pT values - this is due to the rarity of these events as well as the cutoff at 10 GeV/c. I wouldn&rsquo;t bet that if we put the phase space cut to 20 GeV, we would see a higher count of charm hadrons with higher pT though - that extra momentum might just go into created even heavier flavor quarks such as the beauty quark.</p>
+<h3 id="rapidity-y-and-pseudorapidity-">Rapidity (y) and Pseudorapidity ($\eta$)<a hidden class="anchor" aria-hidden="true" href="#rapidity-y-and-pseudorapidity-">#</a></h3>
+<figure class="align-center ">
+    <img loading="lazy" src="./images/rapidity.png#center" width="600px"/> 
+</figure>
+
+<figure class="align-center ">
+    <img loading="lazy" src="./images/eta.png#center" width="600px"/> 
+</figure>
+
+<p>We can see that both these figures look very similar, as expected due to their definitions. These distributions relate to the polar angle with respect to the beamline</p>
+<ul>
+<li>On average, the particles are centered around the pT plane with y = 0. (Polar angle of 90)</li>
+<li>Fewer particles are going in the direction of the beamline (very positive or negative values)</li>
+<li>There is a dip in $\eta$ at 0 due to the way it is calculated (from the $\text{cos}( \theta)$)</li>
+</ul>
+<h3 id="phi-">Phi ($\phi$)<a hidden class="anchor" aria-hidden="true" href="#phi-">#</a></h3>
+<figure class="align-center ">
+    <img loading="lazy" src="./images/phi.png#center" width="600px"/> 
+</figure>
+
+<p>The random spread indicates that there is no bias towards a specific direction in the pT plane.</p>
+<h3 id="delta-phi-">Delta-Phi ($\Delta \phi$)<a hidden class="anchor" aria-hidden="true" href="#delta-phi-">#</a></h3>
+<figure class="align-center ">
+    <img loading="lazy" src="./images/dphi2.png#center" width="600px"/> 
+</figure>
+
+<p>$\Delta \phi$ is the difference between the two azimuthal angles of the charm hadrons. Although we don&rsquo;t expect a bias, or pattern, in the direction of $\phi$, we do expect there to be strong correlations between the two hadrons, especially because we only picked events which have 2 charmed hadrons which should be correlated. We expect a peak at 0 and a broad peak on the away side. The two hadrons should be going opposite from each other. Let&rsquo;s explore this further and see if we can reconcile this further!</p>
+<h2 id="kinematic-correlations-with-all-particles">Kinematic Correlations With All Particles<a hidden class="anchor" aria-hidden="true" href="#kinematic-correlations-with-all-particles">#</a></h2>
+<p>I first experimented by doing this same exact analysis with all events instead of only choosing those which contained two final-state charm hadrons. I won&rsquo;t put all the plots here, because unfortunately, I got the exact same behavior for all the correlations! Everything except the $\Delta \phi$ made sense.</p>
+<p>One interesting I tried though, is to use D0 mesons as triggers, and then plot the $\Delta \phi$ between those D0 and ALL other particles. For some reason, this yielded the behavior I expected the charmed hadrons to have.</p>
+<figure class="align-center ">
+    <img loading="lazy" src="./images/dphi%20all.png#center" width="600px"/> 
+</figure>
+
+<p>Here, we can clearly see that there is a correlation at 0 and $\pi$. The reason we expect these peaks:</p>
+<blockquote>
+<p><strong>Sharp peak at 0</strong> $\to$ in gluon splitting, there is 1 gluon which splits into 2 charm quarks. These quarks are close to collinear, leading to front to front peak being sharp</p>
+<p><strong>Broad peak at $\pi$</strong> $\to$ in pair production, there is 2 gluons which become 2 charm quarks. These quarks are opposite in phi, leading to back to back correlations. Due to fragmentation and other interactions, the peak smears.</p></blockquote>
+<p>Notice that the y axis starts at 185 counts, which tells us that there is a lot of backgorund noise which comprises that 185 count, but there is a small signal - which I would expect to be the charmed hadrons. But, when we isolated the charm hadrons, we didn&rsquo;t see that signal. So it must be coming from something else!</p>
+<hr>
+<p>Unfortunately, my semester project had concluded here for PHY 371C - at a cliffhanger! I hope to one day return to these findings and understand where this discrepancy comes from. If you have any ideas, please feel free to reach out to me!</p>
 
 
   </div>
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/pythia/">Pythia</a></li>
-      <li><a href="http://localhost:1313/tags/python/">Python</a></li>
       <li><a href="http://localhost:1313/tags/particle-physics/">Particle Physics</a></li>
     </ul>
   </footer>

@@ -10,18 +10,20 @@
     <lastBuildDate>Tue, 20 Jan 2026 18:47:40 -0600</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/stochastics/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Dark Energy Project</title>
-      <link>http://localhost:1313/posts/darkenergy/</link>
-      <pubDate>Tue, 20 Jan 2026 18:47:40 -0600</pubDate>
-      <guid>http://localhost:1313/posts/darkenergy/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Generalizable Diffuion via Stochastic Interpolants</title>
       <link>http://localhost:1313/posts/flowfm/</link>
       <pubDate>Tue, 20 Jan 2026 18:47:40 -0600</pubDate>
       <guid>http://localhost:1313/posts/flowfm/</guid>
       <description>&lt;p&gt;Recently, I&amp;rsquo;ve been interested in novel generative techniques. We&amp;rsquo;ve seen the advent of diffusion over the past few years. Diffusion transformers are the gold standard for modern-day image generation, and there has been a lot of research on using diffusion for language modeling, sparked by the famous LLaDa model. Newer advancements include hybrid LLMs built on &amp;ldquo;Block Diffusion&amp;rdquo; to take advantage of diffusion&amp;rsquo;s parallel token generation whilst utilizing autoregression&amp;rsquo;s flexible-length generation and KV Caching.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Temporal Evolution of Dark Energy</title>
+      <link>http://localhost:1313/posts/darkenergy/</link>
+      <pubDate>Tue, 20 Jan 2026 18:47:40 -0600</pubDate>
+      <guid>http://localhost:1313/posts/darkenergy/</guid>
+      <description>&lt;p&gt;Throughout my senior year at UT, I&amp;rsquo;ve been taking astronomogy and cosmology courses out of personal interest. As you may know, dark energy is supposedly responsible for the accelerated expansion of the universe. In this blog post, I will discuss my team&amp;rsquo;s research on the temporal evolution of dark energy through analysis of the DESI (Dark Energy Spectroscopic Instrument) and DES (Dark Energy Survey) datasets.&lt;/p&gt;
+&lt;h1 id=&#34;background&#34;&gt;Background&lt;/h1&gt;
+&lt;p&gt;Before the discovery of dark energy, it was believed that the expansion of the universe would eventually slow down due to gravity. Scientists aimed to measure the rate of this deceleration through the deceleration parameter:&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

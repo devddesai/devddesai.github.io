@@ -98,8 +98,7 @@ For this case, we placed four destinations in a diamond shape. And destinations 
 
 Thus, with only two stations to place, the optimal solution is to place one station near destination 2 and the other near destination 1. Both the PSO and the genetic algorithm are quite sensitive to this problem, it seems as if they only converge to the optimal solution about half the time. For the PSO, we show a failed case, and for the GA we show a successful case where the optimal solution was found:
 
-{{< figure src="./images/pso_4_2_uniform.png" width="400px" align="center" caption="Optimized map of four destinations and two stations using the PSO algorithm. Every destination is assumed to be equally popular.">}} 
-{{< figure src="./images/ga_4_2_uniform.png" width="400px" align="center" caption="Optimized map of four destinations and two stations using the GA algorithm. Every destination is assumed to be equally popular">}}
+2
 
 Additionally, we can also consider the case where the weights are not uniform. For example, we can set the weights to be $(0.7, 0.1, 0.1, 0.1)$. In this case, the optimal solution is to place one station near destination 2 and the other near destination 1, since destination 1 will be the most popular. In this case, both PSO and GA are able to find the optimal solution:
 
