@@ -8,6 +8,8 @@ tags: ["AI", "diffusion", "generative models", "stochastics"]
 showtoc: true
 ---
 
+*Very soon, I will publish my project implementing a linear interpolant/flow matching to Andrej Karpathy's nanoGPT architecture to this page!*
+
 Recently, I've been interested in novel generative techniques. We've seen the advent of diffusion over the past few years. Diffusion transformers are the gold standard for modern-day image generation, and there has been a lot of research on using diffusion for language modeling, sparked by the famous LLaDa model. Newer advancements include hybrid LLMs built on "Block Diffusion" to take advantage of diffusion's parallel token generation whilst utilizing autoregression's flexible-length generation and KV Caching.
 
 Diffusion's core concept revolves around moving from one probability distribution to another by learning a noisy, diffusive path. Flow Matching was a framework which stated that instead of learning the noisy path and steps to take to move from a distribution to another, you can just learn the velocity field. This can be generalized using the ***Stochastic Interpolants*** framework [[1]](https://arxiv.org/abs/2303.08797), which aims to unify diffusion and flow matching.

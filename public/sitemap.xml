@@ -29,47 +29,35 @@
     <loc>http://localhost:1313/tags/</loc>
     <lastmod>2026-01-20T18:47:40-06:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/darkenergy/</loc>
-    <lastmod>2026-01-20T18:47:40-06:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/</loc>
     <lastmod>2026-01-20T18:47:40-06:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/machine-learning/</loc>
-    <lastmod>2025-10-03T18:47:40-06:00</lastmod>
+    <loc>http://localhost:1313/tags/cosmology/</loc>
+    <lastmod>2025-11-20T18:47:40-06:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/projects/</loc>
-    <lastmod>2025-10-03T18:47:40-06:00</lastmod>
+    <lastmod>2025-11-20T18:47:40-06:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/python/</loc>
-    <lastmod>2025-10-03T18:47:40-06:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/quantchallenge/</loc>
-    <lastmod>2025-10-03T18:47:40-06:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/quantitative-finance/</loc>
-    <lastmod>2025-10-03T18:47:40-06:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/pythia/</loc>
-    <lastmod>2025-07-24T18:47:40-06:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/particle-physics/</loc>
-    <lastmod>2025-07-24T18:47:40-06:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/pythia/</loc>
-    <lastmod>2025-07-24T18:47:40-06:00</lastmod>
+    <loc>http://localhost:1313/posts/darkenergy/</loc>
+    <lastmod>2025-11-20T18:47:40-06:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/vae/</loc>
-    <lastmod>2025-07-22T18:47:40-06:00</lastmod>
+    <lastmod>2025-09-22T18:47:40-06:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/deep-learning/</loc>
-    <lastmod>2025-07-22T18:47:40-06:00</lastmod>
+    <lastmod>2025-09-22T18:47:40-06:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/generative-ai/</loc>
-    <lastmod>2025-07-22T18:47:40-06:00</lastmod>
+    <lastmod>2025-09-22T18:47:40-06:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/particle_physics/</loc>
-    <lastmod>2025-07-20T18:47:40-06:00</lastmod>
+    <loc>http://localhost:1313/tags/machine-learning/</loc>
+    <lastmod>2025-09-22T18:47:40-06:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/pythia/</loc>
+    <lastmod>2025-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/particle-physics/</loc>
+    <lastmod>2025-07-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/agent-based-modeling/</loc>
     <lastmod>2024-12-10T18:47:40-06:00</lastmod>

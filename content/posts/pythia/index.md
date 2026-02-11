@@ -9,16 +9,16 @@ showtoc: true
 math: true
 ---
 
-*A full repository of this project can be found here: INSERT REPO LINK!!* 
+*A full repository of this project can be found [here](https://github.com/devddesai/Pythia-Studies).* 
 
-In my junior year, I took an independent research course under Dr. Deepa Thomas whose work specializes in High Energy Physics and Quark Gluon Plasma. A common research method in this field is to use a Monte Carlo event generator, such as `Pythia`, to simulate particle collision data at extremely high energy. This post will cover my analysis of the kinematic correlations of charmed hadrons. 
+In my junior year, I took an independent research course under Dr. Deepa Thomas whose work specializes in High Energy Physics and Quark Gluon Plasma. A common research method in this field is to use a Monte Carlo event generator, such as `Pythia`, to simulate particle collision data at extremely high energy. This post will cover my analysis of the kinematic correlations of charmed hadrons. *This post assumes a basic knowledge of experimental particle physics. I will soon post a crash course blog on this topic!*
 
-<!-- If you haven't checked out my crash course on particle physics, check it out [here]({{< ref "posts/particle_physics/index.md" >}}), as this post assumes a basic knowledge. -->
+<!-- If you haven't checked out my crash course on particle physics, check it out _link_ as this post assumes a basic knowledge. -->
 
 ---
 
 ### Motivation
-Charm quarks are only created during high energy collisions, and are almost exclusively formed during the inital hard scattering, helping us understand **QCD/QGP**?? dynamics. But, charm quarks are difficult to observe directly due to **color confinement**??, and they hadronize rapidly. Hence, I will focus my analysis on charm hadrons, or hadrons which contain at least one charm quark, in hopes to understand more about their underlying production mechanisms.
+Charm quarks are only created during high energy collisions, and are almost exclusively formed during the inital hard scattering, helping us understand QCD/QGP dynamics. But, charm quarks are difficult to observe directly due to color confinement, and they hadronize rapidly. Hence, I will focus my analysis on charm hadrons, or hadrons which contain at least one charm quark, in hopes to understand more about their underlying production mechanisms.
 
 # Setup
 

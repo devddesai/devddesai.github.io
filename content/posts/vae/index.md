@@ -1,6 +1,6 @@
 ---
 title: 'An Overview of Autoencoders'
-date: 2025-07-22T18:47:40-06:00
+date: 2025-09-22T18:47:40-06:00
 author: ["Dev Desai"]
 draft: false
 categories: ["notes"]
@@ -58,13 +58,15 @@ SAE's do not aim to "compress" the input data and reconstruct it. These two desi
 ---
 ## Variational Autoencoders
 
-Let's say we trained an autoencoder on the MNIST dataset (handwritten numbers). We can now have a way to compress handwritten digits. If we encoded input digit images and then stored the latent embeddings only, we would be able to decode those latent embeddings to generate handwritten digits.
+Sorry, WIP!
+
+<!-- Let's say we trained an autoencoder on the MNIST dataset (handwritten numbers). We can now have a way to compress handwritten digits. If we encoded input digit images and then stored the latent embeddings only, we would be able to decode those latent embeddings to generate handwritten digits.
 
 But, these images would be essentially the same as our training data. What if we wanted to generate completely new unique handwritten digits? For instance, let's say we have a latent embedding of a training image 7. If we find a vector in the latent space close to $z$, by taking $z + \epsilon$, and pass it through the decoder, we should end up with a new handwritten 7 that is slightly different than the original one, right?
 
 Actually, the answer is no. Regular autoencoders learn arbitrary latent spaces, and sampling from the latent space results in uninterpretable results. The key idea in variational autoencoders is that, instead of encoding an input into a single point in the latent space, a VAE encodes it to a distribution in the latent space.
 
-ELBO
+ELBO -->
 
 
 Sources: 

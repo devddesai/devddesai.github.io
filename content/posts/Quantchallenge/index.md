@@ -2,7 +2,7 @@
 title: 'QuantChallenge 2025'
 date: 2025-10-03T18:47:40-06:00
 author: ["Dev Desai"]
-draft: false
+draft: true
 categories: ["projects"]
 tags: ["Quantitative Finance", "Python", "Machine Learning"]
 showtoc: true

@@ -4,30 +4,18 @@
     <title>Particle Physics on to(dev🧊)</title>
     <link>http://localhost:1313/tags/particle-physics/</link>
     <description>Recent content in Particle Physics on to(dev🧊)</description>
-    <generator>Hugo -- 0.148.1</generator>
+    <generator>Hugo -- 0.123.7</generator>
     <language>en-us</language>
     <copyright>2026 Dev Desai, Inspired by Michael Albergo.</copyright>
-    <lastBuildDate>Thu, 24 Jul 2025 18:47:40 -0600</lastBuildDate>
+    <lastBuildDate>Thu, 24 Jul 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/particle-physics/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kinematic Correlations of Charmed Hadrons</title>
       <link>http://localhost:1313/posts/pythia/</link>
-      <pubDate>Thu, 24 Jul 2025 18:47:40 -0600</pubDate>
+      <pubDate>Thu, 24 Jul 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/pythia/</guid>
-      <description>&lt;p&gt;In my junior year, I took an independent research course under Dr. Deepa Thomas whose work specializes in High Energy Physics and Quark Gluon Plasma. A common research method in this field is to use a Monte Carlo event generator, such as &lt;code&gt;Pythia&lt;/code&gt;, to simulate particle collision data at extremely high energy. This post will cover my analysis of the kinematic correlations of charmed hadrons. If you haven&amp;rsquo;t checked out my crash course on particle physics, check it out &lt;a href=&#34;http://localhost:1313/posts/particle_physics/&#34;&gt;here&lt;/a&gt;, as this post assumes a basic knowledge.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>An Introduction to High Energy Physics</title>
-      <link>http://localhost:1313/posts/particle_physics/</link>
-      <pubDate>Sun, 20 Jul 2025 18:47:40 -0600</pubDate>
-      <guid>http://localhost:1313/posts/particle_physics/</guid>
-      <description>&lt;p&gt;Hey guys! This past semester, I dove deep into a research project in Professor Deepa Thomas&amp;rsquo;s lab at UT Austin,
-where her group specializes in &lt;em&gt;Quark Gluon Plasma&lt;/em&gt; (QGP). This post aims to give readers a overview of particle
-physics theory. After, be sure to give my &lt;strong&gt;insert link&lt;/strong&gt;
-a read to see how
-we can use particle collision data to probe at these theories!&lt;/p&gt;
-&lt;h1 id=&#34;the-standard-model&#34;&gt;The Standard Model&lt;/h1&gt;
-&lt;p&gt;In physics, all known interactions between matter and energy can be attributed to the four fundamental forces of nature.&lt;/p&gt;</description>
+      <description>A full repository of this project can be found here.
+In my junior year, I took an independent research course under Dr. Deepa Thomas whose work specializes in High Energy Physics and Quark Gluon Plasma. A common research method in this field is to use a Monte Carlo event generator, such as Pythia, to simulate particle collision data at extremely high energy. This post will cover my analysis of the kinematic correlations of charmed hadrons.</description>
     </item>
   </channel>
 </rss>

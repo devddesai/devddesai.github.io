@@ -2,7 +2,7 @@
 title: 'An Introduction to High Energy Physics'
 date: 2025-07-20T18:47:40-06:00
 author: ["Dev Desai"]
-draft: false
+draft: true
 categories: ["notes"]
 tags: ["particle physics", "python"]
 showtoc: true

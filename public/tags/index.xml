@@ -4,7 +4,7 @@
     <title>Tags on to(dev🧊)</title>
     <link>http://localhost:1313/tags/</link>
     <description>Recent content in Tags on to(dev🧊)</description>
-    <generator>Hugo -- 0.148.1</generator>
+    <generator>Hugo -- 0.123.7</generator>
     <language>en-us</language>
     <copyright>2026 Dev Desai, Inspired by Michael Albergo.</copyright>
     <lastBuildDate>Tue, 20 Jan 2026 18:47:40 -0600</lastBuildDate>
@@ -12,91 +12,77 @@
     <item>
       <title>AI</title>
       <link>http://localhost:1313/tags/ai/</link>
-      <pubDate>Tue, 20 Jan 2026 18:47:40 -0600</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/ai/</guid>
       <description></description>
     </item>
     <item>
       <title>Diffusion</title>
       <link>http://localhost:1313/tags/diffusion/</link>
-      <pubDate>Tue, 20 Jan 2026 18:47:40 -0600</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/diffusion/</guid>
       <description></description>
     </item>
     <item>
       <title>Generative Models</title>
       <link>http://localhost:1313/tags/generative-models/</link>
-      <pubDate>Tue, 20 Jan 2026 18:47:40 -0600</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/generative-models/</guid>
       <description></description>
     </item>
     <item>
       <title>Stochastics</title>
       <link>http://localhost:1313/tags/stochastics/</link>
-      <pubDate>Tue, 20 Jan 2026 18:47:40 -0600</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/stochastics/</guid>
       <description></description>
     </item>
     <item>
-      <title>Machine Learning</title>
-      <link>http://localhost:1313/tags/machine-learning/</link>
-      <pubDate>Fri, 03 Oct 2025 18:47:40 -0600</pubDate>
-      <guid>http://localhost:1313/tags/machine-learning/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Python</title>
-      <link>http://localhost:1313/tags/python/</link>
-      <pubDate>Fri, 03 Oct 2025 18:47:40 -0600</pubDate>
-      <guid>http://localhost:1313/tags/python/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Quantitative Finance</title>
-      <link>http://localhost:1313/tags/quantitative-finance/</link>
-      <pubDate>Fri, 03 Oct 2025 18:47:40 -0600</pubDate>
-      <guid>http://localhost:1313/tags/quantitative-finance/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Particle Physics</title>
-      <link>http://localhost:1313/tags/particle-physics/</link>
-      <pubDate>Thu, 24 Jul 2025 18:47:40 -0600</pubDate>
-      <guid>http://localhost:1313/tags/particle-physics/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Pythia</title>
-      <link>http://localhost:1313/tags/pythia/</link>
-      <pubDate>Thu, 24 Jul 2025 18:47:40 -0600</pubDate>
-      <guid>http://localhost:1313/tags/pythia/</guid>
+      <title>Cosmology</title>
+      <link>http://localhost:1313/tags/cosmology/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/cosmology/</guid>
       <description></description>
     </item>
     <item>
       <title>Deep Learning</title>
       <link>http://localhost:1313/tags/deep-learning/</link>
-      <pubDate>Tue, 22 Jul 2025 18:47:40 -0600</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/deep-learning/</guid>
       <description></description>
     </item>
     <item>
       <title>Generative AI</title>
       <link>http://localhost:1313/tags/generative-ai/</link>
-      <pubDate>Tue, 22 Jul 2025 18:47:40 -0600</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/generative-ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Machine Learning</title>
+      <link>http://localhost:1313/tags/machine-learning/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Particle Physics</title>
+      <link>http://localhost:1313/tags/particle-physics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/particle-physics/</guid>
       <description></description>
     </item>
     <item>
       <title>Agent Based Modeling</title>
       <link>http://localhost:1313/tags/agent-based-modeling/</link>
-      <pubDate>Tue, 10 Dec 2024 18:47:40 -0600</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/agent-based-modeling/</guid>
       <description></description>
     </item>
     <item>
       <title>Optimization</title>
       <link>http://localhost:1313/tags/optimization/</link>
-      <pubDate>Tue, 10 Dec 2024 18:47:40 -0600</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/optimization/</guid>
       <description></description>
     </item>

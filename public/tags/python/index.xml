@@ -4,7 +4,7 @@
     <title>Python on to(dev🧊)</title>
     <link>http://localhost:1313/tags/python/</link>
     <description>Recent content in Python on to(dev🧊)</description>
-    <generator>Hugo -- 0.148.1</generator>
+    <generator>Hugo -- 0.123.7</generator>
     <language>en-us</language>
     <copyright>2026 Dev Desai, Inspired by Michael Albergo.</copyright>
     <lastBuildDate>Fri, 03 Oct 2025 18:47:40 -0600</lastBuildDate>
@@ -14,67 +14,24 @@
       <link>http://localhost:1313/posts/quantchallenge/</link>
       <pubDate>Fri, 03 Oct 2025 18:47:40 -0600</pubDate>
       <guid>http://localhost:1313/posts/quantchallenge/</guid>
-      <description>&lt;h2 id=&#34;simple-statistical-modeling&#34;&gt;Simple Statistical Modeling&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Rolling window for average and volatility&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;monte-carlo&#34;&gt;Monte Carlo&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;use $\mu$ and $\sigma$ to simulate thousand of possible game outcomes&lt;/li&gt;
-&lt;li&gt;probaility of winning into a fair value price&lt;/li&gt;
-&lt;li&gt;adjust our fair value price with the tru emarket price. we assume we have some edge to the market.&lt;/li&gt;
-&lt;li&gt;Real fair = 0.7 our fair + 0.3 market fair&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;market-making&#34;&gt;Market Making&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Provide liquidity to the market assuming the fair value and that people will want to trade at that fair value.&lt;/li&gt;
-&lt;li&gt;lets say fair value is 70&lt;/li&gt;
-&lt;li&gt;post buy orders slightly below, so 69&lt;/li&gt;
-&lt;li&gt;post sell orders slightly above, so 71&lt;/li&gt;
-&lt;li&gt;bid ask spread of 2&lt;/li&gt;
-&lt;li&gt;QA of some questions that i initially had
-&lt;ul&gt;
-&lt;li&gt;Q: Why not buy or sell far from the fair value?&lt;/li&gt;
-&lt;li&gt;A: Because extreme prices are usually stale or informed, increase risk, and can trap you with bad inventory. people won&amp;rsquo;t usually buy so dont put liquidity into stale stocks when instead it can be used to turn more profit&lt;/li&gt;
-&lt;li&gt;Q: Why not buy something that’s super cheap?&lt;/li&gt;
-&lt;li&gt;A: “Cheap” prices often mean you’re late to new bad info, or the quote is gone before you reach it; chasing them adds risk.&lt;/li&gt;
-&lt;li&gt;Q: What is the purpose of market making?&lt;/li&gt;
-&lt;li&gt;A: To provide liquidity— always ready to buy/sell so others can trade instantly — and earn the small spread for doing so. for a buyer and seller to happen to have the same exact price ask at a moment is rare, which is why market makers are there&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;skew-safety-net&#34;&gt;Skew Safety Net&lt;/h2&gt;
-&lt;p&gt;Terminology:&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Kinematic Correlations of Charmed Hadrons</title>
-      <link>http://localhost:1313/posts/pythia/</link>
-      <pubDate>Thu, 24 Jul 2025 18:47:40 -0600</pubDate>
-      <guid>http://localhost:1313/posts/pythia/</guid>
-      <description>&lt;p&gt;In my junior year, I took an independent research course under Dr. Deepa Thomas whose work specializes in High Energy Physics and Quark Gluon Plasma. A common research method in this field is to use a Monte Carlo event generator, such as &lt;code&gt;Pythia&lt;/code&gt;, to simulate particle collision data at extremely high energy. This post will cover my analysis of the kinematic correlations of charmed hadrons. If you haven&amp;rsquo;t checked out my crash course on particle physics, check it out &lt;a href=&#34;http://localhost:1313/posts/particle_physics/&#34;&gt;here&lt;/a&gt;, as this post assumes a basic knowledge.&lt;/p&gt;</description>
+      <description>Simple Statistical Modeling Rolling window for average and volatility Monte Carlo use $\mu$ and $\sigma$ to simulate thousand of possible game outcomes probaility of winning into a fair value price adjust our fair value price with the tru emarket price. we assume we have some edge to the market. Real fair = 0.7 our fair + 0.3 market fair Market Making Provide liquidity to the market assuming the fair value and that people will want to trade at that fair value.</description>
     </item>
     <item>
       <title>An Introduction to High Energy Physics</title>
       <link>http://localhost:1313/posts/particle_physics/</link>
       <pubDate>Sun, 20 Jul 2025 18:47:40 -0600</pubDate>
       <guid>http://localhost:1313/posts/particle_physics/</guid>
-      <description>&lt;p&gt;Hey guys! This past semester, I dove deep into a research project in Professor Deepa Thomas&amp;rsquo;s lab at UT Austin,
-where her group specializes in &lt;em&gt;Quark Gluon Plasma&lt;/em&gt; (QGP). This post aims to give readers a overview of particle
-physics theory. After, be sure to give my &lt;strong&gt;insert link&lt;/strong&gt;
-a read to see how
-we can use particle collision data to probe at these theories!&lt;/p&gt;
-&lt;h1 id=&#34;the-standard-model&#34;&gt;The Standard Model&lt;/h1&gt;
-&lt;p&gt;In physics, all known interactions between matter and energy can be attributed to the four fundamental forces of nature.&lt;/p&gt;</description>
+      <description>Hey guys! This past semester, I dove deep into a research project in Professor Deepa Thomas&amp;rsquo;s lab at UT Austin, where her group specializes in Quark Gluon Plasma (QGP). This post aims to give readers a overview of particle physics theory. After, be sure to give my insert link a read to see how we can use particle collision data to probe at these theories!
+The Standard Model In physics, all known interactions between matter and energy can be attributed to the four fundamental forces of nature.</description>
     </item>
     <item>
       <title>Metrobike Optimization Around UT Austin</title>
       <link>http://localhost:1313/posts/metrobike/</link>
       <pubDate>Tue, 10 Dec 2024 18:47:40 -0600</pubDate>
       <guid>http://localhost:1313/posts/metrobike/</guid>
-      <description>&lt;p&gt;This project was done as our final project for &lt;a href=&#34;https://www.wgilpin.com/&#34;&gt;William Gilpin&amp;rsquo;s&lt;/a&gt; Graduate &lt;a href=&#34;https://www.wgilpin.com/cphy/?utm_source=en_us_srepgw&#34;&gt;Computational Physics Course&lt;/a&gt;. Our complete GitHub repository, with instructions on how to replicate our results, can be found &lt;a href=&#34;https://github.com/devddesai/metrobike&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Original post can be found: &lt;a href=&#34;https://hasithv.github.io/posts/24-12-10-metrobike/&#34;&gt;here&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
-&lt;p&gt;The goal of this project is to simulate the behavior of a bike-sharing system in a network of stations and destinations, and then optimize the positions of the stations. We approach the simulation of the bike-sharing system with Agent Based Modeling (ABM).&lt;/p&gt;</description>
+      <description>This project was done as our final project for William Gilpin&amp;rsquo;s Graduate Computational Physics Course. Our complete GitHub repository, with instructions on how to replicate our results, can be found here.
+Original post can be found: here
+Introduction The goal of this project is to simulate the behavior of a bike-sharing system in a network of stations and destinations, and then optimize the positions of the stations. We approach the simulation of the bike-sharing system with Agent Based Modeling (ABM).</description>
     </item>
   </channel>
 </rss>

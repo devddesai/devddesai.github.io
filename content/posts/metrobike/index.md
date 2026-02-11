@@ -4,7 +4,7 @@ date = 2024-12-10T18:47:40-06:00
 author = ["Hasith Vattikuti", "Dev Desai", "Eric Liang", "Viren Govin"]
 draft = false
 categories = ["projects"]
-tags = ["optimization", "agent based modeling", "python"]
+tags = ["optimization", "agent based modeling"]
 showtoc = true
 +++
 

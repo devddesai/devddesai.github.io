@@ -4,7 +4,7 @@
     <title>Notes on to(dev🧊)</title>
     <link>http://localhost:1313/categories/notes/</link>
     <description>Recent content in Notes on to(dev🧊)</description>
-    <generator>Hugo -- 0.148.1</generator>
+    <generator>Hugo -- 0.123.7</generator>
     <language>en-us</language>
     <copyright>2026 Dev Desai, Inspired by Michael Albergo.</copyright>
     <lastBuildDate>Tue, 20 Jan 2026 18:47:40 -0600</lastBuildDate>
@@ -14,37 +14,15 @@
       <link>http://localhost:1313/posts/flowfm/</link>
       <pubDate>Tue, 20 Jan 2026 18:47:40 -0600</pubDate>
       <guid>http://localhost:1313/posts/flowfm/</guid>
-      <description>&lt;p&gt;Recently, I&amp;rsquo;ve been interested in novel generative techniques. We&amp;rsquo;ve seen the advent of diffusion over the past few years. Diffusion transformers are the gold standard for modern-day image generation, and there has been a lot of research on using diffusion for language modeling, sparked by the famous LLaDa model. Newer advancements include hybrid LLMs built on &amp;ldquo;Block Diffusion&amp;rdquo; to take advantage of diffusion&amp;rsquo;s parallel token generation whilst utilizing autoregression&amp;rsquo;s flexible-length generation and KV Caching.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Temporal Evolution of Dark Energy</title>
-      <link>http://localhost:1313/posts/darkenergy/</link>
-      <pubDate>Tue, 20 Jan 2026 18:47:40 -0600</pubDate>
-      <guid>http://localhost:1313/posts/darkenergy/</guid>
-      <description>&lt;p&gt;Throughout my senior year at UT, I&amp;rsquo;ve been taking astronomogy and cosmology courses out of personal interest. As you may know, dark energy is supposedly responsible for the accelerated expansion of the universe. In this blog post, I will discuss my team&amp;rsquo;s research on the temporal evolution of dark energy through analysis of the DESI (Dark Energy Spectroscopic Instrument) and DES (Dark Energy Survey) datasets.&lt;/p&gt;
-&lt;h1 id=&#34;background&#34;&gt;Background&lt;/h1&gt;
-&lt;p&gt;Before the discovery of dark energy, it was believed that the expansion of the universe would eventually slow down due to gravity. Scientists aimed to measure the rate of this deceleration through the deceleration parameter:&lt;/p&gt;</description>
+      <description>Recently, I&amp;rsquo;ve been interested in novel generative techniques. We&amp;rsquo;ve seen the advent of diffusion over the past few years. Diffusion transformers are the gold standard for modern-day image generation, and there has been a lot of research on using diffusion for language modeling, sparked by the famous LLaDa model. Newer advancements include hybrid LLMs built on &amp;ldquo;Block Diffusion&amp;rdquo; to take advantage of diffusion&amp;rsquo;s parallel token generation whilst utilizing autoregression&amp;rsquo;s flexible-length generation and KV Caching.</description>
     </item>
     <item>
       <title>An Overview of Autoencoders</title>
       <link>http://localhost:1313/posts/vae/</link>
-      <pubDate>Tue, 22 Jul 2025 18:47:40 -0600</pubDate>
+      <pubDate>Mon, 22 Sep 2025 18:47:40 -0600</pubDate>
       <guid>http://localhost:1313/posts/vae/</guid>
-      <description>&lt;p&gt;For my 2-D Ising Model project, I was reading up on &lt;em&gt;Denoising Diffusion Probabilistic Models&lt;/em&gt; (DDPMs), which are generative models used in machine learning – especially for generating images. To better understand how DDPMs work, I decided to explore some of the foundational models they build upon, which led me to autoencoders, and specifically, variational autoencoders.&lt;/p&gt;
-&lt;p&gt;In this post, I’ll give a brief overview of autoencoders and introduce two variants: the &lt;strong&gt;variational autoencoder (VAE)&lt;/strong&gt; and the &lt;strong&gt;sparse autoencoder (SAE)&lt;/strong&gt;.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>An Introduction to High Energy Physics</title>
-      <link>http://localhost:1313/posts/particle_physics/</link>
-      <pubDate>Sun, 20 Jul 2025 18:47:40 -0600</pubDate>
-      <guid>http://localhost:1313/posts/particle_physics/</guid>
-      <description>&lt;p&gt;Hey guys! This past semester, I dove deep into a research project in Professor Deepa Thomas&amp;rsquo;s lab at UT Austin,
-where her group specializes in &lt;em&gt;Quark Gluon Plasma&lt;/em&gt; (QGP). This post aims to give readers a overview of particle
-physics theory. After, be sure to give my &lt;strong&gt;insert link&lt;/strong&gt;
-a read to see how
-we can use particle collision data to probe at these theories!&lt;/p&gt;
-&lt;h1 id=&#34;the-standard-model&#34;&gt;The Standard Model&lt;/h1&gt;
-&lt;p&gt;In physics, all known interactions between matter and energy can be attributed to the four fundamental forces of nature.&lt;/p&gt;</description>
+      <description>For my 2-D Ising Model project, I was reading up on Denoising Diffusion Probabilistic Models (DDPMs), which are generative models used in machine learning – especially for generating images. To better understand how DDPMs work, I decided to explore some of the foundational models they build upon, which led me to autoencoders, and specifically, variational autoencoders.
+In this post, I’ll give a brief overview of autoencoders and introduce two variants: the variational autoencoder (VAE) and the sparse autoencoder (SAE).</description>
     </item>
   </channel>
 </rss>
