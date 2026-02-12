@@ -1,5 +1,5 @@
 ---
-title: 'Generalizable Diffuion via Stochastic Interpolants'
+title: 'Generalizable Diffusion via Stochastic Interpolants'
 date: 2026-01-20T18:47:40-06:00
 author: ["Dev Desai"]
 draft: false
