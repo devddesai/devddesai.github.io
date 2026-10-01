@@ -1,0 +1,40 @@
+#!/bin/sh
+# When photos in content/photos/ are being committed, fill in captions for new ones
+# and strip GPS data first (see scripts/add_photos.py). Skip with: git commit --no-verify
+
+if ! changed=$(git diff --cached --name-only --diff-filter=AM -- content/photos/); then
+  echo "Could not list staged photos, so the commit was stopped to avoid publishing GPS data."
+  exit 1
+fi
+staged=$(printf '%s\n' "$changed" | grep -v '_index\.md$')
+[ -z "$staged" ] && exit 0
+
+# Find a working Python 3 (apps that run git may not have your shell's PATH,
+# and /usr/bin/python3 can be a broken Xcode stub)
+PY=""
+for candidate in python3 /opt/homebrew/bin/python3 /opt/miniconda3/bin/python3 \
+  /Library/Frameworks/Python.framework/Versions/Current/bin/python3 /usr/local/bin/python3 /usr/bin/python3; do
+  if "$candidate" -c 'import sys; assert sys.version_info >= (3, 9)' >/dev/null 2>&1; then
+    PY="$candidate"
+    break
+  fi
+done
+if [ -z "$PY" ]; then
+  echo "No working Python 3.9+ found, so the commit was stopped to avoid publishing GPS data."
+  echo "Commit anyway with: git commit --no-verify"
+  exit 1
+fi
+
+echo "Processing photos..."
+if ! "$PY" scripts/add_photos.py; then
+  echo "scripts/add_photos.py failed, so the commit was stopped to avoid publishing GPS data."
+  echo "Fix the error above, or commit anyway with: git commit --no-verify"
+  exit 1
+fi
+
+# Re-stage the captions file and the (now GPS-free) photos
+git add content/photos/_index.md
+echo "$staged" | while IFS= read -r f; do
+  [ -f "$f" ] && git add -- "$f"
+done
+exit 0

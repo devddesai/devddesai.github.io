@@ -2,7 +2,7 @@ baseURL: https://example.org/
 languageCode: en-us
 title: to(dev🧊)
 theme: PaperMod
-copyright: "© 2026 [Dev Desai](https://devddesai.github.io/), Inspired by [Michael Albergo](https://malbergo.me/)."
+copyright: "© 2026 [Dev Desai](https://devddesai.github.io/)"
 
 params:
   defaultTheme: light
@@ -17,14 +17,16 @@ params:
     favicon: /assets/favicon.ico
 
   homeInfoParams:
+    Image: images/profile.jpg  # under assets/; remove this line to hide the photo
     Title: Hey there!
     Content: >-
-      My name is Dev Desai, and I'm a senior at The Univeristy of Texas at Austin. I am interested in AI research,
-      scientific machine learning, and quantitative finance. Here's a little blog about some interesting things I've read and worked on during my time
-      here. I'm still working on migrating all my projects to this site.
+      I'm Dev, and I'm an AI researcher at Harvard SEAS doing a Master's in CSE. Previously, I studied physics at UT Austin.
+      I'm interested in mechanistic interpretability, AI safety, RL envs, and ML algorithms research.
+      Apart from this, I'm a coffee nerd (casabrews, v60+baratza, K7 all the way), and am getting into tennis and photography.
+      If you are interested in any of the above, I would love to [connect](mailto:devdesai@g.harvard.edu) (over a cup of coffee, maybe?)
   socialIcons:
     - name: email
-      url: 'mailto:desaidev@utexas.com'
+      url: 'mailto:devdesai@g.harvard.edu'
     - name: github
       url: 'https://github.com/devddesai'
     - name: linkedin
@@ -44,6 +46,10 @@ menu:
     name: Notes
     url: /categories/notes/
     weight: 30
+  - identifier: postcards
+    name: Postcards
+    url: /postcards/
+    weight: 40
 
 markup:
   goldmark:

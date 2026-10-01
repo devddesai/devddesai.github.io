@@ -35,9 +35,17 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: 'latest'
+          hugo-version: '0.148.1'
           extended: true
       
+      # Reuse processed images (thumbnails etc.) from the previous deploy
+      - name: Cache processed images
+        uses: actions/cache@v4
+        with:
+          path: resources/_gen
+          key: hugo-resources-${{ github.run_id }}
+          restore-keys: hugo-resources-
+
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production

@@ -1,0 +1,488 @@
+/* New theme (redesign branch). Fonts are loaded in layouts/partials/extend_head.html. */
+
+:root {
+  --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ─── Colors ───
+   Light: "sage and sand". Dark: "dusk steel" with sand accents.
+   --theme etc. are PaperMod's own variables; --accent/--warm/--taupe are ours. */
+
+:root {
+  --theme: #F2F0EB;          /* page background */
+  --entry: #FAF9F6;          /* cards */
+  --primary: #2F2D29;        /* headings */
+  --secondary: #6F6B64;      /* meta text */
+  --tertiary: #DAD3C7;       /* tag pills, scrollbar */
+  --content: #3A3833;        /* body text */
+  --code-block-bg: #252624;
+  --code-bg: #E7E3DB;        /* inline code */
+  --border: #E0DBD2;
+
+  --accent: #5F6F4F;         /* sage: links, active nav */
+  --warm: #9A6236;           /* sand: category labels, hover (darker than the swatch so small text stays readable) */
+  --link-hover: #9A6236;
+  --taupe: #BFB3A3;
+}
+
+/* Dark: "dusk steel", the hue of #909EAE darkened */
+.dark {
+  --theme: #2A323C;
+  --entry: #313A45;
+  --primary: #E9EDF1;
+  --secondary: #AEB8C3;
+  --tertiary: #45505D;
+  --content: #D3D9DF;
+  --code-block-bg: #232A33;
+  --code-bg: #36404B;
+  --border: #3E4854;
+
+  --accent: #E6B48B;         /* sand (sage clashed with the steel blue) */
+  --warm: #E6B48B;           /* sand */
+  --link-hover: #F4D3B6;     /* lighter sand, since accent and warm match here */
+  --taupe: #8A8074;
+}
+
+/* PaperMod gives list pages a different background in light mode; keep it uniform */
+.list {
+  background: var(--theme);
+}
+
+/* ─── Home intro with profile photo (layouts/partials/home_info.html) ─── */
+
+.home-info-body {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.home-info-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.home-info-photo {
+  flex-shrink: 0;
+  width: 180px;
+  height: 180px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+@media (max-width: 600px) {
+  .home-info-body {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .home-info-photo {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+/* ─── Post list: rows with dividers, date/category column on the left ───
+   Markup lives in layouts/_default/list.html */
+
+.post-entry {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 28px;
+  margin-bottom: 0;
+  padding: 24px 0;
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--border);
+  border-radius: 0;
+  transition: none;
+}
+
+.post-entry:last-of-type {
+  border-bottom: 1px solid var(--border);
+}
+
+.post-entry:active {
+  transform: none;
+}
+
+.entry-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 5px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.entry-category {
+  color: var(--warm);
+}
+
+.post-entry .entry-header h2 {
+  font-size: 21px;
+  line-height: 1.3;
+}
+
+.post-entry:hover .entry-header h2 {
+  color: var(--accent);
+}
+
+.post-entry .entry-content {
+  margin: 6px 0 0;
+}
+
+.post-entry .entry-footer {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--secondary);
+}
+
+@media (max-width: 600px) {
+  .post-entry {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .entry-aside {
+    flex-direction: row;
+    gap: 12px;
+    padding-top: 0;
+  }
+}
+
+/* ─── Photo gallery (layouts/photos/list.html) ─── */
+
+.gallery {
+  position: relative;
+  left: 50%;
+  width: min(1100px, calc(100vw - 2 * var(--gap)));
+  transform: translateX(-50%);
+  columns: 3 240px;
+  column-gap: 14px;
+}
+
+/* With JS: real columns filled left to right (see layouts/photos/list.html) */
+.gallery.is-masonry {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  columns: auto;
+}
+
+.gallery-col {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.gallery-item {
+  position: relative;
+  margin: 0 0 14px;
+  break-inside: avoid;
+}
+
+.gallery-link {
+  display: block;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.gallery-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 400ms ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.03);
+}
+
+.gallery-item figcaption {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+/* Mouse: caption fades in over the bottom of the photo */
+@media (hover: hover) {
+  .gallery-item figcaption {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 28px 12px 10px;
+    border-radius: 0 0 8px 8px;
+    color: #fff;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.55));
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 250ms ease;
+  }
+
+  .gallery-item:hover figcaption {
+    opacity: 1;
+  }
+}
+
+/* Touch: caption sits under the photo */
+@media (hover: none) {
+  .gallery-item figcaption {
+    padding: 6px 2px 0;
+    color: var(--secondary);
+  }
+}
+
+/* Lightbox */
+.lightbox {
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: #fff;
+  background: rgba(12, 14, 17, 0.92);
+}
+
+.lightbox[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lightbox-in 200ms ease;
+}
+
+.lightbox::backdrop {
+  background: transparent;
+}
+
+.lightbox figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: calc(100vw - 140px);
+  margin: 0;
+}
+
+.lightbox img {
+  max-width: 100%;
+  max-height: calc(100vh - 120px);
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+.lightbox figcaption {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.lightbox-btn {
+  position: absolute;
+  padding: 8px 14px;
+  font-size: 34px;
+  line-height: 1;
+  color: #fff;
+  background: none;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity 200ms ease;
+}
+
+.lightbox-btn:hover {
+  opacity: 1;
+}
+
+.lightbox-close { top: 14px; right: 14px; }
+.lightbox-prev { top: 50%; left: 14px; transform: translateY(-50%); }
+.lightbox-next { top: 50%; right: 14px; transform: translateY(-50%); }
+
+@keyframes lightbox-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .lightbox figure {
+    max-width: calc(100vw - 24px);
+  }
+
+  .lightbox-prev,
+  .lightbox-next {
+    top: auto;
+    bottom: 14px;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-item img,
+  .lightbox[open] {
+    transition: none;
+    animation: none;
+    transform: none !important;
+  }
+}
+
+/* Experiment: faint grid background (currently OFF; remove the comment markers to turn on)
+body,
+body.list {
+  --grid-line: color-mix(in srgb, var(--primary) 5%, transparent);
+  background-color: var(--theme);
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-attachment: fixed;
+}
+*/
+
+/* Theme toggle: moon rocks, sun spins on hover (icons in layouts/partials/header.html) */
+#theme-toggle {
+  transition: color 200ms ease;
+}
+
+#theme-toggle:hover {
+  color: var(--accent);
+}
+
+#theme-toggle svg {
+  transition: transform 450ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#theme-toggle:hover #moon {
+  transform: rotate(-20deg) scale(1.1);
+}
+
+#theme-toggle:hover #sun {
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* ─── Hover animations: accent color fades in with a small movement ─── */
+
+/* Menu: underline slides in from the left (the active item keeps its static underline) */
+#menu a,
+#menu a span {
+  transition: color 220ms ease;
+}
+
+#menu a span:not(.active) {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  padding-bottom: 2px;
+  transition: color 220ms ease, background-size 260ms ease;
+}
+
+#menu a:hover span {
+  color: var(--accent);
+}
+
+#menu a:hover span:not(.active) {
+  background-size: 100% 2px;
+}
+
+/* Post list: title nudges right */
+.post-entry .entry-header h2 {
+  transition: color 220ms ease, transform 260ms ease;
+}
+
+.post-entry:hover .entry-header h2 {
+  transform: translateX(4px);
+}
+
+/* Links in posts: underline thickens */
+.post-content a,
+.home-info .entry-content a {
+  transition: color 220ms ease, text-decoration-color 220ms ease, text-decoration-thickness 220ms ease;
+}
+
+.post-content a:hover,
+.home-info .entry-content a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Social icons: lift slightly */
+.social-icons a {
+  transition: color 220ms ease, transform 260ms ease;
+}
+
+.social-icons a:hover {
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #theme-toggle svg,
+  .post-entry .entry-header h2,
+  .social-icons a {
+    transition: color 220ms ease;
+    transform: none !important;
+  }
+}
+
+/* Accent colors */
+#menu .active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.post-content a,
+.home-info .entry-content a {
+  color: var(--accent);
+  box-shadow: none;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.post-content a:hover,
+.home-info .entry-content a:hover {
+  color: var(--link-hover);
+  text-decoration-color: var(--link-hover);
+}
+
+.post-content blockquote {
+  border-inline-start-color: var(--taupe);
+}
+
+/* Serif for reading: body text, headings, nav */
+body {
+  font-family: var(--font-serif);
+}
+
+/* Lighter headings than PaperMod's default bold */
+h1, h2, h3, h4, h5, h6,
+.logo a,
+.entry-header h1,
+.entry-header h2,
+.post-title {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* Sans for small metadata: dates, reading time, tags, breadcrumbs, footer */
+.post-meta,
+.entry-footer,
+.breadcrumbs,
+.post-tags,
+.paginav,
+.footer {
+  font-family: var(--font-sans);
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--font-mono);
+}

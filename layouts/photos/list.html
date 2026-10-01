@@ -1,0 +1,159 @@
+{{- /* Photo gallery for content/photos/: masonry grid + lightbox. Captions come from resources params in _index.md. */ -}}
+{{- define "main" }}
+
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}
+  <div class="post-description">{{ . | markdownify }}</div>
+  {{- end }}
+</header>
+
+{{- with .Content }}
+<div class="post-content">{{ . }}</div>
+{{- end }}
+
+{{- /* Collect photos with a display date and a sort key (newest first, undated last) */}}
+{{- $items := slice }}
+{{- range .Resources.ByType "image" }}
+  {{- $date := "" }}
+  {{- $sortKey := 0 }}
+  {{- with .Params.date }}
+    {{- $v := . }}
+    {{- $format := "Jan 2, 2006" }}
+    {{- if and (eq (printf "%T" $v) "string") (eq (len $v) 7) }}
+      {{- $v = printf "%s-01" $v }}
+      {{- $format = "Jan 2006" }}
+    {{- end }}
+    {{- $t := time.AsTime $v }}
+    {{- $sortKey = $t.Unix }}
+    {{- $date = $t | time.Format $format }}
+  {{- end }}
+  {{- $items = $items | append (dict "img" . "date" $date "sortKey" $sortKey) }}
+{{- end }}
+{{- $items = sort $items "sortKey" "desc" }}
+
+<div class="gallery">
+  {{- range $i, $item := $items }}
+  {{- $img := $item.img }}
+  {{- $thumb := $img.Process "webp q80" }}
+  {{- if gt $img.Width 800 }}{{ $thumb = $img.Resize "800x webp q80" }}{{ end }}
+  {{- $full := $img.Process "webp q85" }}
+  {{- if gt $img.Width 2400 }}{{ $full = $img.Resize "2400x webp q85" }}{{ end }}
+  {{- $parts := slice }}
+  {{- with $img.Params.location }}{{ $parts = $parts | append . }}{{ end }}
+  {{- with $item.date }}{{ $parts = $parts | append . }}{{ end }}
+  {{- $caption := delimit $parts " · " }}
+  <figure class="gallery-item">
+    <a class="gallery-link" href="{{ $full.RelPermalink }}" data-caption="{{ $caption }}" data-index="{{ $i }}">
+      <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}"
+        alt="{{ $caption | default "Photo" }}" loading="lazy" decoding="async">
+    </a>
+    {{- with $caption }}
+    <figcaption>{{ . }}</figcaption>
+    {{- end }}
+  </figure>
+  {{- end }}
+</div>
+
+<dialog class="lightbox" aria-label="Photo viewer">
+  <button class="lightbox-btn lightbox-close" aria-label="Close">&times;</button>
+  <button class="lightbox-btn lightbox-prev" aria-label="Previous photo">&lsaquo;</button>
+  <figure>
+    <img alt="">
+    <figcaption></figcaption>
+  </figure>
+  <button class="lightbox-btn lightbox-next" aria-label="Next photo">&rsaquo;</button>
+</dialog>
+
+<script>
+  // Masonry that reads left to right: each photo (newest first) goes into the
+  // currently shortest column. Without JS, the CSS column layout is used instead.
+  (() => {
+    const gallery = document.querySelector('.gallery');
+    if (!gallery) return;
+    const items = [...gallery.querySelectorAll('.gallery-item')];
+    const GAP = 14, MIN_COL = 240, MAX_COLS = 3;  // keep in sync with .gallery in theme.css
+    let cols = 0;
+
+    const layout = () => {
+      const n = Math.max(1, Math.min(MAX_COLS, Math.floor((gallery.clientWidth + GAP) / (MIN_COL + GAP))));
+      if (n === cols) return;
+      cols = n;
+      const columns = Array.from({ length: n }, () => {
+        const col = document.createElement('div');
+        col.className = 'gallery-col';
+        return col;
+      });
+      const heights = new Array(n).fill(0);
+      items.forEach((item) => {
+        const img = item.querySelector('img');
+        const k = heights.indexOf(Math.min(...heights));
+        columns[k].appendChild(item);
+        heights[k] += img.getAttribute('height') / img.getAttribute('width');
+      });
+      gallery.replaceChildren(...columns);
+      gallery.classList.add('is-masonry');
+    };
+
+    layout();
+    new ResizeObserver(layout).observe(gallery);
+  })();
+
+  // Lightbox
+  (() => {
+    // Sort by date order, not by position in the grid
+    const links = [...document.querySelectorAll('.gallery-link')]
+      .sort((a, b) => a.dataset.index - b.dataset.index);
+    const box = document.querySelector('.lightbox');
+    if (!links.length || !box) return;
+
+    const img = box.querySelector('img');
+    const cap = box.querySelector('figcaption');
+    const multiple = links.length > 1;
+    box.querySelector('.lightbox-prev').hidden = !multiple;
+    box.querySelector('.lightbox-next').hidden = !multiple;
+
+    let current = 0;
+    const show = (n) => {
+      current = (n + links.length) % links.length;
+      const link = links[current];
+      img.src = link.href;
+      img.alt = link.querySelector('img').alt;
+      cap.textContent = link.dataset.caption || '';
+      cap.hidden = !link.dataset.caption;
+    };
+
+    links.forEach((link, n) => link.addEventListener('click', (e) => {
+      e.preventDefault();
+      show(n);
+      box.showModal();
+    }));
+
+    box.querySelector('.lightbox-close').addEventListener('click', () => box.close());
+    box.querySelector('.lightbox-prev').addEventListener('click', () => show(current - 1));
+    box.querySelector('.lightbox-next').addEventListener('click', () => show(current + 1));
+
+    // Click on the dark area (not the photo or buttons) closes
+    box.addEventListener('click', (e) => {
+      if (e.target === box || e.target.tagName === 'FIGURE') box.close();
+    });
+
+    box.addEventListener('keydown', (e) => {
+      if (!multiple) return;
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
+
+    // Swipe left/right on touch screens
+    let startX = null;
+    box.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+    box.addEventListener('touchend', (e) => {
+      if (startX === null || !multiple) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
+      startX = null;
+    });
+  })();
+</script>
+
+{{- end }}{{- /* end main */ -}}

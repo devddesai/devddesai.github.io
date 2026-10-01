@@ -1,3 +1,12 @@
+/* ============================================================
+   DISABLED: everything below is wrapped in "@media not all",
+   which never matches, so none of it is applied.
+   (CSS comments cannot nest, so a /* */ wrapper would break.)
+   To re-enable: delete this header, the "@media not all {" line,
+   and the closing "} /* end @media not all */" at the bottom.
+   ============================================================ */
+@media not all {
+
 /*
 This is just a placeholder blank stylesheet so as to support adding custom styles budled with theme's default styles
 
@@ -275,3 +284,5 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
 .dark #toc {
   background-color: rgba(218, 83, 44, 0.2); /* slightly darker for dark mode */
 }
+
+} /* end @media not all */

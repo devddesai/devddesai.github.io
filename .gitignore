@@ -1,0 +1,10 @@
+# Hugo build output and caches (GitHub Actions rebuilds the site on deploy)
+public/
+resources/_gen/
+.hugo_build.lock
+
+# macOS
+.DS_Store
+
+# Local tooling
+.claude/

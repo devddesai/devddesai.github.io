@@ -1,0 +1,24 @@
+{{- /* Override of PaperMod's home_info.html: adds an optional profile photo (homeInfoParams.Image, a path under assets/) */ -}}
+{{- with site.Params.homeInfoParams }}
+<article class="first-entry home-info">
+    <div class="home-info-body">
+        <div class="home-info-text">
+            <header class="entry-header">
+                <h1>{{ .Title | markdownify }}</h1>
+            </header>
+            <div class="entry-content">
+                {{ .Content | markdownify }}
+            </div>
+            <footer class="entry-footer">
+                {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
+            </footer>
+        </div>
+        {{- with .Image }}
+        {{- with resources.Get . }}
+        {{- $photo := .Fill "400x400 Center webp q85" }}
+        <img class="home-info-photo" src="{{ $photo.RelPermalink }}" width="180" height="180" alt="{{ partial "author.html" $ | default site.Title }}">
+        {{- end }}
+        {{- end }}
+    </div>
+</article>
+{{- end -}}
