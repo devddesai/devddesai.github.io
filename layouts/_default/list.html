@@ -62,15 +62,24 @@
 {{- else if $term }}
 {{- $class = "post-entry tag-entry" }}
 {{- end }}
+{{- /* featured posts (e.g. experiment ideas) render as a highlighted card instead of a dated row */}}
+{{- $featured := .Params.featured }}
+{{- if $featured }}
+{{- $class = printf "%s featured-entry" $class }}
+{{- end }}
 
 <article class="{{ $class }}">
   {{- /* redesign: left column with date + category */}}
   <div class="entry-aside">
+    {{- if $featured }}
+    <span class="featured-label">Pinned</span>
+    {{- else }}
     {{- if not .Date.IsZero }}
     <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format "Jan 2, 2006" }}</time>
     {{- end }}
     {{- with .Params.categories }}
     <span class="entry-category">{{ index . 0 }}</span>
+    {{- end }}
     {{- end }}
   </div>
   <div class="entry-main">
@@ -95,7 +104,7 @@
   </div>
   {{- end }}
   {{- /* redesign: date lives in .entry-aside, so the footer only shows reading time + authors */}}
-  {{- if not (.Param "hideMeta") }}
+  {{- if and (not (.Param "hideMeta")) (not $featured) }}
   <footer class="entry-footer">
     {{- $meta := slice }}
     {{- if (.Param "ShowReadingTime") }}

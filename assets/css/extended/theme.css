@@ -143,6 +143,45 @@
   color: var(--secondary);
 }
 
+/* Featured entry (front matter `featured: true`): a highlighted card, not a dated row */
+/* Negative side margins cancel padding + border so the card's text lines up with the rows below */
+.post-entry.featured-entry {
+  margin: 8px -25px 20px -27px;
+  padding: 22px 24px;
+  background: var(--theme);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--warm);
+  border-radius: 10px;
+}
+
+.post-entry.featured-entry + .post-entry {
+  border-top: none;
+}
+
+/* Not enough side gutter for the overhang: run the card edge to edge, padding = page gutter */
+@media (max-width: 799px) {
+  .post-entry.featured-entry {
+    margin: 8px calc(-1 * var(--gap)) 20px;
+    padding: 18px var(--gap) 18px calc(var(--gap) - 3px);
+    border-radius: 0;
+    border-right: none;
+  }
+}
+
+.featured-label {
+  align-self: flex-start;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--warm) 14%, transparent);
+  color: var(--warm);
+  font-weight: 600;
+}
+
+.post-entry.featured-entry .entry-header h2::after {
+  content: " →";
+  color: var(--warm);
+}
+
 @media (max-width: 600px) {
   .post-entry {
     grid-template-columns: 1fr;

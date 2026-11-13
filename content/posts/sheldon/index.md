@@ -1,8 +1,8 @@
 ---
 title: 'Teaching a 3B Model to be Sheldon Cooper, and Crush a Physics Test'
-date: 2026-09-28T18:47:40-06:00
+date: 2026-10-03T18:47:40-06:00
 author: ["Dev Desai", "Marina Lin", "Stefan Neuber"]
-draft: true
+draft: false
 categories: ["projects"]
 tags: ["Post-training", "Reinforcement learning"]
 showtoc: true
@@ -42,6 +42,16 @@ The largest effect of SFT was getting the model to *respond in the conversation*
 ---
 
 ## Stage 2: RLAIF
+
+### RL Motivation
+
+The next step was to do some RL to further increase the Sheldon persona. To build some intuition, RL can be thought of as "distribution sharpening," where we push the model to increase the chances of it outputting something it already knows. For our example, the model might have both a Sheldon-like persona and a helpful assistant persona in its output distribution (since we performed LoRA SFT which adds on top of the current weights). Given some prompting and such, I'm sure you could get our SFT model to still speak like a helpful assistant. But, the goal of RL is to push the model towards the Sheldon distribution and "sharpen" it, meaning that it outputs Sheldon-ness more often. It's not actually learning anything new at this point - rather it's just being told which behavior is good and which not to do. 
+
+There's two big names in RL training algorithms: PPO (Proximal Policy Optimization) and GRPO (Group Relative Policy Optimization). Roughly speaking, in PPO, you prompt the model and calculate the reward, which is some number that measures how aligned the model's output is to what we want. Then, using another model, you get the probability that the model gave that output, and then you can run the training step. GRPO aims to avoid using the other model (which is usually larger) as it is expensive, and instead, you run the prompt $k$ times. Then you calculate the reward for each run, or *rollout*, find the average across, and then compute an *advantage* compared to the average for each rollout. This method gives a cheaper estimate on the probability of each reward. Then you can do a training step, which pushes the model towards replies that score above the average. Also, you can (optionally, is a bit expensive) add a reverse KL divergence penalty (different from pretraining forward KL) which keeps the model from drifting too far from its initial distribution (can cause a mode collapse where the model overfits).
+
+
+
+
 
 For RLAIF, we used **GRPO** (Group Relative Policy Optimization). For each prompt, the policy samples several replies, a reward model scores them, and the policy is pushed toward replies that score above the *group average* for that same prompt. A KL penalty keeps the policy from drifting too far from where it started (the SFT model).
 
