@@ -47,41 +47,45 @@ The largest effect of SFT was getting the model to *respond in the conversation*
 
 The next step was to do some RL to further increase the Sheldon persona. To build some intuition, RL can be thought of as "distribution sharpening," where we push the model to increase the chances of it outputting something it already knows. For our example, the model might have both a Sheldon-like persona and a helpful assistant persona in its output distribution (since we performed LoRA SFT which adds on top of the current weights). Given some prompting and such, I'm sure you could get our SFT model to still speak like a helpful assistant. But, the goal of RL is to push the model towards the Sheldon distribution and "sharpen" it, meaning that it outputs Sheldon-ness more often. It's not actually learning anything new at this point - rather it's just being told which behavior is good and which not to do. 
 
-There's two big names in RL training algorithms: PPO (Proximal Policy Optimization) and GRPO (Group Relative Policy Optimization). Roughly speaking, in PPO, you prompt the model and calculate the reward, which is some number that measures how aligned the model's output is to what we want. Then, using another model, you get the probability that the model gave that output, and then you can run the training step. GRPO aims to avoid using the other model (which is usually larger) as it is expensive, and instead, you run the prompt $k$ times. Then you calculate the reward for each run, or *rollout*, find the average across, and then compute an *advantage* compared to the average for each rollout. This method gives a cheaper estimate on the probability of each reward. Then you can do a training step, which pushes the model towards replies that score above the average. Also, you can (optionally, is a bit expensive) add a reverse KL divergence penalty (different from pretraining forward KL) which keeps the model from drifting too far from its initial distribution (can cause a mode collapse where the model overfits).
+There's two big names in RL training algorithms: PPO (Proximal Policy Optimization) and GRPO (Group Relative Policy Optimization). Roughly speaking, in PPO, you prompt the model and calculate the reward, which is some number that measures how aligned the model's output is to what we want. Then, another model (called a *critic*) estimates what reward the model usually gets for that prompt. Comparing the actual reward to that estimate tells you if the output was better or worse than expected, and then you can run the training step. GRPO aims to avoid using the critic (which is usually as big as the model itself) as it is expensive, and instead, you run the prompt $k$ times. Then you calculate the reward for each run, or *rollout*, find the average across, and then compute an *advantage* compared to the average for each rollout. The group average basically replaces the critic's estimate, so you don't need a whole extra model. Then you can do a training step, which pushes the model towards replies that score above the average. Also, you can (optionally, is a bit expensive) add a reverse KL divergence penalty (different from pretraining forward KL) which keeps the model from drifting too far from its initial distribution (can cause a mode collapse where the model overfits).
 
+### Our Setup
 
+For our RLAIF step, we used GRPO with $k = 4$ rollouts per prompt, plus the KL penalty I mentioned above. For the reward, we used an LLM judge (GPT-5.6 Luna) to score how Sheldon-like each reply was, from 0 (definitely not Sheldon) to 50 (could go either way) to 100 (a convincing Sheldon). We called this judge prompt **J01**, and the reward was just the score divided by 100. There was no physics reward at all in this stage.
 
+{{< figure src="./images/workflow_rlaif.png" width="650px" align="center" caption="RLAIF: continue training the SFT model, using the judge's scores on its own sampled replies.">}}
 
+### Picking the Judge
 
-For RLAIF, we used **GRPO** (Group Relative Policy Optimization). For each prompt, the policy samples several replies, a reward model scores them, and the policy is pushed toward replies that score above the *group average* for that same prompt. A KL penalty keeps the policy from drifting too far from where it started (the SFT model).
+Since the judge is basically the entire reward, we wanted to make sure it could actually tell Sheldon apart from a normal assistant before training on it. We tried ten different judge prompts on three kinds of replies: real Sheldon lines from the show, normal AI replies, and AI replies that were told to sound like Sheldon. We went with J01, which separated real Sheldon from normal AI replies pretty well, with an AUROC of about 0.91. Roughly speaking, if you pick one real Sheldon reply and one normal AI reply, it scores the Sheldon one higher about 91% of the time.
 
-Our reward model was an LLM judge (GPT-5.6 Luna) with a rubric we called **J01**, scoring Sheldon-likeness from 0 (incompatible) to 100 (distinctive and convincing). The reward was just `score / 100`. There was no physics reward and no separate "quality" reward.
+### Results
 
-{{< figure src="./images/workflow_rlaif.png" width="650px" align="center" caption="RLAIF: continue the SFT model, using judge scores on its own sampled replies.">}}
+For training data, we had GPT-5.6 Luna generate 3,000 everyday conversation snippets. Unlike SFT, there's no Sheldon reply to copy here - the model has to come up with its own replies, and the judge scores them. We also never told the model to act like Sheldon in the prompt, so all the Sheldon-ness had to come from the weights.
 
-**Picking the judge.** Before trusting a judge with the reward, we compared ten rubric prompts on three kinds of replies: real transcript replies, ordinary AI replies, and AI replies explicitly written to sound like Sheldon. J01 separated real Sheldon from ordinary AI replies with an AUROC of about **0.91** on 510 fully scored contexts.
-
-**Training setup.** 3,000 generated everyday-conversation contexts (with no target reply), four sampled replies per prompt, one epoch, learning rate $5\times10^{-6}$, KL coefficient 0.04. The policy got no persona instruction in the prompt, so all of the Sheldon had to come from the weights.
-
-It worked: the mean J01 score on the 511 held-out prompts went from **41.66 → 70.43**. Same prompt, SFT vs. RLAIF:
+It worked pretty well! On the held-out prompts, the average judge score went from **41.66 → 70.43**. Here's the same prompt for both models:
 
 > **SFT:** Good night. And thank you for the gift of your time. *(J01: 72)*
 >
 > **RLAIF:** Good night. And thank you for the gift of your time. I'm sure you're aware that I have no need for your services. *(J01: 92)*
 
-That example also shows a side effect. RLAIF replies got about **66% longer** (25.4 → 42.0 tokens on average), and hit the 256-token limit more often (12 → 31 replies). Length was never rewarded directly, but longer replies leave more room for persona cues, and possibly more room to impress the judge.
+One side effect was that replies got about **66% longer** (25 → 42 tokens on average). We never rewarded length, but longer replies give the model more room to throw in Sheldon-isms, and maybe more room to impress the judge. More on that later.
 
 ---
 
 ## Stage 3: RLVR on Physics
 
-Now for the physics. All physics evaluation uses the same **488 MMLU physics questions** (high-school, college and conceptual physics). We never trained on MMLU. It was strictly the test set.
+Now for the physics. This is the same distribution sharpening idea, but now the reward is just whether the model got the answer right. That's the "verifiable" part - we don't need a judge, since the answer key is the reward.
 
-### The run that worked best (R2)
+For testing, we used **488 physics questions from MMLU** (high school, college and conceptual physics). We never trained on MMLU, it was strictly our test set.
 
-Our best physics result came from continuing the RLAIF model on **MMLU-Pro physics** questions. To avoid contamination, we removed 411 MMLU-sourced items, checked overlap with the test set and demonstrations, and cut each question down to four choices.
+### Training Data
 
-We also filtered for difficulty. If the model already gets a question right ~100% of the time (or never does), all GRPO rollouts get the same reward and there's no learning signal. So from 739 candidates, we kept 461 where the model's starting probability on the correct letter was between 0.25 and 0.95.
+We trained on physics questions from **MMLU-Pro**, a harder version of MMLU. We removed any questions that originally came from MMLU (so nothing from the test set leaked in), and cut each question down to four choices to match MMLU's format.
+
+We also filtered by difficulty, which goes back to how GRPO works. If the model always gets a question right (or always gets it wrong), every rollout gets the same reward, so none of them are above or below the average and there's nothing to learn. So out of 739 questions, we kept the 461 where the model's starting chance of picking the right answer was between 25% and 95%.
+
+### Setup
 
 The reward was:
 
@@ -89,9 +93,7 @@ $$
 r = \mathbb{1}[\text{correct final letter}] + 0.25 \cdot \mathbb{1}[\text{valid boxed answer}]
 $$
 
-The format bonus encourages the model to actually finish with a clean `\boxed{}` answer. Setup: eight rollouts per question, eight questions per update, 57 updates (one pass), learning rate $10^{-5}$, KL coefficient 0.04, on a single H100. No AI judge was involved here, since the answer key is the reward.
-
-Generation was capped at 512 tokens, with up to 480 for a reasoning draft. If the draft didn't end in a valid box, the same model was asked to pick a letter A–D (without seeing the key).
+Basically, 1 point for the right answer, plus a small bonus for finishing with a clean `\boxed{}` answer. We used $k = 8$ rollouts per question and did one pass through the data on a single H100. The model could write up to ~480 tokens of reasoning, and if it didn't end with a boxed answer, we just asked it to pick a letter.
 
 ### Results
 
@@ -103,13 +105,13 @@ Generation was capped at 512 tokens, with up to 480 for a reasoning draft. If th
 | **Overall physics (488)** | 56.76% | 57.38% | **59.22%** |
 | **Mean J01 Sheldon score** | 41.66 | **70.43** | 67.98 |
 
-{{< figure src="./images/physics_accuracy.png" width="550px" align="center" caption="Zero-shot, 512-token boxed-answer evaluation on the same 488 MMLU physics questions.">}}
+{{< figure src="./images/physics_accuracy.png" width="550px" align="center" caption="Physics accuracy on the same 488 MMLU questions for each stage.">}}
 
-So R2 got **289/488**, up from 280 for RLAIF. That sounds nice, but it's more of a reshuffle than a clean gain: R2 fixed 30 answers and broke 21, for a net +9 (+1.84 percentage points). The 95% paired interval is **[−1.02, +4.71]** with exact paired $p = 0.26$. That's not statistically clear. Also, R2 is the *best* of several runs we evaluated on the same benchmark, so this should be read as exploratory.
+Our best run (we called it R2) got **289/488** right, up from 280 for RLAIF. That sounds nice, but it's more of a reshuffle than a real gain: it fixed 30 answers and broke 21, for a net of +9 (about +1.8 percentage points). The confidence interval includes zero, so this could just be noise. Also, R2 was the best of several runs we tried, so take it with a grain of salt.
 
-On the persona side, R2's J01 score dropped by 2.45 points to 67.98 (95% interval [−4.85, +0.23]). That's the largest drop among our RLVR adapters, but the interval still includes zero.
+On the persona side, R2's Sheldon score dropped a bit, from 70.43 to 67.98, but that's also within noise.
 
-{{< figure src="./images/persona_judge.png" width="600px" align="center" caption="Persona scores across all adapters. RLAIF gives the big jump; every RLVR run stays close to it.">}}
+{{< figure src="./images/persona_judge.png" width="600px" align="center" caption="Sheldon scores for every model. RLAIF gives the big jump, and none of the physics (RLVR) runs lose much of it.">}}
 
 ---
 
@@ -117,64 +119,54 @@ On the persona side, R2's J01 score dropped by 2.45 points to 67.98 (95% interva
 
 ### Why were the physics gains so small?
 
-The [Qwen2.5 Technical Report](https://arxiv.org/html/2412.15115v2) (Sections 3–4) describes a lot of scientific pretraining text, over a million SFT examples including math and logical reasoning (multiple choice too), and then DPO and GRPO. MMLU and MMLU-Pro are listed as *evaluations*, not training sets, but the model has clearly already been trained hard on the relevant skills.
+My guess is that Qwen was already really good at this kind of stuff. According to the [Qwen2.5 Technical Report](https://arxiv.org/html/2412.15115v2), Qwen was pretrained on lots of scientific text, then post-trained on over a million SFT examples (including math and reasoning problems), and then trained with DPO and GRPO on top of that. Going back to the distribution sharpening idea, if Qwen's already been sharpened this much on these kinds of problems, there's probably not much left for a few hundred of our questions to sharpen. This is just a hypothesis though.
 
-Our guess is that a few hundred physics questions add very little new signal to a model that's already this post-trained. That's a hypothesis though: the report doesn't prove the model is saturated on physics. Also, our MMLU-Pro training pool leaned toward numerical problems, which may not transfer well to MMLU's mix (especially conceptual physics, which actually went *down*).
+Also, our MMLU-Pro questions were mostly calculation-heavy, while MMLU has a lot of conceptual physics - and conceptual physics actually went *down* after RLVR.
 
-### Correct answers can be fragile
+### A right answer doesn't mean right reasoning
 
-A correct final letter doesn't mean correct reasoning. On one wavelength question, RLAIF and R2 wrote the *exact same* wrong explanation (that gamma rays have the longest wavelength). RLAIF still picked the correct option D; R2 picked A. RLVR didn't "unlearn" anything here; the original correct answer was luck.
+The verifier only checks the final letter, so it can't tell good reasoning from a lucky guess. On one question about wavelengths, RLAIF and R2 wrote the *exact same* wrong explanation (that gamma rays have the longest wavelength - they actually have the shortest). RLAIF still picked the right answer and R2 didn't. So R2 didn't really "unlearn" anything, RLAIF just got lucky. Some R2 answers also had the right reasoning, and then picked a letter that didn't match it.
 
-The flip side happened too: some R2 drafts had the right explanation and then picked an inconsistent letter. Since the verifier only checks the letter, it can't tell sound reasoning from a lucky guess.
+Also, the formatting bonus never really worked: every single R2 answer still needed the "just pick a letter" fallback.
 
-### Formatting never really stuck
+### The judge can be gamed
 
-Despite the format bonus, **every** R2 eval answer needed the fallback "pick a letter" step. That's a formatting failure, not proof that there was no reasoning: plenty of drafts had real calculations in them. None of the 21 regressions hit the draft token limit, so truncation doesn't explain them either.
+In one of our earlier runs, a reply just repeats *"I was in a state of profound joy"* over and over until it hits the token limit, and J01 gave it a **92/100**. That doesn't prove training caused the repetition, but it shows the judge has blind spots. J01 also liked AI-written Sheldon replies *more* than real Sheldon lines from the show.
 
-Training logs showed no clear upward trend in correctness and very little policy drift. Since each batch had different questions, that doesn't prove zero learning, but one pass over a small, mostly numerical set probably isn't much signal.
+Since RLAIF was optimizing against this exact judge, we can't rule out that part of the score jump came from the model learning to game the judge, rather than actually becoming more like Sheldon. The longer replies are at least consistent with that. To really check, we'd need humans to rate the replies, which we didn't do.
 
-### A high persona score can hide a bad reply
-
-In an earlier MMLU-Pro run (run E), one reply repeats *"I was in a state of profound joy"* over and over until it hits the 256-token limit. J01 gave it **92/100**.
-
-> That's a judge weakness, not proof that training caused the repetition. But it's a good reminder that the judge is the same thing RLAIF was optimizing against.
-
-J01 also preferred *generated* Sheldon-style replies over *real* transcript replies during calibration, and held-out examples helped us pick the rubric. Without an independent human evaluation, we can't rule out that RLAIF partly learned to game the judge, and the longer replies are at least consistent with that.
-
-{{< figure src="./images/reply_length.png" width="600px" align="center" caption="Mean generated reply length. RLAIF made replies much longer even though length was never rewarded.">}}
+{{< figure src="./images/reply_length.png" width="600px" align="center" caption="Average reply length. RLAIF made replies a lot longer, even though length was never rewarded.">}}
 
 ---
 
 ## Earlier RLVR Attempts
 
-R2 wasn't our first try. Before MMLU-Pro, we tried two other physics sources, all starting from the RLAIF model and tested on the same 488 MMLU questions:
+R2 wasn't our first try. Before MMLU-Pro, we tried two other sources of physics questions:
 
-- **OpenScience** (synthetic physics questions with answer keys): the 300-question, eight-rollout run fixed 31 answers and broke 30, for a net +1. Earlier letter-only versions gained 8 (300 questions, 4 rollouts) and 6 (500 questions, 16 rollouts). More data and more sampling didn't help.
-- **ARC-Challenge** (real exam questions): most questions were already too easy. 215 of 308 had over 90% probability on the right answer before training, so there was little reward variation for GRPO to learn from. Filtering down to uncertain questions left very few. Higher learning rates ($5\times10^{-5}$) lost answers, and both ARC runs were sensitive to option order on shuffled-choice MMLU.
+- **OpenScience** (synthetic physics questions): barely moved anything. Our main run fixed 31 answers and broke 30, and using more data or more rollouts didn't help.
+- **ARC-Challenge** (real science exam questions): most of the questions were too easy. 215 of the 308 questions were already answered correctly with over 90% probability before training, so there wasn't much for GRPO to learn from (same issue as the filtering above).
 
-{{< figure src="./images/earlier_rlvr_accuracy.png" width="700px" align="center" caption="Paired physics changes vs. the starting RLAIF model, with 95% bootstrap intervals. Every interval includes zero.">}}
+MMLU-Pro worked the best, probably because the harder questions gave GRPO more to work with. Here are all the runs we tried:
 
-The MMLU-Pro follow-ups did better because harder questions gave more reward variation. Letter-only run E gained 9 answers (persona 70.06), a couple of other seeds/learning rates gained 7, and reasoning run R1 gained 6, before R2 changed the learning rate, batch size and format bonus together.
+{{< figure src="./images/rlvr_all_runs.png" width="700px" align="center" caption="Every RLVR run we tried, compared to the RLAIF model it started from (with 95% confidence intervals). The MMLU-Pro runs do the best, but none of them are clearly above zero.">}}
 
-{{< figure src="./images/rlvr_all_runs.png" width="700px" align="center" caption="Every RLVR run we evaluated, as paired MMLU physics change vs. its matched RLAIF starting point (95% CI), grouped by evaluation protocol. The MMLU-Pro runs do best, but no interval sits clearly above zero.">}}
+### One more try: combining the rewards
 
-### One more try: a combined reward
-
-Since R2 had the biggest persona drop, we also tried putting the judge back into the RLVR reward:
+Since R2's Sheldon score dropped a bit, we also tried adding the judge back into the physics reward, so the model gets rewarded for being right *and* sounding like Sheldon:
 
 $$
 r = \mathbb{1}[\text{correct}] + 0.25 \cdot \mathbb{1}[\text{boxed}] + 0.5 \cdot \frac{\text{J01(draft)}}{100}
 $$
 
-This only ran for 30 updates (deadline), but it kept the persona score near RLAIF (69.78) while gaining less physics (284/488). Neither change was statistically clear.
+We only got to run this for 30 updates because of the deadline. It kept the Sheldon score close to RLAIF (69.78), but gained less physics (284/488). Neither change was big enough to be more than noise.
 
 ---
 
 ## Takeaways
 
-- **SFT** on real dialogue is great for getting a model to stay in the conversation instead of acting like an assistant.
-- **RLAIF** boosted the judge-measured persona a lot (41.66 → 70.43), but the judge has blind spots. A reply stuck in a loop scored 92/100, and replies got longer across the board. If your reward is an LLM, you should assume the policy will find its weak spots.
-- **RLVR** on a few hundred physics questions barely moved an already heavily post-trained 3B model. Our best run was +1.84 pp with an interval that includes zero.
-- A verifier that only checks the final letter can't distinguish good reasoning from a lucky guess, so "accuracy went up" and "the model learned physics" are different claims.
+- **SFT** on real dialogue was great for getting the model to actually talk like it's in the conversation, instead of acting like a helpful assistant.
+- **RLAIF** made the model a lot more Sheldon-like according to the judge (41.66 → 70.43), but the judge has blind spots. If your reward is another LLM, you should assume the model will find its weak spots.
+- **RLVR** on a few hundred physics questions barely moved a model that was already heavily post-trained.
+- Checking only the final answer can't tell good reasoning from a lucky guess, so "accuracy went up" and "the model learned physics" are two different claims.
 
-Overall, the persona and physics seemed mostly *compatible*: none of the RLVR runs clearly destroyed the Sheldon-ness. But we also never got a physics gain big enough to really test that tradeoff.
+As for our original motivation, learning to be Sheldon didn't really make the model better at physics. SFT and RLAIF are within a point of each other in the table above, and compared to the base Qwen model, SFT was only about 1.6 points higher (on a slightly different physics eval), which is within noise. But the persona didn't hurt physics either, and none of the physics runs really destroyed the Sheldon-ness. I'd still love to try that LoRA overlap idea from the beginning, to see if the two actually share anything under the hood.

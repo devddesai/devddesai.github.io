@@ -16,6 +16,20 @@ math: true
 
 ---
 
+## Safety Cartridges
+
+*I came up with this idea during a lecture by my professor, Boaz Barak, where he talked about [deliberative alignment](https://arxiv.org/abs/2412.16339), the approach OpenAI used to train o1.*
+
+This is what I'm currently working on: comparing where a safety policy (like a model spec) should live. It could be **in context**, in a **compressed KV cache** (a [cartridge](https://arxiv.org/abs/2506.06266) or attention-matching compaction), or **in the weights** through post-training, as in deliberative alignment. I have a lot of general ideas here, and some of the questions I keep coming back to are:
+
+- **Does post-training beat in-context learning if the in-context model is the teacher policy?** If you distill from the model with the spec in context, does the trained model learn something more *causal* than the in-context version, or is it just a copy of it?
+- **Jailbreak robustness.** Intuitively, jailbreaking seems easy when the model spec is just sitting in context and harder when it's trained in. But if the in-context model is the teacher, why would the student end up more robust than the teacher?
+- **Scaling laws for safety, cartridge vs. post-training.** With a fixed compute budget, what's better: $2x$ compute on post-training, or $x$ on post-training plus $x$ on a KV cartridge?
+- **Attention matching** as a training-free alternative to cartridges. When does it keep the right things, and when does it copy the teacher's mistakes?
+- **Stacking.** How does stacking different LoRA adapters compare with stacking different cartridges, especially when the policies conflict? LoRA adapters are matrices added on top of the weights, so stacking them probably works fine but might cause a small, noticeable hit to the model's capabilities. Stacked cartridges are still just context, so they shouldn't harm the model's capabilities.
+
+---
+
 ## J-Space
 
 Most of these come from reading Anthropic's [*Verbalizable Representations Form a Global Workspace in Language Models*](https://arxiv.org/abs/2607.15495) and from my own [J-space experiments]({{< ref "/posts/jspace" >}}). If you haven't seen J-space before, that post has a quick intro.
@@ -69,18 +83,3 @@ Most of these come from reading Anthropic's [*Verbalizable Representations Form 
 **Question:** How do J-lens probes behave on looped (recurrent-depth) LLMs, where the same block is applied many times?
 
 **Why it's interesting:** The J-lens is built from an averaged Jacobian per *layer*. In a looped model, "layer" turns into "iteration." Does a workspace form over loop iterations the way it does over depth? Does it show up at a consistent iteration?
-
----
-
-## Safety Cartridges
-
-*I came up with this idea during a lecture by my professor, Boaz Barak, where he talked about [deliberative alignment](https://arxiv.org/abs/2412.16339), the approach OpenAI used to train o1.*
-
-This is what I'm currently working on: comparing where a safety policy (like a model spec) should live. It could be **in context**, in a **compressed KV cache** (a [cartridge](https://arxiv.org/abs/2506.06266) or attention-matching compaction), or **in the weights** through post-training, as in deliberative alignment. I have a lot of general ideas here, and some of the questions I keep coming back to are:
-
-- **Does post-training beat in-context learning if the in-context model is the teacher policy?** If you distill from the model with the spec in context, does the trained model learn something more *causal* than the in-context version, or is it just a copy of it?
-- **Jailbreak robustness.** Intuitively, jailbreaking seems easy when the model spec is just sitting in context and harder when it's trained in. But if the in-context model is the teacher, why would the student end up more robust than the teacher?
-- **Scaling laws for safety, cartridge vs. post-training.** With a fixed compute budget, what's better: $2x$ compute on post-training, or $x$ on post-training plus $x$ on a KV cartridge?
-- **Attention matching** as a training-free alternative to cartridges. When does it keep the right things, and when does it copy the teacher's mistakes?
-- **Stacking.** How does stacking different LoRA adapters compare with stacking different cartridges, especially when the policies conflict? LoRA adapters are matrices added on top of the weights, so stacking them probably works fine but might cause a small, noticeable hit to the model's capabilities. Stacked cartridges are still just context, so they shouldn't harm the model's capabilities.
-
