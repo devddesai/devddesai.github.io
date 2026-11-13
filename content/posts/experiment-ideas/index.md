@@ -32,17 +32,13 @@ Most of these come from reading Anthropic's [*Verbalizable Representations Form 
 3. Take the top-$k$ J-space representations from the LoRA model and patch them into the base model's residual stream.
 4. Check whether the patched base model gets close to the post-trained model's results.
 
-**Status:** Not started
-
 ### Routing around the J-space with context (the "textbook" experiment)
 
 **Question:** Can the right context let a model bypass J-space ablation entirely?
 
 **Why it's interesting:** I ran some preliminary tests on this, which are written up in the [follow-up section of my J-space post]({{< ref "/posts/jspace#follow-up-can-in-context-learning-route-around-the-ablation" >}}). The short version: textbook chapters and unrelated worked examples don't help, but showing the model *the same problem with different numbers* undoes the J-space damage. It looks like the procedure being present in context is what matters, not the "autocomplete" format.
 
-**Rough plan:** More models, more seeds, varying the number of shots, an irrelevant-domain few-shot control, and the harder MATH-500 settings I didn't get to.
-
-**Status:** Preliminary results, want to do more
+**Status:** [Preliminary results]({{< ref "/posts/jspace#follow-up-can-in-context-learning-route-around-the-ablation" >}}), want to do more
 
 ### Does the J-space get crowded?
 
@@ -52,8 +48,6 @@ Most of these come from reading Anthropic's [*Verbalizable Representations Form 
 
 **Rough plan:** Keep the external task fixed and steadily increase the difficulty of the internal task (counting higher, tracking more items, harder mental arithmetic). Measure both external-task accuracy and how faithfully the J-lens shows the internal task being carried out.
 
-**Status:** Not started
-
 ### Multi-token concepts and the oracle lens
 
 **Question:** How much are we missing because the J-lens only sees single-token concepts?
@@ -62,15 +56,11 @@ Most of these come from reading Anthropic's [*Verbalizable Representations Form 
 
 **Rough plan:** Wait for that to come out, then rerun my ablation experiments with it.
 
-**Status:** Waiting / reading
-
 ### What does math training do to the J-space?
 
 **Question:** If you train a model heavily on math and then ablate its J-space, how much of the math ability survives? Is most of what the math training added represented *in* the J-space, or does it go through some other mechanism?
 
 **Rough plan:** Compare a base model with a math-specialized fine-tune of the same model. Run the same J-space ablation on both and see whether the fine-tune's extra math accuracy is more or less fragile than the base model's.
-
-**Status:** Not started
 
 ---
 
@@ -80,11 +70,11 @@ Most of these come from reading Anthropic's [*Verbalizable Representations Form 
 
 **Why it's interesting:** The J-lens is built from an averaged Jacobian per *layer*. In a looped model, "layer" turns into "iteration." Does a workspace form over loop iterations the way it does over depth? Does it show up at a consistent iteration?
 
-**Status:** Haven't looked into this yet
-
 ---
 
 ## Safety Cartridges
+
+*I came up with this idea during a lecture by my professor, Boaz Barak, where he talked about [deliberative alignment](https://arxiv.org/abs/2412.16339), the approach OpenAI used to train o1.*
 
 This is what I'm currently working on: comparing where a safety policy (like a model spec) should live. It could be **in context**, in a **compressed KV cache** (a [cartridge](https://arxiv.org/abs/2506.06266) or attention-matching compaction), or **in the weights** through post-training, as in deliberative alignment. I have a lot of general ideas here, and some of the questions I keep coming back to are:
 
@@ -92,6 +82,5 @@ This is what I'm currently working on: comparing where a safety policy (like a m
 - **Jailbreak robustness.** Intuitively, jailbreaking seems easy when the model spec is just sitting in context and harder when it's trained in. But if the in-context model is the teacher, why would the student end up more robust than the teacher?
 - **Scaling laws for safety, cartridge vs. post-training.** With a fixed compute budget, what's better: $2x$ compute on post-training, or $x$ on post-training plus $x$ on a KV cartridge?
 - **Attention matching** as a training-free alternative to cartridges. When does it keep the right things, and when does it copy the teacher's mistakes?
-- **Stacking.** How does stacking different LoRA adapters compare with stacking different cartridges, especially when the policies conflict?
+- **Stacking.** How does stacking different LoRA adapters compare with stacking different cartridges, especially when the policies conflict? LoRA adapters are matrices added on top of the weights, so stacking them probably works fine but might cause a small, noticeable hit to the model's capabilities. Stacked cartridges are still just context, so they shouldn't harm the model's capabilities.
 
-**Status:** In progress

@@ -8,7 +8,7 @@ tags: ["AI", "diffusion", "generative models", "stochastics"]
 showtoc: true
 ---
 
-*Very soon, I will publish my project implementing a linear interpolant/flow matching to Andrej Karpathy's nanoGPT architecture to this page!*
+*I tried applying a linear interpolant/flow matching to Andrej Karpathy's nanoGPT. Check out my [nanoFM post]({{< ref "/posts/nanofm" >}}).*
 
 Recently, I've been interested in novel generative techniques. We've seen the advent of diffusion over the past few years. Diffusion transformers are the gold standard for modern-day image generation, and there has been a lot of research on using diffusion for language modeling, sparked by the famous LLaDa model. Newer advancements include hybrid LLMs built on "Block Diffusion" to take advantage of diffusion's parallel token generation whilst utilizing autoregression's flexible-length generation and KV Caching.
 

@@ -1,5 +1,5 @@
 ---
-title: "Does Chain of Thought Replace a Model's Internal Workspace? Ablating J-Space in Qwen3-4B"
+title: "Can We Route Around J-Space with Chain of Thought and In-Context Learning?"
 date: 2026-10-15
 author: ["Dev Desai"]
 draft: false
@@ -9,37 +9,37 @@ showtoc: true
 math: true
 ---
 
-*This post covers my Homework 0 for Harvard's CS 2881 (AI Safety), plus a follow-up experiment on in-context learning that I ran about a month later.*
+*This is some work I did inspired by my AI safety course.*
 
 In July 2026, Gurnee, Sofroniew et al. at Anthropic published [*Verbalizable Representations Form a Global Workspace in Language Models*](https://arxiv.org/abs/2607.15495). One of its claims is that a language model has a small set of internal representations, which they call the **J-space**, that it uses for multi-step reasoning. If you ablate that space, the model can still talk fluently and do a lot of automatic inference, but internal multi-step reasoning falls apart.
 
 The finding that caught my attention: on GSM8K, problems solved **with explicit chain of thought (CoT)** were much more robust to J-space ablation than the same problems answered directly. The idea is that writing steps down on the page and holding them in the internal workspace are partially interchangeable scratchpads.
 
-Our homework asked us to dig into this trade-off: does it keep holding as problems get harder?
+I wanted to dig into this trade-off: does it keep holding as problems get harder?
 
 ---
 
 ## What is J-Space?
 
-"J" stands for **Jacobian**. For a layer $\ell$, the paper averages the Jacobian of the final-layer residual stream with respect to the layer-$\ell$ residual stream, over positions and prompts:
+For a layer $\ell$, the paper averages the Jacobian of the final-layer residual stream with respect to the layer-$\ell$ residual stream, over positions and prompts:
 
 $$
 J_\ell = \mathbb{E}_{t,\, t' \ge t,\, \text{prompt}} \left[ \frac{\partial h_{\text{final}, t'}}{\partial h_{\ell, t}} \right]
 $$
 
-This is one $d_{\text{model}} \times d_{\text{model}}$ matrix per layer. Roughly, it captures a representation's standing tendency to eventually produce a given output. You can use it as a lens, much like the logit lens:
+This is one $d_{\text{model}} \times d_{\text{model}}$ matrix per layer. It roughly captures an activation's tendency to produce some output, and you can use it like a lens:
 
 $$
 \text{lens}(h_\ell) = \text{softmax}\left( W_U \cdot \text{norm}(J_\ell \, h_\ell) \right)
 $$
 
-Each row of $W_U J_\ell$ is a **J-lens vector** $v_{\ell, w}$, one per token $w$. A token's score at a position is $v_{\ell,w} \cdot h_{\ell,t}$. The **J-space** of an activation is the small, sparse set of J-lens vectors that are currently most active.
+Basically, every token in the vocabulary has a **J-lens vector** at each layer. At every position in the prompt, the inner product of the model's activation vector with each vocabulary token's J-lens vector gives a reading of how much the model is "thinking about" every single token in the vocabulary. The **J-space** is just the top-$k$ tokens the model is thinking about most strongly.
 
-**Ablating** it works like this. At every position in a band of layers:
+Then we can try to **ablate** (get rid of) this internal workspace. At every position, across a band of layers:
 
-1. Take the top $k = 10$ J-lens vectors by score.
-2. Skip any token that is already in the clean model's top-10 next-token predictions. This keeps the ablation from simply deleting the answer the model is about to say.
-3. Project those directions out: $h \leftarrow h - (h \cdot \hat v)\hat v$.
+1. Take the top-$k$ J-lens vectors ($k = 10$, for instance).
+2. Check whether each token is already in the model's prediction for its actual next token. If it is, leave it alone, so we don't just delete the answer the model is about to say.
+3. Project the rest of the directions out of the activation: $h \leftarrow h - (h \cdot \hat v)\hat v$.
 
 ---
 
@@ -53,9 +53,7 @@ $$
 RG(d) = \frac{\text{CoT}_{\text{ablated}}(d)}{\text{CoT}_{\text{clean}}(d)} - \frac{\text{noCoT}_{\text{ablated}}(d)}{\text{noCoT}_{\text{clean}}(d)}
 $$
 
-I used retention ratios rather than raw accuracy differences on purpose. CoT helps more on harder problems anyway, so the raw CoT minus no-CoT gap would widen with difficulty regardless of anything J-space related.
-
-I pre-registered this (committed before running any experiments): if the hypothesis holds, $RG$ should **shrink** with difficulty. A stable or widening gap counts as evidence against it.
+If my hypothesis holds, $RG$ should **shrink** with difficulty. A stable or widening gap would be evidence against it.
 
 ---
 
@@ -63,11 +61,16 @@ I pre-registered this (committed before running any experiments): if the hypothe
 
 **Model:** Qwen3-4B (36 layers, $d_{\text{model}} = 2560$), bf16, greedy decoding, on a rented RTX 4090.
 
-**The Jacobian:** built over 25 wikitext-2 prompts of 128 tokens each. Each prompt's first 4 positions are skipped because their norms are anomalous. This follows Neel Nanda's lighter-weight replication rather than the paper's 1,000-prompt corpus.
+**The Jacobian:** built over 25 wikitext-2 prompts of 128 tokens each. Each prompt's first 4 positions are skipped because their norms are anomalous. This follows Neel Nanda's lighter-weight replication [[2]](#references) rather than the paper's 1,000-prompt corpus.
 
-**Finding the workspace band:** the paper's analysis was on Claude, so I had to locate the band of layers where the J-space lives in Qwen myself. An "ignition" test, which needs no J-lens, put the onset at **layer 13 (36% of depth)**, close to the paper's ~38% for Claude. Lens hit rate stays flat through the middle layers and then climbs in the late "motor" layers, where the model is just doing next-token prediction. I set the band at L13–27.
+**Finding the workspace band:** the paper's analysis was on Claude, so I had to find which layers the J-space lives in for Qwen myself. I used two measurements: one for where the band starts and one for where it ends.
 
-{{< figure src="./images/band_evidence.png" width="750px" align="center" caption="Locating the workspace band in Qwen3-4B. Ignition onset at layer 13 (~36% depth); lens hit rate rises sharply after ~65% depth, marking the late 'motor' layers.">}}
+- **Where it starts (the "ignition" test):** take a sentence like "The capital city of ___ is called" and fill the blank with a *blend* of two countries' input embeddings, say 70% France and 30% Japan. Then slowly shift the blend from all-Japan to all-France and watch the activations at each layer. In early layers, the activations change smoothly as the blend shifts. Starting at some layer, they *snap* to either France or Japan instead, which is the model committing to one concept. For Qwen this starts at **layer 13 (36% of depth)**, close to the paper's ~38% for Claude.
+- **Where it ends (lens hit rate):** at each position, check whether any of the top-10 J-lens tokens is the token the model actually predicts next. In the middle layers, this almost never happens (~5% of positions), because the J-space holds concepts the model is working with, not the next word. In the late layers it shoots up (to ~86% by layer 33), because those layers are just getting ready to output the next token. The paper calls these "motor" layers, and they're not the workspace we want.
+
+Putting those together, I set the band at **L13–27** (36–75% of depth).
+
+{{< figure src="./images/band_evidence.png" width="750px" align="center" caption="Blue: how sharply the activation snaps between the two blended countries (1× = smooth, no snapping), which jumps at layer 13. Red: how often the top J-lens tokens match the next-token prediction, which shoots up in the late motor layers. The shaded region is the band I chose.">}}
 
 **The grid:** 3 difficulties × 3 ablation conditions (clean / J-space / random) × 2 reasoning modes (CoT / no-CoT), all on the same problems so comparisons are paired. The main grid ablates only the first third of the band (L13–17).
 
@@ -79,20 +82,18 @@ I pre-registered this (committed before running any experiments): if the hypothe
 
 **Controls:**
 - **A norm-matched random-direction ablation.** It removes the same norm as the J-space ablation, but along random directions. Matching only the *number* of directions would confuse "removed more" with "removed the right thing."
-- **A positive control.** One-hop vs. two-hop factual recall (e.g. currency → country → capital), with no math. This checks that the ablation does anything interesting before trusting it on harder tasks.
-- **Coherence and removed fraction per cell.** Ablation can wreck the output entirely before producing anything interpretable, so I measured this rather than assuming it.
-
-**Prompting gotchas:** the no-CoT arm is prefilled with `The final answer is $\boxed{` to force an immediate answer. Without the prefill, Qwen3-4B just wrote a full solution anyway and got truncated. A uniform 512-token cap also truncated 2.5% of GSM8K answers but 76% of MATH-500 ones, so I switched to per-difficulty caps (512 / 1024 / 1024).
+- **A positive control.** Before the actual experiment, I tested that the ablation actually works using a factual recall task (more on this in the paper).
+- **A sanity check.** I made sure the ablation didn't completely wreck the model's output.
 
 ---
 
 ## Results
 
-### Positive control
+### Checking the ablation works
 
-Ablating L13–17 drops two-hop recall from 0.775 to 0.600. The random control removes *more* norm but does less two-hop damage (0.700). The J-space vs. random difference has a 95% CI of [0.013, 0.188], so the ablation is **specific**.
+I ran the positive control and the sanity check, and compared the J-space ablation against a random-direction ablation of the same size. The J-space ablation hurt factual recall more than the random one did, so it proved to work.
 
-It isn't really **selective**, though: one-hop recall also drops, from 0.938 to 0.787. Wider bands damage both and destroy coherence, which is why the main grid stays at L13–17.
+One more thing came out of this: ablating more layers damaged everything. Recall dropped a lot more at L13–22, and by L13–27 the model's output became incoherent. So for the main experiment I only ablate the first few layers of the band, **L13–17**, where the ablation hurts reasoning without breaking the model.
 
 ### Main grid
 
@@ -120,50 +121,40 @@ CoT accuracy barely moves under ablation, while no-CoT drops more and more as di
 
 The gap **widens**, from 0.25 to 0.75. CoT retention stays near 1.0 at both difficulties, while no-CoT retention falls from 0.69 to 0.25. Written CoT protected *more* on the harder dataset, not less. Direct answering has further to fall as problems get harder, and CoT has little left to lose.
 
+With chain of thought, the J-space ablation barely affected accuracy. So, at least for math problems at this difficulty, a written workspace seems to be able to stand in for the internal one.
+
 There are some big caveats:
 
 1. **It isn't shown to be J-space specific.** On GSM8K, the random control produces an equal or larger gap, and every math cell's random-vs-J-space interval spans zero.
 2. **Only the lightest ablation was tested.** Widening the band on GSM8K drops CoT retention from 0.971 (L13–17) to 0.857 (L13–22) to 0.371 (L13–27). At the widest band, coherence itself breaks down. "CoT is robust" only held at light severity.
 3. **There's no data at the hardest difficulty.** AIME sits at a capability ceiling for a 4B model.
 
+A logical follow-up would be to use a larger model that can actually solve harder datasets, to see whether this still holds on much harder problems, since I wasn't able to test AIME.
+
 ---
 
 ## Follow-up: Can In-Context Learning Route Around the Ablation?
 
-At the end of the homework I had a nagging thought. The paper notes that fluent, pattern-continuation-style generation keeps going under ablation even when the relevant concept is in the J-space. "Autocomplete" seems to route around the workspace.
+After finishing this, I had a separate idea I wanted to test. The paper notes that fluent, pattern-continuation-style generation keeps going under ablation even when the relevant concept is in the J-space. "Autocomplete" seems to route around the workspace.
 
 A math textbook is full of complex reasoning that an LLM could just *autofill*. So what if, instead of instructing the model to solve a problem, you present the problem as **a document to be continued**? Does the ablated model recover the accuracy it loses when asked directly?
 
-### Pre-registered hypotheses
-
-- **H-A (autocomplete bypass):** demonstrations raise retention under J-space ablation, and the random control doesn't show the same rise.
-- **H-B (contextual inference needs the workspace):** using demonstrations is itself the kind of inference the ablation removes, so the in-context gain shrinks.
-- **H-0 (framing is irrelevant):** retention doesn't change.
-
-My prior was H-0 or H-B, not H-A.
-
 ### Setup
 
-Same model, same ablation (top-10, clean-top-10 exclusion) at every position, *including the demonstrations*. I ran it at a light band (L13–17) and a medium band (L13–22), with the norm-matched random control in every ablated cell. Sample sizes are larger this time: N=200 for GSM8K direct answers and N=100 for MATH-500.
+I used the same setup as before, at two bands this time: light (L13–17) and medium (L13–22).
 
 The contexts I tried, in order of how much of the *procedure* they contain:
 
 | Context | What the model sees before the test problem |
 | --- | --- |
-| Instruction (chat) | The original homework's chat-template instruction |
+| Instruction (chat) | The chat-template instruction from the first experiment |
 | Plain text | `Problem: … / Solution:`, with no instruction or examples |
 | 5 unrelated examples | 5 worked GSM8K training problems |
 | Textbook + examples | A 272-word textbook-style chapter on word problems, then the 5 examples |
 | Long textbook + examples | A 1,285-word chapter, then the examples |
 | **Same problem, new numbers** | Up to 3 copies of the *test problem* with different numbers, solved |
 
-For the last one, I generated variants from GSM8K's calculator annotations and checked every equation in each rewritten solution. 112 of the 200 problems had safe variants.
-
-### Unrelated examples and textbooks do nothing
-
-Demonstrations of *other* problems changed neither clean accuracy (0.26–0.27 throughout) nor retention under ablation. Adding a textbook chapter, short or long, also changed nothing, even though the long-textbook prompts have about 20× more ablated positions than the instruction prompt. The confidence intervals were tight enough to call this a real null, not just an underpowered result.
-
-### The same problem with new numbers undoes the damage
+### Results
 
 | Band | Context | Clean | J-space | Random | Retention (J-space) |
 | --- | --- | ---: | ---: | ---: | --- |
@@ -174,40 +165,24 @@ Demonstrations of *other* problems changed neither clean accuracy (0.26–0.27 t
 | L13–22 | 5 unrelated examples | 0.330 | 0.125 | 0.214 | 0.38 |
 | L13–22 | **Same problem** | 0.375 | **0.268** | 0.259 | **0.71** [0.53, 0.92] |
 
-At the light band, the same-problem context **erases the J-space damage entirely**: the ablated model is as accurate as the clean one. At the medium band, it removes the J-space-*specific* part of the damage and leaves only what the random control also causes (0.71 vs 0.69). The retention gain over the instruction baseline is +0.50 [0.23, 0.80] at light and +0.41 [0.17, 0.67] at medium. Under the random control there's no significant gain at either band.
+The unrelated examples and textbook chapters didn't really help. The ablated model lost just as much accuracy as it did with a plain instruction.
 
-That meets the pre-registered rule for **H-A**, the hypothesis I didn't expect.
+Showing the model **the same problem with different numbers** did help. At the light band, the ablated model was as accurate as the clean one.
+
+At the medium band, here's how much of the clean accuracy survived each ablation:
+
+| Prompt | J-space ablation | Random ablation |
+| --- | ---: | ---: |
+| Instruction | 0.31 | 0.72 |
+| Same problem | **0.71** | 0.69 |
+
+The same-problem examples brought the J-space-ablated model up to about the same level as the randomly ablated one. In other words, they undid the extra damage from removing the J-space. They didn't help against random ablation, though, so the effect is specific to the J-space.
 
 {{< figure src="./images/icl_retention_by_context.png" width="800px" align="center" caption="Retention (ablated / clean accuracy) by context, for J-space ablation (red) and the norm-matched random control (blue). Only the 'same problem, new numbers' context lifts J-space retention.">}}
 
-Some sanity checks:
-- Clean accuracy rises only slightly with the same-problem context (+0.05, CI spanning zero). The gain is specifically in the *ablated* model (+0.21 [0.13, 0.30]).
-- 11 problems had a variant whose answer happened to match the real answer. Excluding them doesn't change anything.
-- The model predicts a demonstration's answer 8–13 times out of 112 in *every* condition, clean included, so it isn't just copying.
+Maybe this isn't the most surprising result. If the model has already seen the same problem worked out, it might only need to do some simple calculations, rather than figure out how to solve the problem from scratch.
 
-**MATH-500** showed the same thing, more weakly. Four *subject-matched* examples, which share procedures like "how to reduce mod n" with the test problem, raised J-space retention from 0.61 to 1.10 (+0.49 [0.16, 0.91]). Under random ablation they did nothing.
-
-### Where the ablation actually bites
-
-To see *which tokens* the ablation disrupts, I ran teacher-forced comparisons of clean vs. ablated next-token predictions on few-shot prompts with the reference solution appended. Two things came out of this:
-
-1. **Generic text continuation isn't spared relative to noise.** On wikitext, J-space ablation flips 29% / 41% of top-1 predictions (light / medium), compared with 21% / 31% for the random control. The paper's "leaves the bulk of ordinary text prediction intact" holds only in absolute terms.
-2. **The arithmetic tokens are the *most* stable, not the least.** This went against my own prediction. Computed numbers agree with the clean model 97% of the time, and their likelihood under ablation is as high as clean. The disruption is concentrated in the *reading* positions: the demonstrations, the question, and the opening of the solution. Those are where the model figures out what the problem is and what to do.
-
-### Interpretation
-
-The pattern across all the conditions follows a single gradient: **the more of the required procedure the context contains, the more it substitutes for the J-space**. It only ever substitutes for the J-space-*specific* damage, never for the random control's.
-
-What routes around the ablation isn't the *format* of continuation. Plain text, unrelated examples and textbook prose all fail. It's having the *procedure* present in the context. That fits the paper's own explanation of why CoT is robust: CoT externalizes intermediate results onto the page, and here a same-problem demonstration externalizes the *plan*. Given a plan, whether by teacher forcing or by demonstration, the ablated model still computes the numbers correctly. What it loses is the ability to work out *what* to compute.
-
-There's also a by-product for the original homework. With N=200, the specificity question finally resolves. At the light band, J-space and random ablation do equal damage. At the medium band, J-space ablation costs direct answering about **twice** what the random control does, while removing *less* norm. That's the first J-space-specific effect on a math task in this project. It also means the homework's "not J-space-specific" conclusion was really a statement about the light band.
-
-### Limitations
-
-- One model, one seed, greedy decoding. The CoT cells (N≈40) are only powered for large effects.
-- The same-problem result is on the 112 problems that had safe variants, which are easier than average (clean accuracy 0.32 vs 0.265).
-- Few-shot prompts get 4–20× more ablated positions than the baseline. The norm-matched control keeps the J-space vs. random comparisons fair, but retention comparisons *across* formats aren't intervention-matched.
-- The random control matches norm, not output relevance. "Specific" here always means "worse than matched-norm noise."
+This was a pretty rushed, quick extension that I did for fun, and there's probably a lot more to dig into here. I do want to work on it a bit more, and I have it listed in my [experiment ideas]({{< ref "/posts/experiment-ideas" >}}).
 
 ---
 
